@@ -1,0 +1,34 @@
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-item {
+  &>fa-icon {
+    margin-right: 3px;
+  }
+}
+
+// .form-inline {
+//   margin-left: auto;
+// }
+
+.top-panel-heading {
+  display: flex;
+  align-items: center;
+
+  & .user-img {
+    max-height: 50px;
+    border: 1px solid white;
+    display: inline;
+    margin-right: 4px;
+  }
+}
+
+.cart-section {
+  color: white;
+  margin-left: auto;
+}
+
+.navbar {
+  justify-content: space-between;
+}
