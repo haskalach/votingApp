@@ -1,4 +1,7 @@
 <div class="row">
+  <div class="col-12">
+      <button class="btn btn-success add-user" *appHasRole="['Admin']" [routerLink]="['register']">Add User</button>
+  </div>
   <table class="table">
     <tr>
       <th style="width:10%">User Id</th>

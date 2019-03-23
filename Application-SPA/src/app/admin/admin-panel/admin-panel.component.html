@@ -1,14 +1,18 @@
 <div class="row no-margin">
-  <div class="col-2 inner-menue">
-    <h2>Admin Panel</h2>
-    <div class="inner-menue">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" [routerLinkActive]="'active'"><a class="nav-link" *appHasRole="['Admin']" [routerLink]="['users']">Users</a></li>
-      </ul>
-    </div>
+  <div class="col-12 inner-menue">
 
+    <div class="btn-group" dropdown>
+        <div  dropdownToggle
+                aria-controls="dropdown-basic">
+                <fa-icon [icon]="['fas', 'bars']" ></fa-icon> <span class="title">Admin Panel</span><span class="caret"></span>
+    </div>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+            <li class="nav-item" [routerLinkActive]="'active'"><a class="nav-link" *appHasRole="['Admin']" [routerLink]="['users']">Users</a></li>
+        </ul>
+      </div>
   </div>
-  <div class="col-10">
+  <div class="col-12">
     <div class="container mt-5">
       <router-outlet></router-outlet>
     </div>

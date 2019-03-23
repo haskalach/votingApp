@@ -19,6 +19,5 @@ namespace Application.API.Dtos {
         public string PhotoUrl { get; set; }
         public ICollection<PhotosForDetailedDto> Photos { get; set; }
 
-        public ICollection<OrderForReturnDto> Orders { get; set; }
     }
 }

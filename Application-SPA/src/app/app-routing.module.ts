@@ -11,6 +11,7 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberEditComponent } from './pages/member/member-edit/member-edit.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RegisterComponent } from './admin/user-management/register/register.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,11 @@ const routes: Routes = [
             path: 'users',
             data: { roles: ['Admin'] },
             component: UserManagementComponent
+          },
+          {
+            path: 'register',
+            data: { roles: ['Admin'] },
+            component: RegisterComponent
           }
         ]
       }

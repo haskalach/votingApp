@@ -2,7 +2,6 @@
   <a class="navbar-brand" [routerLink]="['/home']">App</a>
 
   <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
-    <li class="nav-item" [routerLinkActive]="'active'"><a class="nav-link" [routerLink]="['/items']">Items</a></li>
     <li *appHasRole="['Admin','Moderator']" class="nav-item" [routerLinkActive]="'active'"><a class="nav-link"
         [routerLink]="['/admin']">Admin</a></li>
   </ul>

@@ -28,18 +28,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.createRegisterForm();
-    // this.regitrationForm = new FormGroup(
-    //   {
-    //     userName: new FormControl(null, Validators.required),
-    //     password: new FormControl('', [
-    //       Validators.required,
-    //       Validators.minLength(4),
-    //       Validators.maxLength(8)
-    //     ]),
-    //     confirmPassword: new FormControl('', Validators.required)
-    //   },
-    //   this.passwordMatchValidators
-    // );
   }
 
   createRegisterForm() {
@@ -78,21 +66,21 @@ export class RegisterComponent implements OnInit {
       this.auth.resgiter(this.user).subscribe(
         next => {
           // console.log('resgitration success');
-          this.alertify.success('resgitration success');
+          this.router.navigate(['/admin/users']);
         },
         error => {
           console.log(error);
           this.alertify.error(error);
         },
         () => {
-          this.auth.login(this.user).subscribe(() => {
-            this.router.navigate(['/members']);
-          });
+          // this.auth.login(this.user).subscribe(() => {
+          //   this.router.navigate(['/members']);
+          // });
         }
       );
     }
   }
   cancel() {
-    this.cancelRegister.emit(false);
+    this.router.navigate(['/admin']);
   }
 }
