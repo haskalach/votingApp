@@ -7,6 +7,7 @@ namespace Application.API.Data {
     public class DataContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>> {
         public DataContext (DbContextOptions<DataContext> options) : base (options) { }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Voter> Voters { get; set; }
         protected override void OnModelCreating (ModelBuilder builder) {
             base.OnModelCreating (builder);
 
