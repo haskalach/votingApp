@@ -5,9 +5,10 @@
   <table class="table">
     <tr>
       <th style="width:10%">Voter Id</th>
-      <th style="width:15%">First Name</th>
+      <th style="width:10%">Code</th>
+      <th style="width:10%">First Name</th>
       <th style="width:15%">Birth Date</th>
-      <th style="width:20%">Registration Date</th>
+      <th style="width:15%">Registration Date</th>
       <th style="width:20%">Graduation Date</th>
       <th style="width:5%">Vote</th>
       <th style="width:5%">Attend</th>
@@ -25,13 +26,13 @@
         {{voter.firstName}}
       </td>
       <td>
-        {{voter.birthDate}}
+        {{voter.birthDate | date}}
       </td>
       <td>
-        {{voter.registration}}
+        {{voter.registration | date}}
       </td>
       <td>
-        {{voter.graduation}}
+        {{voter.graduation | date}}
       </td>
       <td>
         {{voter.vote}}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.API.Data;
 using Application.API.Dtos;
@@ -27,6 +28,14 @@ namespace Application.API.Controllers {
                 return Ok ();
             }
             return BadRequest ("Could not add voter");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetVoters () {
+            var voterFromRepo = await _repo.GetVoters();
+
+            var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
+            return Ok (voterList);
         }
     }
 }

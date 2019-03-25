@@ -12,4 +12,7 @@ export class VoterService {
   addVoter(voter: Voter) {
     return this.http.post(this.baseUrl + this.repo, voter);
   }
+  getVoters() {
+    return this.http.get(this.baseUrl + this.repo);
+  }
 }

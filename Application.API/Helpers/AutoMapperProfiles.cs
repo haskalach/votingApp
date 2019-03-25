@@ -28,6 +28,7 @@ namespace Application.API.Helpers {
             CreateMap<PhotoForCreationDto, Photo> ();
             CreateMap<UserForRegisterDto, User> ();
             CreateMap<VoterForCreationDto, Voter> ();
+            CreateMap<Voter, VoterForReturnDto> ();
         }
     }
 }

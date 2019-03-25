@@ -11,6 +11,7 @@ namespace Application.API.Data {
 
         Task<User> GetUser (int id);
         Task<Photo> GetPhoto (int id);
+        Task<IEnumerable<Voter>> GetVoters ();
         Task<Photo> GetMainPhoto (int userId);
 
     }

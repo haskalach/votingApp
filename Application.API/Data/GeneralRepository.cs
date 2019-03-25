@@ -21,7 +21,6 @@ namespace Application.API.Data {
             _context.Remove (entity);
         }
 
-
         public async Task<Photo> GetMainPhoto (int userId) {
             var photo = await _context.Photos.Where (u => u.UserId == userId).FirstOrDefaultAsync (p => p.IsMain);
             return photo;
@@ -37,6 +36,10 @@ namespace Application.API.Data {
             return user;
         }
 
+        public async Task<IEnumerable<Voter>> GetVoters () {
+            var voters = await _context.Voters.ToListAsync ();
+            return voters;
+        }
         public async Task<bool> SaveAll () {
             return await _context.SaveChangesAsync () > 0;
         }

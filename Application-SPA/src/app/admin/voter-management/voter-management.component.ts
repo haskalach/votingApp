@@ -1,3 +1,4 @@
+import { VoterService } from './../../_services/voter/voter.service';
 import { Component, OnInit } from '@angular/core';
 import { Voter } from 'src/app/_models/voter';
 import { RouterModule } from '@angular/router';
@@ -9,7 +10,19 @@ import { RouterModule } from '@angular/router';
 })
 export class VoterManagementComponent implements OnInit {
   voters: Voter[];
-  constructor() {}
+  constructor(private voterService: VoterService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getVoters();
+  }
+  getVoters() {
+    this.voterService.getVoters().subscribe(
+      (voters: Voter[]) => {
+        this.voters = voters;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }
