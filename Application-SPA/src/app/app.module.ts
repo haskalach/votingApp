@@ -47,6 +47,9 @@ import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './admin/user-management/register/register.component';
+import { VoterService } from './_services/voter/voter.service';
+import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
+import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
 
 
 
@@ -69,7 +72,9 @@ export function tokenGetter() {
     HasRoleDirective,
     PhotoManagementComponent,
     UserManagementComponent,
-    RolesModalComponent
+    RolesModalComponent,
+    VoterManagementComponent,
+    AddVoterComponent
   ],
   imports: [
     ButtonsModule.forRoot(),
@@ -106,7 +111,8 @@ export function tokenGetter() {
     MemberListResolver,
     MemberEditResolver,
     PreventUnsavedChanges,
-    AdminService
+    AdminService,
+    VoterService
   ],
   entryComponents: [
     RolesModalComponent

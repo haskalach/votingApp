@@ -1,0 +1,59 @@
+<form [formGroup]="voterForm" (ngSubmit)="addVoter()">
+  <h2 class="text-center text-primary">Add A New Voter</h2>
+  <hr>
+
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="code" [ngClass]="{'is-invalid': voterForm.get('code').errors && voterForm.get('code').touched}" placeholder="Code">
+    <div class="invalid-feedback" *ngIf="voterForm.get('code').touched && voterForm.get('code').hasError('required')">Code Is Required</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="firstName" [ngClass]="{'is-invalid': voterForm.get('firstName').errors && voterForm.get('firstName').touched}" placeholder="First Name">
+    <div class="invalid-feedback" *ngIf="voterForm.get('firstName').touched && voterForm.get('firstName').hasError('required')">First Name Is Required</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': voterForm.get('birthDate').errors && voterForm.get('birthDate').touched}"
+      class="form-control" placeholder="Date of Birth" formControlName="birthDate" type="text" bsDatepicker>
+    <div class="invalid-feedback" *ngIf="voterForm.get('birthDate').touched && voterForm.get('birthDate').hasError('required')">Date Of Birth Is Required</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': voterForm.get('registration').errors && voterForm.get('registration').touched}"
+      class="form-control" placeholder="Date of Birth" formControlName="registration" type="text" bsDatepicker>
+    <div class="invalid-feedback" *ngIf="voterForm.get('registration').touched && voterForm.get('registration').hasError('required')">Registration Date Is Required</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': voterForm.get('graduation').errors && voterForm.get('graduation').touched}"
+      class="form-control" placeholder="Date of Birth" formControlName="graduation" type="text" bsDatepicker>
+    <div class="invalid-feedback" *ngIf="voterForm.get('graduation').touched && voterForm.get('graduation').hasError('required')">Graduation Date Is Required</div>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" formControlName="vote" [ngClass]="{'is-invalid': voterForm.get('vote').errors && voterForm.get('vote').touched}" placeholder="Vote">
+    <div class="invalid-feedback" *ngIf="voterForm.get('vote').touched && voterForm.get('vote').hasError('required')">Vote Is Required</div>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" formControlName="attend" [ngClass]="{'is-invalid': voterForm.get('attend').errors && voterForm.get('attend').touched}" placeholder="Attend">
+    <div class="invalid-feedback" *ngIf="voterForm.get('attend').touched && voterForm.get('attend').hasError('required')">Attend Is Required</div>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" formControlName="transport" [ngClass]="{'is-invalid': voterForm.get('transport').errors && voterForm.get('transport').touched}" placeholder="Transport">
+    <div class="invalid-feedback" *ngIf="voterForm.get('transport').touched && voterForm.get('transport').hasError('required')">Transport Is Required</div>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" formControlName="voted" [ngClass]="{'is-invalid': voterForm.get('voted').errors && voterForm.get('voted').touched}" placeholder="Voted">
+    <div class="invalid-feedback" *ngIf="voterForm.get('voted').touched && voterForm.get('voted').hasError('required')">Voted Is Required</div>
+  </div>
+
+
+
+
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" type="submit">Register</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>

@@ -1,0 +1,34 @@
+export interface Voter {
+  id: number;
+  code: number;
+  firstName: string;
+  speciality: string;
+  subChapter: string;
+  religion: string;
+  polotici: string;
+  reference: string;
+  votedYear: string;
+  birthDate: Date;
+  birthCountry: string;
+  birthPlace: string;
+  civilIdMother: string;
+  civilIdKad: string;
+  civilIdRegion: string;
+  registeryNumber: string;
+  civilIdPlace: string;
+  registration: Date;
+  graduation: Date;
+  school: string;
+  graduationLocation: string;
+  addressWork: string;
+  mobileWork: string;
+  phoneWork: string;
+  addressHome: string;
+  mobileHome: string;
+  phoneHome: string;
+  email: string;
+  vote: number;
+  attend: number;
+  transport: number;
+  voted: number;
+}

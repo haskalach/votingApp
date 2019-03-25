@@ -1,3 +1,4 @@
+import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberDetailedComponent } from './pages/member/member-detailed/member-detailed.component';
@@ -12,6 +13,7 @@ import { MemberEditComponent } from './pages/member/member-edit/member-edit.comp
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RegisterComponent } from './admin/user-management/register/register.component';
+import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,16 @@ const routes: Routes = [
             path: 'register',
             data: { roles: ['Admin'] },
             component: RegisterComponent
+          },
+          {
+            path: 'voters',
+            data: { roles: ['Admin'] },
+            component: VoterManagementComponent
+          },
+          {
+            path: 'add-voter',
+            data: { roles: ['Admin'] },
+            component: AddVoterComponent
           }
         ]
       }
