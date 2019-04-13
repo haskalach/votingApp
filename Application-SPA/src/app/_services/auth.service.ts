@@ -1,9 +1,10 @@
 import { User } from 'src/app/_models/user';
-import { ApiCallService } from './api-call.service';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,14 @@ export class AuthService {
   currentUser: User;
   photoUrl = new BehaviorSubject<string>('../../assets/images/user.png');
   currentPhotoUrl = this.photoUrl.asObservable();
-  constructor(private api: ApiCallService) {}
+  baseUrl = environment.apiUrl;
+  constructor(private http: HttpClient) {}
 
   changeMemberPhoto(PhotoUrl: string) {
     this.photoUrl.next(PhotoUrl);
   }
   login(model: any) {
-    return this.api.Post(this.repo + 'login', model).pipe(
+    return this.http.post(this.baseUrl + this.repo + 'login', model).pipe(
       map((response: any) => {
         const user = response;
         if (user) {
@@ -36,7 +38,7 @@ export class AuthService {
   }
 
   resgiter(user: User) {
-    return this.api.Post(this.repo + 'register', user);
+    return this.http.post(this.baseUrl + this.repo + 'register', user);
   }
 
   loggedIn() {

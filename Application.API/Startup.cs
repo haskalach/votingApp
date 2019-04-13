@@ -119,7 +119,7 @@ namespace Application.API {
             app.UseMvc (routes => {
                 routes.MapSpaFallbackRoute (
                     name: "spa-fallback",
-                    defaults : new { controller = "Fallback", action = "Index" }
+                    defaults : new { controller = "FallBack", action = "Index" }
                 );
             });
         }

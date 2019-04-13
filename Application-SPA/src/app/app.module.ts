@@ -24,7 +24,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
-import { ApiCallService } from './_services/api-call.service';
 import { HomeComponent } from './pages/home/home.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
@@ -102,7 +101,6 @@ export function tokenGetter() {
   ],
   providers: [
     AuthService,
-    ApiCallService,
     ErrorInterceptorProvider,
     AlertifyService,
     AuthGuard,

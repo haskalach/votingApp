@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import { ApiCallService } from './../api-call.service';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { PaginatedResult } from 'src/app/_models/pagination';
@@ -14,7 +13,7 @@ export class UserService {
   repo = 'users';
   photoRepo = 'photos';
   baseUrl = environment.apiUrl;
-  constructor(private api: ApiCallService, private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getUsers(
     page?,
@@ -59,18 +58,18 @@ export class UserService {
       );
   }
   getUser(id: number): Observable<User> {
-    return this.api.Get<User>(this.repo + '/' + id);
+    return this.http.get<User>(this.baseUrl + this.repo + '/' + id);
   }
   updateUser(user: User): Observable<User> {
-    return this.api.Put<User>(this.repo, user);
+    return this.http.put<User>(this.baseUrl + this.repo, user);
   }
   setMainPhoto(id: number) {
-    return this.api.Post(
-      this.repo + '/' + this.photoRepo + '/' + id + '/setMain'
+    return this.http.post(
+     this.baseUrl + this.repo + '/' + this.photoRepo + '/' + id + '/setMain', null
     );
   }
   deletePhoto(id: number) {
-    return this.api.Delete(this.repo + '/' + this.photoRepo + '/' + id);
+    return this.http.delete(this.baseUrl + this.repo + '/' + this.photoRepo + '/' + id);
   }
   sendLike(recipientId: number) {
     return this.http.post(this.baseUrl + 'users/like/' + recipientId, {});
