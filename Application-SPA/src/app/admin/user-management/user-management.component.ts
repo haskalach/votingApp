@@ -1,3 +1,6 @@
+import { UserService } from './../../_services/user/user.service';
+import { AlertifyService } from './../../_services/alertify.service';
+import { OrganizationService } from './../../_services/organization/organization.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
@@ -6,6 +9,7 @@ import {
   BsModalRef
 } from '../../../../node_modules/ngx-bootstrap/modal';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
+import { Organization } from 'src/app/_models/Organization';
 
 @Component({
   selector: 'app-user-management',
@@ -15,19 +19,34 @@ import { RolesModalComponent } from '../roles-modal/roles-modal.component';
 export class UserManagementComponent implements OnInit {
   users: User[];
   bsModalRef: BsModalRef;
+  organizations: Organization[];
   constructor(
     private adminService: AdminService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private organizationService: OrganizationService,
+    private alertityService: AlertifyService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.getUsersWithRoles();
+    this.getOrganizationList();
   }
 
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe(
       (users: User[]) => {
         this.users = users;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  getOrganizationList() {
+    this.organizationService.getOrganizations().subscribe(
+      (organizations: Organization[]) => {
+        this.organizations = organizations;
       },
       error => {
         console.log(error);
@@ -86,5 +105,20 @@ export class UserManagementComponent implements OnInit {
       }
     }
     return roles;
+  }
+  updateUserOrganization(user: User) {
+    const assignObject = {
+      userEmail: user.email,
+      organizationId: user.organizationId == null ? 0 : user.organizationId
+    };
+    console.log({ assignObject });
+    this.userService.assignOrganization(assignObject).subscribe(
+      next => {
+        this.alertityService.success('User Organization Update Succesfully');
+      },
+      error => {
+        this.alertityService.error('User Organization Failed to Update');
+      }
+    );
   }
 }

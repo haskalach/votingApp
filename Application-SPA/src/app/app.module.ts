@@ -49,6 +49,8 @@ import { RegisterComponent } from './admin/user-management/register/register.com
 import { VoterService } from './_services/voter/voter.service';
 import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
 import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
+import { OrganizationManagementComponent } from './admin/organization-management/organization-management.component';
+import { OrganizationService } from './_services/organization/organization.service';
 
 
 
@@ -73,7 +75,8 @@ export function tokenGetter() {
     UserManagementComponent,
     RolesModalComponent,
     VoterManagementComponent,
-    AddVoterComponent
+    AddVoterComponent,
+    OrganizationManagementComponent
   ],
   imports: [
     ButtonsModule.forRoot(),
@@ -110,7 +113,8 @@ export function tokenGetter() {
     MemberEditResolver,
     PreventUnsavedChanges,
     AdminService,
-    VoterService
+    VoterService,
+    OrganizationService
   ],
   entryComponents: [
     RolesModalComponent

@@ -1,3 +1,4 @@
+import { OrganizationManagementComponent } from './admin/organization-management/organization-management.component';
 import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
@@ -77,6 +78,11 @@ const routes: Routes = [
             path: 'add-voter',
             data: { roles: ['Admin'] },
             component: AddVoterComponent
+          },
+          {
+            path: 'organizations',
+            data: { roles: ['Admin'] },
+            component: OrganizationManagementComponent
           }
         ]
       }

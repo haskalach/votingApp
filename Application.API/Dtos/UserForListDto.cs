@@ -12,5 +12,6 @@ namespace Application.API.Dtos {
         public string city { get; set; }
         public string country { get; set; }
         public string PhotoUrl { get; set; }
+        public int OrganizationId { get; set; }
     }
 }

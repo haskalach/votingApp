@@ -8,6 +8,8 @@ namespace Application.API.Data {
         public DataContext (DbContextOptions<DataContext> options) : base (options) { }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Voter> Voters { get; set; }
+        public DbSet<OrganizationType> OrganizationTypes { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
         protected override void OnModelCreating (ModelBuilder builder) {
             base.OnModelCreating (builder);
 

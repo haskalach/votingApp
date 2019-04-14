@@ -26,7 +26,9 @@ namespace Application.API.Controllers {
             var userList = await (from user in _context.Users orderby user.UserName select new {
                 Id = user.Id,
                     UserName = user.UserName,
-                    Roles = (from userRole in user.UserRoles join role in _context.Roles on userRole.RoleId equals role.Id select role.Name).ToList ()
+                    Email = user.Email,
+                    Roles = (from userRole in user.UserRoles join role in _context.Roles on userRole.RoleId equals role.Id select role.Name).ToList (),
+                    OrganizationId = user.OrganizationId
             }).ToListAsync ();
 
             return Ok (userList);
@@ -51,10 +53,5 @@ namespace Application.API.Controllers {
             return Ok (await _userManager.GetRolesAsync (user));
         }
 
-        [Authorize (Policy = "ModeratorRole")]
-        [HttpGet ("photosForModeration")]
-        public IActionResult GetPhotosForModeration () {
-            return Ok ("Admins or mederators can see this");
-        }
     }
 }

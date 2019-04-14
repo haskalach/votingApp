@@ -13,6 +13,8 @@ namespace Application.API.Data {
         Task<Photo> GetPhoto (int id);
         Task<IEnumerable<Voter>> GetVoters ();
         Task<Photo> GetMainPhoto (int userId);
+        Task<IEnumerable<Organization>> GetOrganizations ();
+        Task<Organization> GetOrganization (int orgId);
 
     }
 }

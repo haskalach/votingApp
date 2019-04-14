@@ -65,13 +65,22 @@ export class UserService {
   }
   setMainPhoto(id: number) {
     return this.http.post(
-     this.baseUrl + this.repo + '/' + this.photoRepo + '/' + id + '/setMain', null
+      this.baseUrl + this.repo + '/' + this.photoRepo + '/' + id + '/setMain',
+      null
     );
   }
   deletePhoto(id: number) {
-    return this.http.delete(this.baseUrl + this.repo + '/' + this.photoRepo + '/' + id);
+    return this.http.delete(
+      this.baseUrl + this.repo + '/' + this.photoRepo + '/' + id
+    );
   }
   sendLike(recipientId: number) {
     return this.http.post(this.baseUrl + 'users/like/' + recipientId, {});
+  }
+  assignOrganization(obj) {
+    return this.http.post(
+      this.baseUrl + this.repo + '/assignOrganization',
+      obj
+    );
   }
 }

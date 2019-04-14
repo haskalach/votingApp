@@ -29,6 +29,9 @@ namespace Application.API.Helpers {
             CreateMap<UserForRegisterDto, User> ();
             CreateMap<VoterForCreationDto, Voter> ();
             CreateMap<Voter, VoterForReturnDto> ();
+            CreateMap<OrganizationForCreationDto, Organization> ();
+            CreateMap<OrganizationTypeForCreationDto, OrganizationType> ();
+            
         }
     }
 }

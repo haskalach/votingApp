@@ -26,6 +26,17 @@ namespace Application.API.Data {
             return photo;
         }
 
+        public async Task<IEnumerable<Organization>> GetOrganizations()
+        {
+            var organizations = await _context.Organizations.Include(o=>o.Users).Include(o =>o.OrganizationType).ToListAsync ();
+            return organizations;
+        }
+        public async Task<Organization> GetOrganization(int orgId)
+        {
+            var organization = await _context.Organizations.Include(o=>o.Users).Include(o =>o.OrganizationType).Where(o=>o.Id == orgId).FirstOrDefaultAsync();
+            return organization;
+        }
+
         public async Task<Photo> GetPhoto (int id) {
             var photo = await _context.Photos.FirstOrDefaultAsync (p => p.Id == id);
             return photo;
