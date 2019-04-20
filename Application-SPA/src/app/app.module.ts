@@ -51,6 +51,10 @@ import { VoterManagementComponent } from './admin/voter-management/voter-managem
 import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
 import { OrganizationManagementComponent } from './admin/organization-management/organization-management.component';
 import { OrganizationService } from './_services/organization/organization.service';
+import { CreatOrganizationComponent } from './admin/organization-management/creat-organization/creat-organization.component';
+import { UtilitiesService } from './_services/utilities/utilities.service';
+import { OrganizationTypeManagementComponent } from './admin/organization-type-management/organization-type-management.component';
+import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
 
 
 
@@ -76,7 +80,10 @@ export function tokenGetter() {
     RolesModalComponent,
     VoterManagementComponent,
     AddVoterComponent,
-    OrganizationManagementComponent
+    OrganizationManagementComponent,
+    CreatOrganizationComponent,
+    OrganizationTypeManagementComponent,
+    CreateOrganizationTypeComponent
   ],
   imports: [
     ButtonsModule.forRoot(),
@@ -114,7 +121,8 @@ export function tokenGetter() {
     PreventUnsavedChanges,
     AdminService,
     VoterService,
-    OrganizationService
+    OrganizationService,
+    UtilitiesService
   ],
   entryComponents: [
     RolesModalComponent

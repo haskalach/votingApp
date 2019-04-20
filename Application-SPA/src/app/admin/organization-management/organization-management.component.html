@@ -1,3 +1,39 @@
-<p>
-  organization-management works!
-</p>
+<div class="row">
+  <div class="col-12">
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      [routerLink]="['/admin/create-organizations']"
+    >
+      Add Organization
+    </button>
+  </div>
+  <table class="table">
+    <tr>
+      <th style="width:20%">Id</th>
+      <th style="width:40%">Name</th>
+      <th style="width:40%">Type</th>
+    </tr>
+    <tr *ngFor="let org of organizations">
+      <td>
+        {{ org.id }}
+      </td>
+      <td>
+        {{ org.name }}
+      </td>
+      <td>
+        <select
+          class="form-control"
+          [(ngModel)]="org.organizationTypeId"
+          (change)="updateOrganizationType(org)"
+        >
+          <option
+            *ngFor="let orgType of organizationTypes"
+            [ngValue]="orgType.id"
+            >{{ orgType.name }}</option
+          >
+        </select>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -58,5 +58,13 @@ namespace Application.API.Controllers {
             }
             return BadRequest ("Could not add Organzation type");
         }
+
+        [Authorize (Policy = "RequireAdminRole")]
+        [HttpGet ("type")]
+        public async Task<IActionResult> GetOrganizationTypes () {
+
+            var organizationTypes = await _repo.GetOrganizationTypes ();
+            return Ok (organizationTypes);
+        }
     }
 }

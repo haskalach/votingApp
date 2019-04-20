@@ -1,11 +1,8 @@
+import { UtilitiesService } from './../../../_services/utilities/utilities.service';
 import { AlertifyService } from './../../../_services/alertify.service';
 import { AuthService } from './../../../_services/auth.service';
 
-import {
-  FormGroup,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
@@ -23,7 +20,8 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private utilities: UtilitiesService
   ) {}
 
   ngOnInit() {
@@ -78,6 +76,8 @@ export class RegisterComponent implements OnInit {
           // });
         }
       );
+    } else {
+      this.utilities.validateAllFormFields(this.regitrationForm);
     }
   }
   cancel() {

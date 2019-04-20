@@ -85,9 +85,10 @@ export class UserManagementComponent implements OnInit {
     const userRoles = user.roles;
     const availableRoles: any[] = [
       { name: 'Admin', value: 'Admin' },
-      { name: 'Moderator', value: 'Moderator' },
-      { name: 'Member', value: 'Member' },
-      { name: 'VIP', value: 'VIP' }
+      { name: 'OrganizationAdmin', value: 'OrganizationAdmin' },
+      { name: 'LaptopUser', value: 'LaptopUser' },
+      { name: 'MobileUser', value: 'MobileUser' },
+      { name: 'Reference', value: 'Reference' }
     ];
     for (let i = 0; i < availableRoles.length; i++) {
       let isMatch = false;

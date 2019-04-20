@@ -19,10 +19,12 @@ namespace Application.API.Data {
                 var users = JsonConvert.DeserializeObject<List<User>> (userData);
 
                 var roles = new List<Role> {
-                    new Role { Name = "Member" },
+ 
                     new Role { Name = "Admin" },
-                    new Role { Name = "Moderator" },
-                    new Role { Name = "VIP" }
+                    new Role { Name = "OrganizationAdmin" },
+                    new Role { Name = "LaptopUser" },
+                    new Role { Name = "MobileUser" },
+                    new Role { Name = "Reference" }
                 };
 
                 foreach (var role in roles) {
@@ -31,7 +33,7 @@ namespace Application.API.Data {
                 foreach (var user in users) {
 
                     _userManager.CreateAsync (user, "password").Wait ();
-                    _userManager.AddToRoleAsync (user, "Member").Wait ();
+                    _userManager.AddToRoleAsync (user, "LaptopUser").Wait ();
                 }
 
                 var adminUser = new User {
@@ -42,7 +44,7 @@ namespace Application.API.Data {
                 IdentityResult result = _userManager.CreateAsync (adminUser, "password").Result;
                 if (result.Succeeded) {
                     var admin = _userManager.FindByNameAsync ("Admin").Result;
-                    _userManager.AddToRolesAsync (admin, new [] { "Admin", "Moderator" }).Wait ();
+                    _userManager.AddToRolesAsync (admin, new [] { "Admin"}).Wait ();
                 }
             }
 

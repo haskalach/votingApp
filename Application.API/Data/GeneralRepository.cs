@@ -31,6 +31,11 @@ namespace Application.API.Data {
             var organizations = await _context.Organizations.Include(o=>o.Users).Include(o =>o.OrganizationType).ToListAsync ();
             return organizations;
         }
+        public async Task<IEnumerable<OrganizationType>> GetOrganizationTypes()
+        {
+            var organizationTypes = await _context.OrganizationTypes.ToListAsync ();
+            return organizationTypes;
+        }
         public async Task<Organization> GetOrganization(int orgId)
         {
             var organization = await _context.Organizations.Include(o=>o.Users).Include(o =>o.OrganizationType).Where(o=>o.Id == orgId).FirstOrDefaultAsync();

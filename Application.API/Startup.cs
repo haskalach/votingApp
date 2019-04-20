@@ -70,8 +70,10 @@ namespace Application.API {
                 });
             services.AddAuthorization (options => {
                 options.AddPolicy ("RequireAdminRole", policy => policy.RequireRole ("Admin"));
-                options.AddPolicy ("ModeratorRole", policy => policy.RequireRole ("Admin", "Moderator"));
-                options.AddPolicy ("VipOnly", policy => policy.RequireRole ("Admin", "VIP"));
+                options.AddPolicy ("ModeratorRole", policy => policy.RequireRole ("OrganizationAdmin"));
+                options.AddPolicy ("LaptopRole", policy => policy.RequireRole ("LaptopUser"));
+                options.AddPolicy ("MobileRole", policy => policy.RequireRole ("MobileUser"));
+                options.AddPolicy ("ReferenceRole", policy => policy.RequireRole ("Reference"));
             });
 
             services.AddMvc (options => {

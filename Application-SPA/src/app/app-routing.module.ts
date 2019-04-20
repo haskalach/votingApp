@@ -15,6 +15,9 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RegisterComponent } from './admin/user-management/register/register.component';
 import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
+import { CreatOrganizationComponent } from './admin/organization-management/creat-organization/creat-organization.component';
+import { OrganizationTypeManagementComponent } from './admin/organization-type-management/organization-type-management.component';
+import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
 
 const routes: Routes = [
   {
@@ -83,6 +86,21 @@ const routes: Routes = [
             path: 'organizations',
             data: { roles: ['Admin'] },
             component: OrganizationManagementComponent
+          },
+          {
+            path: 'create-organizations',
+            data: { roles: ['Admin'] },
+            component: CreatOrganizationComponent
+          },
+          {
+            path: 'organizations-types',
+            data: { roles: ['Admin'] },
+            component: OrganizationTypeManagementComponent
+          },
+          {
+            path: 'create-organizations-types',
+            data: { roles: ['Admin'] },
+            component: CreateOrganizationTypeComponent
           }
         ]
       }

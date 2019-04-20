@@ -9,5 +9,6 @@
     <PackageReference Include="Microsoft.AspNetCore.App"/>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1"/>
     <PackageReference Include="CloudinaryDotNet" Version="1.2.0"/>
+    <PackageReference Include="NETStandard.Library" Version="2.0.3"/>
   </ItemGroup>
 </Project>

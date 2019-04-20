@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-12">
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      [routerLink]="['/admin/create-organizations-types']"
+    >
+      Add Organization type
+    </button>
+  </div>
+  <table class="table">
+    <tr>
+      <th style="width:20%">Id</th>
+      <th style="width:80%">Name</th>
+    </tr>
+    <tr *ngFor="let orgtype of organizationTypes">
+      <td>
+        {{ orgtype.id }}
+      </td>
+      <td>
+        {{ orgtype.name }}
+      </td>
+    </tr>
+  </table>
+</div>

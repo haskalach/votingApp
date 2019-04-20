@@ -56,6 +56,11 @@ namespace Application.API.Controllers {
             var result = await _signInManager.CheckPasswordSignInAsync (user, userForLoginDto.Password, false);
             if (result.Succeeded) {
                 var appUser = await _userManager.Users.Include (p => p.Photos).FirstOrDefaultAsync (u => u.NormalizedEmail == userForLoginDto.Email.ToUpper ());
+                var roles = await _userManager.GetRolesAsync (appUser);
+                if ((roles.IndexOf ("Admin") == -1 ) && (user.OrganizationId == null)) {
+                    return BadRequest ("Could Not sign in Untill User is linked to organization");
+                }
+
                 var userToreturn = _mapper.Map<UserForListDto> (appUser);
                 return Ok (new {
                     token = GenerateJwtToken (appUser).Result,
