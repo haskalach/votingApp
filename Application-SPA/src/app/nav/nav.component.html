@@ -16,6 +16,13 @@
     >
       <a class="nav-link" [routerLink]="['/home']">Enggeneeres</a>
     </li>
+    <li
+    *appHasRole="['OrganizationAdmin']"
+    class="nav-item"
+    [routerLinkActive]="'active'"
+  >
+    <a class="nav-link" [routerLink]="['/home']">Org Admin</a>
+  </li>
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown top-panel-heading" dropdown>
