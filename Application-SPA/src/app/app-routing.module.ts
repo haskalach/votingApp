@@ -17,7 +17,9 @@ import { RegisterComponent } from './admin/user-management/register/register.com
 import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
 import { CreatOrganizationComponent } from './admin/organization-management/creat-organization/creat-organization.component';
 import { OrganizationTypeManagementComponent } from './admin/organization-type-management/organization-type-management.component';
+// tslint:disable-next-line: max-line-length
 import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
+import { OrgUsersComponent } from './pages/org-users/org-users.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,11 @@ const routes: Routes = [
             component: MemberEditComponent,
             resolve: { user: MemberEditResolver },
             canDeactivate: [PreventUnsavedChanges]
+          },
+          {
+            path: 'users',
+            data: { roles: ['OrganizationAdmin'] },
+            component: OrgUsersComponent
           }
         ]
       },
