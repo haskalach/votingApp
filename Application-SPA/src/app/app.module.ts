@@ -55,6 +55,7 @@ import { CreatOrganizationComponent } from './admin/organization-management/crea
 import { UtilitiesService } from './_services/utilities/utilities.service';
 import { OrganizationTypeManagementComponent } from './admin/organization-type-management/organization-type-management.component';
 import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
+import { HasOrgTypeDirective } from './_directives/hasOrgType.directive';
 
 
 
@@ -75,6 +76,7 @@ export function tokenGetter() {
     TimeAgoPipe,
     AdminPanelComponent,
     HasRoleDirective,
+    HasOrgTypeDirective,
     PhotoManagementComponent,
     UserManagementComponent,
     RolesModalComponent,

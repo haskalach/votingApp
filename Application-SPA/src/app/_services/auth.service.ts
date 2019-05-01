@@ -56,4 +56,14 @@ export class AuthService {
     });
     return isMatch;
   }
+  TypeMatch(allowedTypes): boolean {
+    let isMatch = false;
+    const userTypes = this.decodedToken.organizationType as string;
+    if (userTypes === allowedTypes) {
+      isMatch = true;
+    } else {
+      return;
+    }
+    return isMatch;
+  }
 }

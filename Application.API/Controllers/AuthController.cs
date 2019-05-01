@@ -24,7 +24,9 @@ namespace Application.API.Controllers {
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public AuthController (IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager) {
+        private readonly IGeneralRepository _repo;
+        public AuthController (IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IGeneralRepository repo) {
+            _repo = repo;
             _signInManager = signInManager;
             _userManager = userManager;
             _mapper = mapper;
@@ -57,7 +59,7 @@ namespace Application.API.Controllers {
             if (result.Succeeded) {
                 var appUser = await _userManager.Users.Include (p => p.Photos).FirstOrDefaultAsync (u => u.NormalizedEmail == userForLoginDto.Email.ToUpper ());
                 var roles = await _userManager.GetRolesAsync (appUser);
-                if ((roles.IndexOf ("Admin") == -1 ) && (user.OrganizationId == null)) {
+                if ((roles.IndexOf ("Admin") == -1) && (user.OrganizationId == null)) {
                     return BadRequest ("Could Not sign in Untill User is linked to organization");
                 }
 
@@ -78,6 +80,10 @@ namespace Application.API.Controllers {
                 new Claim (ClaimTypes.NameIdentifier, user.Id.ToString ()),
                 new Claim (ClaimTypes.Email, user.Email)
             };
+            if (user.OrganizationId.HasValue && user.OrganizationId > 0) {
+                var organization = await _repo.GetOrganization (user.OrganizationId ?? default(int));
+                claims.Add (new System.Security.Claims.Claim("organizationType", organization.OrganizationType.Name));
+            }
 
             var roles = await _userManager.GetRolesAsync (user);
 

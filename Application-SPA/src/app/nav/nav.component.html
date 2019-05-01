@@ -2,37 +2,82 @@
   <a class="navbar-brand" [routerLink]="['/home']">App</a>
 
   <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
-    <li *appHasRole="['Admin','Moderator']" class="nav-item" [routerLinkActive]="'active'"><a class="nav-link"
-        [routerLink]="['/admin']">Admin</a></li>
+    <li
+      *appHasRole="['Admin']"
+      class="nav-item"
+      [routerLinkActive]="'active'"
+    >
+      <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+    </li>
+    <li
+      *appHasOrgType="'eng'"
+      class="nav-item"
+      [routerLinkActive]="'active'"
+    >
+      <a class="nav-link" [routerLink]="['/home']">Enggeneeres</a>
+    </li>
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown top-panel-heading" dropdown>
     <span>
-      <img class="user-img" src="{{photoUrl || '../../../../assets/images/user.png'}}" alt="">
+      <img
+        class="user-img"
+        src="{{ photoUrl || '../../../../assets/images/user.png' }}"
+        alt=""
+      />
     </span>
     <div dropdownToggle class=" dropdown-toggle text-light">
-      Welcome {{authService.decodedToken.unique_name | titlecase}} <span class="caret"></span>
+      Welcome {{ authService.decodedToken.unique_name | titlecase }}
+      <span class="caret"></span>
     </div>
-    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right mt-3" role="menu">
-      <li role="menuitem"><a class="dropdown-item" [routerLink]="['/member/edit']">
+    <ul
+      *dropdownMenu
+      class="dropdown-menu dropdown-menu-right mt-3"
+      role="menu"
+    >
+      <li role="menuitem">
+        <a class="dropdown-item" [routerLink]="['/member/edit']">
           <fa-icon [icon]="['fas', 'user']"></fa-icon>Edit Profile
-        </a></li>
+        </a>
+      </li>
       <li class="divider dropdown-divider"></li>
-      <li role="menuitem"><a class="dropdown-item" [routerLink]="['/member/edit']">
+      <li role="menuitem">
+        <a class="dropdown-item" [routerLink]="['/member/edit']">
           <fa-icon [icon]="['fas', 'shopping-cart']"></fa-icon>Orders
-        </a></li>
+        </a>
+      </li>
       <li class="divider dropdown-divider"></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="logout()">
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="logout()">
           <fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>Logout
-        </a></li>
-
+        </a>
+      </li>
     </ul>
   </div>
 
-  <form *ngIf="!loggedIn()" class="form-inline my-2 my-lg-0" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <input class="form-control mr-sm-2" formControlName="email" type="text" placeholder="Email" />
-    <input class="form-control mr-sm-2" formControlName="password" type="password" placeholder="Password" />
-    <button class="btn btn-success my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">
+  <form
+    *ngIf="!loggedIn()"
+    class="form-inline my-2 my-lg-0"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <input
+      class="form-control mr-sm-2"
+      formControlName="email"
+      type="text"
+      placeholder="Email"
+    />
+    <input
+      class="form-control mr-sm-2"
+      formControlName="password"
+      type="password"
+      placeholder="Password"
+    />
+    <button
+      class="btn btn-success my-2 my-sm-0"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
       Login
     </button>
   </form>
