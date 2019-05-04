@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace Application.API.Controllers {
     [Route ("api/[controller]")]
     [ApiController]
-    public class VoterController : ControllerBase {
+    public class EngenereController : ControllerBase {
         private readonly IGeneralRepository _repo;
         private readonly IMapper _mapper;
-        public VoterController (IGeneralRepository repo, IMapper mapper) {
+        public EngenereController (IGeneralRepository repo, IMapper mapper) {
             _mapper = mapper;
             _repo = repo;
         }
@@ -20,7 +20,7 @@ namespace Application.API.Controllers {
         [HttpPost]
         public async Task<IActionResult> AddVoter (VoterForCreationDto voterForCreationDto) {
 
-            var voterToCreate = _mapper.Map<Voter> (voterForCreationDto);
+            var voterToCreate = _mapper.Map<Engeneres> (voterForCreationDto);
 
             _repo.Add (voterToCreate);
 

@@ -2,7 +2,7 @@ using System;
 
 namespace Application.API.Models
 {
-    public class Voter
+    public class Engeneres
     {
         public int Id { get; set; }
         public int Code { get; set; }

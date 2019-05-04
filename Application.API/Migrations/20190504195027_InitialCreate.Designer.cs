@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190413134659_AddingOrganzations")]
-    partial class AddingOrganzations
+    [Migration("20190504195027_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,79 @@ namespace Application.API.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Application.API.Models.Engeneres", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddressHome");
+
+                    b.Property<string>("AddressWork");
+
+                    b.Property<int>("Attend");
+
+                    b.Property<string>("BirthCountry");
+
+                    b.Property<DateTime>("BirthDate");
+
+                    b.Property<string>("BirthPlace");
+
+                    b.Property<string>("CivilIdKad");
+
+                    b.Property<string>("CivilIdMother");
+
+                    b.Property<string>("CivilIdPlace");
+
+                    b.Property<string>("CivilIdRegion");
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<DateTime>("Graduation");
+
+                    b.Property<string>("GraduationLocation");
+
+                    b.Property<string>("MobileHome");
+
+                    b.Property<string>("MobileWork");
+
+                    b.Property<string>("PhoneHome");
+
+                    b.Property<string>("PhoneWork");
+
+                    b.Property<string>("Politic");
+
+                    b.Property<string>("Reference");
+
+                    b.Property<string>("RegisteryNumber");
+
+                    b.Property<DateTime>("Registration");
+
+                    b.Property<string>("Religion");
+
+                    b.Property<string>("School");
+
+                    b.Property<string>("Speciality");
+
+                    b.Property<string>("SubChapter");
+
+                    b.Property<int>("Transport");
+
+                    b.Property<int>("Vote");
+
+                    b.Property<int>("Voted");
+
+                    b.Property<string>("VotedYear");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Engeneres");
+                });
 
             modelBuilder.Entity("Application.API.Models.Organization", b =>
                 {
@@ -143,8 +216,6 @@ namespace Application.API.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<int?>("OrgId");
-
                     b.Property<int?>("OrganizationId");
 
                     b.Property<string>("PasswordHash");
@@ -190,79 +261,6 @@ namespace Application.API.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Application.API.Models.Voter", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddressHome");
-
-                    b.Property<string>("AddressWork");
-
-                    b.Property<int>("Attend");
-
-                    b.Property<string>("BirthCountry");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("BirthPlace");
-
-                    b.Property<string>("CivilIdKad");
-
-                    b.Property<string>("CivilIdMother");
-
-                    b.Property<string>("CivilIdPlace");
-
-                    b.Property<string>("CivilIdRegion");
-
-                    b.Property<int>("Code");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<DateTime>("Graduation");
-
-                    b.Property<string>("GraduationLocation");
-
-                    b.Property<string>("MobileHome");
-
-                    b.Property<string>("MobileWork");
-
-                    b.Property<string>("PhoneHome");
-
-                    b.Property<string>("PhoneWork");
-
-                    b.Property<string>("Politic");
-
-                    b.Property<string>("Reference");
-
-                    b.Property<string>("RegisteryNumber");
-
-                    b.Property<DateTime>("Registration");
-
-                    b.Property<string>("Religion");
-
-                    b.Property<string>("School");
-
-                    b.Property<string>("Speciality");
-
-                    b.Property<string>("SubChapter");
-
-                    b.Property<int>("Transport");
-
-                    b.Property<int>("Vote");
-
-                    b.Property<int>("Voted");
-
-                    b.Property<string>("VotedYear");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Voters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

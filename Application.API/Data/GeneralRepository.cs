@@ -49,8 +49,8 @@ namespace Application.API.Data {
             return user;
         }
 
-        public async Task<IEnumerable<Voter>> GetVoters () {
-            var voters = await _context.Voters.ToListAsync ();
+        public async Task<IEnumerable<Engeneres>> GetVoters () {
+            var voters = await _context.Engeneres.ToListAsync ();
             return voters;
         }
         public async Task<bool> SaveAll () {

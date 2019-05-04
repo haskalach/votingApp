@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application.API.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,103 @@ namespace Application.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Engeneres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Code = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    Speciality = table.Column<string>(nullable: true),
+                    SubChapter = table.Column<string>(nullable: true),
+                    Religion = table.Column<string>(nullable: true),
+                    Politic = table.Column<string>(nullable: true),
+                    Reference = table.Column<string>(nullable: true),
+                    VotedYear = table.Column<string>(nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    BirthCountry = table.Column<string>(nullable: true),
+                    BirthPlace = table.Column<string>(nullable: true),
+                    CivilIdMother = table.Column<string>(nullable: true),
+                    CivilIdKad = table.Column<string>(nullable: true),
+                    CivilIdRegion = table.Column<string>(nullable: true),
+                    RegisteryNumber = table.Column<string>(nullable: true),
+                    CivilIdPlace = table.Column<string>(nullable: true),
+                    Registration = table.Column<DateTime>(nullable: false),
+                    Graduation = table.Column<DateTime>(nullable: false),
+                    School = table.Column<string>(nullable: true),
+                    GraduationLocation = table.Column<string>(nullable: true),
+                    AddressWork = table.Column<string>(nullable: true),
+                    MobileWork = table.Column<string>(nullable: true),
+                    PhoneWork = table.Column<string>(nullable: true),
+                    AddressHome = table.Column<string>(nullable: true),
+                    MobileHome = table.Column<string>(nullable: true),
+                    PhoneHome = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Vote = table.Column<int>(nullable: false),
+                    Attend = table.Column<int>(nullable: false),
+                    Transport = table.Column<int>(nullable: false),
+                    Voted = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Engeneres", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrganizationTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrganizationTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<int>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Organizations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    OrganizationTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organizations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Organizations_OrganizationTypes_OrganizationTypeId",
+                        column: x => x.OrganizationTypeId,
+                        principalTable: "OrganizationTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,32 +149,18 @@ namespace Application.API.Migrations
                     LookingFor = table.Column<string>(nullable: true),
                     Interests = table.Column<string>(nullable: true),
                     city = table.Column<string>(nullable: true),
-                    country = table.Column<string>(nullable: true)
+                    country = table.Column<string>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
+                        name: "FK_AspNetUsers_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,6 +312,16 @@ namespace Application.API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_OrganizationId",
+                table: "AspNetUsers",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Organizations_OrganizationTypeId",
+                table: "Organizations",
+                column: "OrganizationTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_UserId",
                 table: "Photos",
                 column: "UserId");
@@ -252,6 +345,9 @@ namespace Application.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Engeneres");
+
+            migrationBuilder.DropTable(
                 name: "Photos");
 
             migrationBuilder.DropTable(
@@ -259,6 +355,12 @@ namespace Application.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Organizations");
+
+            migrationBuilder.DropTable(
+                name: "OrganizationTypes");
         }
     }
 }
