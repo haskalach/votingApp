@@ -41,7 +41,7 @@ export class AuthService {
     return this.http.post(this.baseUrl + this.repo + 'register', user);
   }
   CreateReferenceUser(user: User) {
-    return this.http.post(this.baseUrl + this.repo + 'register', user);
+    return this.http.post(this.baseUrl + this.repo + 'createReference', user);
   }
 
   loggedIn() {

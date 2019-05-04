@@ -1,3 +1,59 @@
-<p>
-  create-reference-user works!
-</p>
+<div class="col-12">
+  <form [formGroup]="regitrationForm" (ngSubmit)="register()">
+    <h2 class="text-center text-primary">Add Reference User</h2>
+    <hr />
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="userName"
+        [ngClass]="{
+          'is-invalid':
+            regitrationForm.get('userName').errors &&
+            regitrationForm.get('userName').touched
+        }"
+        placeholder="Username"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          regitrationForm.get('userName').touched &&
+          regitrationForm.get('userName').hasError('required')
+        "
+      >
+        Username Is Required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="email"
+        [ngClass]="{
+          'is-invalid':
+            regitrationForm.get('email').errors &&
+            regitrationForm.get('email').touched
+        }"
+        placeholder="Email"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          regitrationForm.get('email').touched &&
+          regitrationForm.get('email').hasError('required')
+        "
+      >
+        Username Is Required
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" type="submit">Register</button>
+      <button class="btn btn-default" type="button" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
