@@ -60,6 +60,9 @@ export class UserService {
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.baseUrl + this.repo + '/' + id);
   }
+  getOrgUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl + this.repo + '/organizationUser');
+  }
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(this.baseUrl + this.repo, user);
   }

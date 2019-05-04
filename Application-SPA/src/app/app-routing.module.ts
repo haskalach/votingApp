@@ -20,6 +20,7 @@ import { OrganizationTypeManagementComponent } from './admin/organization-type-m
 // tslint:disable-next-line: max-line-length
 import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
 import { OrgUsersComponent } from './pages/org-users/org-users.component';
+import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
             path: 'users',
             data: { roles: ['OrganizationAdmin'] },
             component: OrgUsersComponent
+          },
+          {
+            path: 'createUser',
+            data: { roles: ['OrganizationAdmin'] },
+            component: CreateReferenceUserComponent
           }
         ]
       },

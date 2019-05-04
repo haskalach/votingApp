@@ -10,6 +10,7 @@ namespace Application.API.Data {
         Task<bool> SaveAll ();
 
         Task<User> GetUser (int id);
+        Task<IEnumerable<User>> GetOrganizationUsers (int orgId, int userId);
         Task<Photo> GetPhoto (int id);
         Task<IEnumerable<Voter>> GetVoters ();
         Task<Photo> GetMainPhoto (int userId);

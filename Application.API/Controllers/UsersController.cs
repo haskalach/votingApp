@@ -32,6 +32,16 @@ namespace Application.API.Controllers {
             return Ok (userToReturn);
         }
 
+        [HttpGet ("organizationUser")]
+        public async Task<IActionResult> GetOrganizationUsers () {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var users = await _repo.GetOrganizationUsers (OrganizationId?? default (int), userId);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>> (users);
+            return Ok (usersToReturn);
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateUser (UserForUpdateDto userForUpdateDto) {
             // if (id != int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value)) {

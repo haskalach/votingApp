@@ -48,6 +48,26 @@ namespace Application.API.Controllers {
             return BadRequest (result.Errors);
         }
 
+        [HttpPost ("createReference")]
+        public async Task<IActionResult> CreateReferenceUser (UserForReferenceRegisterDto userForReferenceRegisterDto) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var userToCreate = _mapper.Map<User> (userForReferenceRegisterDto);
+            var result = await _userManager.CreateAsync (userToCreate, "password");
+            List<string> selectedRoles = new List<string> ();
+            selectedRoles.Add ("Reference");
+            var Rolesresult = await _userManager.AddToRolesAsync (userToCreate, selectedRoles);
+            var userToReturn = _mapper.Map<UserForDetailedDto> (userToCreate);
+
+            userToCreate.OrganizationId = OrganizationId;
+
+            if (result.Succeeded && Rolesresult.Succeeded&& await _repo.SaveAll ()) {
+                return CreatedAtRoute ("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
+            }
+            return BadRequest (result.Errors);
+        }
+
         [HttpPost ("login")]
         public async Task<IActionResult> login (UserForLoginDto userForLoginDto) {
 
@@ -81,8 +101,8 @@ namespace Application.API.Controllers {
                 new Claim (ClaimTypes.Email, user.Email)
             };
             if (user.OrganizationId.HasValue && user.OrganizationId > 0) {
-                var organization = await _repo.GetOrganization (user.OrganizationId ?? default(int));
-                claims.Add (new System.Security.Claims.Claim("organizationType", organization.OrganizationType.Name));
+                var organization = await _repo.GetOrganization (user.OrganizationId ?? default (int));
+                claims.Add (new System.Security.Claims.Claim ("organizationType", organization.OrganizationType.Name));
             }
 
             var roles = await _userManager.GetRolesAsync (user);

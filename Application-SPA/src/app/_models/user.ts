@@ -18,6 +18,7 @@ export interface User {
   lookingFor?: string;
   photos?: Photo[];
   roles?: string[];
+  userRoles?: any[];
   organizationId?: number;
   organization: Organization;
 }

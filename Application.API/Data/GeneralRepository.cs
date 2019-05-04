@@ -26,19 +26,16 @@ namespace Application.API.Data {
             return photo;
         }
 
-        public async Task<IEnumerable<Organization>> GetOrganizations()
-        {
-            var organizations = await _context.Organizations.Include(o=>o.Users).Include(o =>o.OrganizationType).ToListAsync ();
+        public async Task<IEnumerable<Organization>> GetOrganizations () {
+            var organizations = await _context.Organizations.Include (o => o.Users).Include (o => o.OrganizationType).ToListAsync ();
             return organizations;
         }
-        public async Task<IEnumerable<OrganizationType>> GetOrganizationTypes()
-        {
+        public async Task<IEnumerable<OrganizationType>> GetOrganizationTypes () {
             var organizationTypes = await _context.OrganizationTypes.ToListAsync ();
             return organizationTypes;
         }
-        public async Task<Organization> GetOrganization(int orgId)
-        {
-            var organization = await _context.Organizations.Include(o=>o.Users).Include(o =>o.OrganizationType).Where(o=>o.Id == orgId).FirstOrDefaultAsync();
+        public async Task<Organization> GetOrganization (int orgId) {
+            var organization = await _context.Organizations.Include (o => o.Users).Include (o => o.OrganizationType).Where (o => o.Id == orgId).FirstOrDefaultAsync ();
             return organization;
         }
 
@@ -58,6 +55,11 @@ namespace Application.API.Data {
         }
         public async Task<bool> SaveAll () {
             return await _context.SaveChangesAsync () > 0;
+        }
+
+        public async Task<IEnumerable<User>> GetOrganizationUsers (int orgId, int userId) {
+            var users = await _context.Users.Where (u => u.OrganizationId == orgId && u.Id != userId).Include (u => u.UserRoles).ThenInclude(r =>r.Role).ToListAsync ();
+            return users;
         }
     }
 }

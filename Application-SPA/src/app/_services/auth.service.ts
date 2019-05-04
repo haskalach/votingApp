@@ -40,6 +40,9 @@ export class AuthService {
   resgiter(user: User) {
     return this.http.post(this.baseUrl + this.repo + 'register', user);
   }
+  CreateReferenceUser(user: User) {
+    return this.http.post(this.baseUrl + this.repo + 'register', user);
+  }
 
   loggedIn() {
     const token = localStorage.getItem('token');

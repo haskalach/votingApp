@@ -57,6 +57,7 @@ import { OrganizationTypeManagementComponent } from './admin/organization-type-m
 import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
 import { HasOrgTypeDirective } from './_directives/hasOrgType.directive';
 import { OrgUsersComponent } from './pages/org-users/org-users.component';
+import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
 
 
 
@@ -87,7 +88,8 @@ export function tokenGetter() {
     CreatOrganizationComponent,
     OrganizationTypeManagementComponent,
     CreateOrganizationTypeComponent,
-    OrgUsersComponent
+    OrgUsersComponent,
+    CreateReferenceUserComponent
   ],
   imports: [
     ButtonsModule.forRoot(),
