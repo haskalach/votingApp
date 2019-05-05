@@ -58,6 +58,8 @@ import { CreateOrganizationTypeComponent } from './admin/organization-type-manag
 import { HasOrgTypeDirective } from './_directives/hasOrgType.directive';
 import { OrgUsersComponent } from './pages/org-users/org-users.component';
 import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
+import { EngenereUploadComponent } from './pages/engenere/engenere-upload/engenere-upload.component';
+import { EngenereService } from './_services/engenere/engenere.service';
 
 
 
@@ -89,7 +91,8 @@ export function tokenGetter() {
     OrganizationTypeManagementComponent,
     CreateOrganizationTypeComponent,
     OrgUsersComponent,
-    CreateReferenceUserComponent
+    CreateReferenceUserComponent,
+    EngenereUploadComponent
   ],
   imports: [
     ButtonsModule.forRoot(),
@@ -128,7 +131,8 @@ export function tokenGetter() {
     AdminService,
     VoterService,
     OrganizationService,
-    UtilitiesService
+    UtilitiesService,
+    EngenereService
   ],
   entryComponents: [
     RolesModalComponent

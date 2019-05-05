@@ -21,6 +21,7 @@ import { OrganizationTypeManagementComponent } from './admin/organization-type-m
 import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
 import { OrgUsersComponent } from './pages/org-users/org-users.component';
 import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
+import { EngenereUploadComponent } from './pages/engenere/engenere-upload/engenere-upload.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
             path: 'createUser',
             data: { roles: ['OrganizationAdmin'] },
             component: CreateReferenceUserComponent
+          },
+          {
+            path: 'upload',
+            component: EngenereUploadComponent
           }
         ]
       },
