@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Application.API.Data;
 using Application.API.Models;
 using AutoMapper;
 using ExcelDataReader;
@@ -19,9 +20,11 @@ namespace Application.API.Controllers {
     public class EngenereUploadController : Controller {
         private IHostingEnvironment _hostingEnvironment;
         private readonly IMapper _mapper;
+        private readonly IGeneralRepository _repo;
 
-        public EngenereUploadController (IHostingEnvironment hostingEnvironment, IMapper mapper) {
+        public EngenereUploadController (IHostingEnvironment hostingEnvironment, IMapper mapper, IGeneralRepository repo) {
             _mapper = mapper;
+            _repo = repo;
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -42,6 +45,7 @@ namespace Application.API.Controllers {
                     using (var stream = new FileStream (fullPath, FileMode.Create)) {
                         file.CopyTo (stream);
                     }
+
                     using (Stream inputStream = file.OpenReadStream ()) {
                         IExcelDataReader reader;
 
@@ -57,17 +61,69 @@ namespace Application.API.Controllers {
                         DataTable sheet = sheets["Sheet1"];
 
                         foreach (DataRow row in sheet.Rows) {
-                            Engeneres dataItem = Activator.CreateInstance<Engeneres> ();
-                            dataItem = row;
-                            list.Add (dataItem);
-                        }
+                            Engeneres dataItem = new Engeneres ();
+                            int code;
+                            int vote;
+                            int attend;
+                            int transport;
+                            int voted;
+                            DateTime birthDate;
+                            DateTime registration;
+                            DateTime graduation;
+                            Int32.TryParse (row["Code"].ToString (), out code);
+                            Int32.TryParse (row["Vote"].ToString (), out vote);
+                            Int32.TryParse (row["Attend"].ToString (), out attend);
+                            Int32.TryParse (row["Transport"].ToString (), out transport);
+                            Int32.TryParse (row["Voted"].ToString (), out voted);
+                            DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
+                            DateTime.TryParse (row["Registration"].ToString (), out registration);
+                            DateTime.TryParse (row["Graduation"].ToString (), out graduation);
+                            dataItem.Code = code;
+                            dataItem.FirstName = row["FirstName"].ToString ();
+                            dataItem.Speciality = row["Speciality"].ToString ();
+                            dataItem.SubChapter = row["SubChapter"].ToString ();
+                            dataItem.Religion = row["Religion"].ToString ();
+                            dataItem.Politic = row["Politic"].ToString ();
+                            dataItem.Reference = row["Reference"].ToString ();
+                            dataItem.VotedYear = row["VotedYear"].ToString ();
+                            dataItem.BirthDate = birthDate;
+                            dataItem.BirthCountry = row["BirthCountry"].ToString ();
+                            dataItem.BirthPlace = row["BirthPlace"].ToString ();
+                            dataItem.CivilIdMother = row["CivilIdMother"].ToString ();
+                            dataItem.CivilIdKad = row["CivilIdKad"].ToString ();
+                            dataItem.CivilIdRegion = row["CivilIdRegion"].ToString ();
+                            dataItem.RegisteryNumber = row["RegisteryNumber"].ToString ();
+                            dataItem.CivilIdPlace = row["CivilIdPlace"].ToString ();
+                            dataItem.Registration = registration;
+                            dataItem.Graduation = graduation;
+                            dataItem.School = row["School"].ToString ();
+                            dataItem.GraduationLocation = row["GraduationLocation"].ToString ();
+                            dataItem.AddressWork = row["AddressWork"].ToString ();
+                            dataItem.MobileWork = row["MobileWork"].ToString ();
+                            dataItem.PhoneWork = row["PhoneWork"].ToString ();
+                            dataItem.AddressHome = row["AddressHome"].ToString ();
+                            dataItem.MobileHome = row["MobileHome"].ToString ();
+                            dataItem.PhoneHome = row["PhoneHome"].ToString ();
+                            dataItem.AddressHome = row["AddressHome"].ToString ();
+                            dataItem.Email = row["Email"].ToString ();
+                            dataItem.Vote = vote;
+                            dataItem.Attend = attend;
+                            dataItem.Transport = transport;
+                            dataItem.Voted = voted;
 
-                        return Json (list.ToArray ());
+                            // list.Add (dataItem);
+                            _repo.Add (dataItem);
+                        }
+                        System.IO.File.Delete (fullPath);
                     }
                 }
-                return Json ("Upload Successful.");
+                if (_repo.SaveAll ().Result) {
+                    return Ok (list);
+                } else {
+                    return BadRequest ("something wrong happend while saving");
+                }
             } catch (System.Exception ex) {
-                return Json ("Upload Failed: " + ex.Message);
+                return BadRequest ("Upload Failed: " + ex.Message);
             }
         }
         private static ExcelDataSetConfiguration GetDataSetConfig () {
@@ -77,6 +133,27 @@ namespace Application.API.Controllers {
                     ReadHeaderRow = rowReader => Console.WriteLine ("{0}: {1}", rowReader[0], rowReader[1])
                     }
             };
+        }
+
+        [HttpGet]
+        [HttpGet]
+        [Route ("data.csv")]
+        [Produces ("text/csv")]
+        public IActionResult GetDataAsCsv () {
+            return Ok (DummyData ());
+        }
+
+        private static IEnumerable<Engeneres> DummyData () {
+            var model = new List<Engeneres> {
+                new Engeneres {
+                Id = 1
+                },
+                new Engeneres {
+                Id = 2
+                }
+            };
+
+            return model;
         }
 
     }
