@@ -36,7 +36,7 @@ export class UploadEngeneresComponent implements OnInit {
 
   uploadFiles() {
     this.voterService
-      .uploadData(this.formData, 'EngenereUpload')
+      .uploadData(this.formData, 'Engenere/Upload')
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);
