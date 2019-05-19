@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Application.API.Data;
 using Application.API.Dtos;
+using Application.API.Helpers;
 using Application.API.Models;
 using AutoMapper;
 using ExcelDataReader;
@@ -41,10 +42,11 @@ namespace Application.API.Controllers {
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetVoters () {
-            var voterFromRepo = await _repo.GetVoters ();
+        public async Task<IActionResult> GetVoters ([FromQuery] EngenereParams engenereParams) {
+            var voterFromRepo = await _repo.GetEngeneres (engenereParams);
 
             var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
+            Response.AddPagination (voterFromRepo.CurrentPage, voterFromRepo.PageSize, voterFromRepo.TotalCount, voterFromRepo.TotalPages);
             return Ok (voterList);
         }
 

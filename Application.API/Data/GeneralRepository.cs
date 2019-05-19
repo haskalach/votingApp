@@ -49,9 +49,9 @@ namespace Application.API.Data {
             return user;
         }
 
-        public async Task<IEnumerable<Engeneres>> GetVoters () {
-            var voters = await _context.Engeneres.ToListAsync ();
-            return voters;
+        public async Task<PagedList<Engeneres>> GetEngeneres (EngenereParams engenereParams) {
+            var voters = _context.Engeneres.AsQueryable ();
+            return await PagedList<Engeneres>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
         }
         public async Task<bool> SaveAll () {
             return await _context.SaveChangesAsync () > 0;
