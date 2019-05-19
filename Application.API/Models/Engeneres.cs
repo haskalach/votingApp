@@ -1,9 +1,7 @@
 using System;
 
-namespace Application.API.Models
-{
-    public class Engeneres
-    {
+namespace Application.API.Models {
+    public class Engeneres {
         public int Id { get; set; }
         public int Code { get; set; }
         public string FirstName { get; set; }

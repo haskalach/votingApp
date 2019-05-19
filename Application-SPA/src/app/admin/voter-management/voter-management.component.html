@@ -1,6 +1,19 @@
 <div class="row">
   <div class="col-12">
-    <button class="btn btn-success add-btn" *appHasRole="['Admin']" [routerLink]="['/admin/add-voter']">Add Voter</button>
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      [routerLink]="['/admin/add-voter']"
+    >
+      Add Voter
+    </button>
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      (click)="exportVoters()"
+    >
+      export Voter
+    </button>
   </div>
   <table class="table">
     <tr>
@@ -17,34 +30,34 @@
     </tr>
     <tr *ngFor="let voter of voters">
       <td>
-        {{voter.id}}
+        {{ voter.id }}
       </td>
       <td>
-        {{voter.code}}
+        {{ voter.code }}
       </td>
       <td>
-        {{voter.firstName}}
+        {{ voter.firstName }}
       </td>
       <td>
-        {{voter.birthDate | date}}
+        {{ voter.birthDate | date }}
       </td>
       <td>
-        {{voter.registration | date}}
+        {{ voter.registration | date }}
       </td>
       <td>
-        {{voter.graduation | date}}
+        {{ voter.graduation | date }}
       </td>
       <td>
-        {{voter.vote}}
+        {{ voter.vote }}
       </td>
       <td>
-        {{voter.attend}}
+        {{ voter.attend }}
       </td>
       <td>
-        {{voter.transport}}
+        {{ voter.transport }}
       </td>
       <td>
-        {{voter.voted}}
+        {{ voter.voted }}
       </td>
     </tr>
   </table>

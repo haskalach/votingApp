@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Voter } from 'src/app/_models/voter';
 import { HttpClient } from '@angular/common/http';
@@ -14,5 +15,12 @@ export class VoterService {
   }
   getVoters() {
     return this.http.get(this.baseUrl + this.repo);
+  }
+  exportVoters() {
+    return this.http.get(this.baseUrl + this.repo + '/Export');
+    // .map(res => {
+    //   const blob = new Blob([res], { type: 'text/xlxs' });
+    //   return blob;
+    // });
   }
 }

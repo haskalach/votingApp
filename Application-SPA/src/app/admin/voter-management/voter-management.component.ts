@@ -1,7 +1,6 @@
 import { VoterService } from './../../_services/voter/voter.service';
 import { Component, OnInit } from '@angular/core';
 import { Voter } from 'src/app/_models/voter';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-voter-management',
@@ -25,4 +24,13 @@ export class VoterManagementComponent implements OnInit {
       }
     );
   }
+
+  exportVoters() {
+    this.voterService.exportVoters().subscribe(next => {
+      console.log(next);
+      window.open(next.toString());
+      // this.downloadFile(next.toString());
+    });
+  }
+
 }

@@ -111,11 +111,16 @@ namespace Application.API.Controllers {
                             dataItem.Transport = transport;
                             dataItem.Voted = voted;
 
-                            // list.Add (dataItem);
-                            _repo.Add (dataItem);
+                            if (_repo.GetEngenere (dataItem.Code).Result == null) {
+                                list.Add (dataItem);
+                                _repo.Add (dataItem);
+                            }
                         }
                         System.IO.File.Delete (fullPath);
                     }
+                }
+                if (list.Count == 0) {
+                    return Ok (list);
                 }
                 if (_repo.SaveAll ().Result) {
                     return Ok (list);
@@ -133,27 +138,6 @@ namespace Application.API.Controllers {
                     ReadHeaderRow = rowReader => Console.WriteLine ("{0}: {1}", rowReader[0], rowReader[1])
                     }
             };
-        }
-
-        [HttpGet]
-        [HttpGet]
-        [Route ("data.csv")]
-        [Produces ("text/csv")]
-        public IActionResult GetDataAsCsv () {
-            return Ok (DummyData ());
-        }
-
-        private static IEnumerable<Engeneres> DummyData () {
-            var model = new List<Engeneres> {
-                new Engeneres {
-                Id = 1
-                },
-                new Engeneres {
-                Id = 2
-                }
-            };
-
-            return model;
         }
 
     }

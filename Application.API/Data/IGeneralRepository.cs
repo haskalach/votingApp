@@ -17,6 +17,7 @@ namespace Application.API.Data {
         Task<IEnumerable<Organization>> GetOrganizations ();
         Task<IEnumerable<OrganizationType>> GetOrganizationTypes ();
         Task<Organization> GetOrganization (int orgId);
+        Task<Engeneres> GetEngenere(int code);
 
     }
 }

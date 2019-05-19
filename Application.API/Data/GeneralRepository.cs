@@ -58,8 +58,13 @@ namespace Application.API.Data {
         }
 
         public async Task<IEnumerable<User>> GetOrganizationUsers (int orgId, int userId) {
-            var users = await _context.Users.Where (u => u.OrganizationId == orgId && u.Id != userId).Include (u => u.UserRoles).ThenInclude(r =>r.Role).ToListAsync ();
+            var users = await _context.Users.Where (u => u.OrganizationId == orgId && u.Id != userId).Include (u => u.UserRoles).ThenInclude (r => r.Role).ToListAsync ();
             return users;
+        }
+
+        public async Task<Engeneres> GetEngenere (int code) {
+            var eng = await _context.Engeneres.FirstOrDefaultAsync (x => x.Code == code);
+            return eng;
         }
     }
 }
