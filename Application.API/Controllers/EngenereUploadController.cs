@@ -70,6 +70,7 @@ namespace Application.API.Controllers {
                             DateTime birthDate;
                             DateTime registration;
                             DateTime graduation;
+                            
                             Int32.TryParse (row["Code"].ToString (), out code);
                             Int32.TryParse (row["Vote"].ToString (), out vote);
                             Int32.TryParse (row["Attend"].ToString (), out attend);
@@ -110,8 +111,13 @@ namespace Application.API.Controllers {
                             dataItem.Attend = attend;
                             dataItem.Transport = transport;
                             dataItem.Voted = voted;
-
-                            if (_repo.GetEngenere (dataItem.Code).Result == null) {
+                            bool exists = false;
+                            list.ForEach (item => { 
+                                if(item.Code == dataItem.Code){
+                                    exists = true;
+                                }
+                            });
+                            if (_repo.GetEngenere (dataItem.Code).Result == null && exists == false) {
                                 list.Add (dataItem);
                                 _repo.Add (dataItem);
                             }
