@@ -1,4 +1,4 @@
-<h1>File Upload Using Angular 5 and ASP.NET Core 2.1</h1>
+<h1>File Upload 1</h1>
 <input #file type="file" multiple (change)="upload(file.files)" />
 <br />
 <span
@@ -7,7 +7,4 @@
 >
   {{ progress }}%
 </span>
-
-<span style="font-weight:bold;color:green;" *ngIf="message">
-  {{ message }}
-</span>
+<button type="button" (click)="uploadFiles()"> Upload Selected Files</button>

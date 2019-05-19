@@ -1,26 +1,30 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Voter } from 'src/app/_models/voter';
-import { HttpClient } from '@angular/common/http';
+import { Engenere } from 'src/app/_models/Engenere';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoterService {
-  repo = 'Engenere';
+  engrepo = 'Engenere';
   baseUrl = 'http://localhost:5000/api/';
   constructor(private http: HttpClient) {}
-  addVoter(voter: Voter) {
-    return this.http.post(this.baseUrl + this.repo, voter);
+  addEngenere(voter: Engenere) {
+    return this.http.post(this.baseUrl + this.engrepo, voter);
   }
-  getVoters() {
-    return this.http.get(this.baseUrl + this.repo);
+  getEngeneres() {
+    return this.http.get(this.baseUrl + this.engrepo);
   }
-  exportVoters() {
-    return this.http.get(this.baseUrl + this.repo + '/Export');
-    // .map(res => {
-    //   const blob = new Blob([res], { type: 'text/xlxs' });
-    //   return blob;
-    // });
+  uploadData(formData, uploadUrl) {
+    const uploadReq = new HttpRequest(
+      'POST',
+      this.baseUrl + uploadUrl,
+      formData,
+      {
+        reportProgress: true
+      }
+    );
+    return this.http.request(uploadReq);
   }
 }

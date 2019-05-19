@@ -47,8 +47,6 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './admin/user-management/register/register.component';
 import { VoterService } from './_services/voter/voter.service';
-import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
-import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
 import { OrganizationManagementComponent } from './admin/organization-management/organization-management.component';
 import { OrganizationService } from './_services/organization/organization.service';
 import { CreatOrganizationComponent } from './admin/organization-management/creat-organization/creat-organization.component';
@@ -58,8 +56,10 @@ import { CreateOrganizationTypeComponent } from './admin/organization-type-manag
 import { HasOrgTypeDirective } from './_directives/hasOrgType.directive';
 import { OrgUsersComponent } from './pages/org-users/org-users.component';
 import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
-import { EngenereUploadComponent } from './pages/engenere/engenere-upload/engenere-upload.component';
 import { EngenereService } from './_services/engenere/engenere.service';
+import { AddEngenereComponent } from './admin/engenere-management/add-engenere/add-engenere.component';
+import { EngenereManagementComponent } from './admin/engenere-management/engenere-management.component';
+import { UploadEngeneresComponent } from './admin/engenere-management/upload-engeneres/upload-engeneres.component';
 
 
 
@@ -84,15 +84,15 @@ export function tokenGetter() {
     PhotoManagementComponent,
     UserManagementComponent,
     RolesModalComponent,
-    VoterManagementComponent,
-    AddVoterComponent,
     OrganizationManagementComponent,
     CreatOrganizationComponent,
     OrganizationTypeManagementComponent,
     CreateOrganizationTypeComponent,
     OrgUsersComponent,
     CreateReferenceUserComponent,
-    EngenereUploadComponent
+    AddEngenereComponent,
+    EngenereManagementComponent,
+    UploadEngeneresComponent
   ],
   imports: [
     ButtonsModule.forRoot(),

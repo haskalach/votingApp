@@ -3,16 +3,16 @@
     <button
       class="btn btn-success add-btn"
       *appHasRole="['Admin']"
-      [routerLink]="['/admin/add-voter']"
+      [routerLink]="['/admin/add-engenere']"
     >
-      Add Voter
+      Add Engenere
     </button>
     <button
       class="btn btn-success add-btn"
       *appHasRole="['Admin']"
-      (click)="exportVoters()"
+      [routerLink]="['/admin/upload-engenere']"
     >
-      export Voter
+      Upload Data
     </button>
   </div>
   <table class="table">

@@ -1,4 +1,4 @@
-export interface Voter {
+export interface Engenere {
   id: number;
   code: number;
   firstName: string;

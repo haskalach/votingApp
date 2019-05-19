@@ -1,5 +1,5 @@
+import { UploadEngeneresComponent } from './admin/engenere-management/upload-engeneres/upload-engeneres.component';
 import { OrganizationManagementComponent } from './admin/organization-management/organization-management.component';
-import { AddVoterComponent } from './admin/voter-management/add-voter/add-voter.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberDetailedComponent } from './pages/member/member-detailed/member-detailed.component';
@@ -14,14 +14,14 @@ import { MemberEditComponent } from './pages/member/member-edit/member-edit.comp
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RegisterComponent } from './admin/user-management/register/register.component';
-import { VoterManagementComponent } from './admin/voter-management/voter-management.component';
 import { CreatOrganizationComponent } from './admin/organization-management/creat-organization/creat-organization.component';
 import { OrganizationTypeManagementComponent } from './admin/organization-type-management/organization-type-management.component';
 // tslint:disable-next-line: max-line-length
 import { CreateOrganizationTypeComponent } from './admin/organization-type-management/create-organization-type/create-organization-type.component';
 import { OrgUsersComponent } from './pages/org-users/org-users.component';
 import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
-import { EngenereUploadComponent } from './pages/engenere/engenere-upload/engenere-upload.component';
+import { EngenereManagementComponent } from './admin/engenere-management/engenere-management.component';
+import { AddEngenereComponent } from './admin/engenere-management/add-engenere/add-engenere.component';
 
 const routes: Routes = [
   {
@@ -61,10 +61,6 @@ const routes: Routes = [
             path: 'createUser',
             data: { roles: ['OrganizationAdmin'] },
             component: CreateReferenceUserComponent
-          },
-          {
-            path: 'upload',
-            component: EngenereUploadComponent
           }
         ]
       },
@@ -91,14 +87,19 @@ const routes: Routes = [
             component: RegisterComponent
           },
           {
-            path: 'voters',
+            path: 'engeneres',
             data: { roles: ['Admin'] },
-            component: VoterManagementComponent
+            component: EngenereManagementComponent
           },
           {
-            path: 'add-voter',
+            path: 'add-engenere',
             data: { roles: ['Admin'] },
-            component: AddVoterComponent
+            component: AddEngenereComponent
+          },
+          {
+            path: 'upload-engenere',
+            data: { roles: ['Admin'] },
+            component: UploadEngeneresComponent
           },
           {
             path: 'organizations',

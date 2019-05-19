@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { VoterManagementComponent } from './voter-management.component';
+import { AddEngenereComponent } from './add-engenere.component';
 
-describe('VoterManagementComponent', () => {
-  let component: VoterManagementComponent;
-  let fixture: ComponentFixture<VoterManagementComponent>;
+describe('AddEngenereComponent', () => {
+  let component: AddEngenereComponent;
+  let fixture: ComponentFixture<AddEngenereComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VoterManagementComponent ]
+      declarations: [ AddEngenereComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VoterManagementComponent);
+    fixture = TestBed.createComponent(AddEngenereComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
