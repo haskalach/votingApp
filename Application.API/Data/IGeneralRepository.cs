@@ -12,12 +12,12 @@ namespace Application.API.Data {
         Task<User> GetUser (int id);
         Task<IEnumerable<User>> GetOrganizationUsers (int orgId, int userId);
         Task<Photo> GetPhoto (int id);
-        Task<PagedList<Voter>> GetEngeneres (EngenereParams engenereParams);
+        Task<PagedList<Voter>> GetVoters (EngenereParams engenereParams);
         Task<Photo> GetMainPhoto (int userId);
         Task<IEnumerable<Organization>> GetOrganizations ();
         Task<IEnumerable<VoterType>> GetOrganizationTypes ();
         Task<Organization> GetOrganization (int orgId);
-        Task<Voter> GetEngenere(int code);
+        Task<Voter> GetEngenere (int code);
 
     }
 }

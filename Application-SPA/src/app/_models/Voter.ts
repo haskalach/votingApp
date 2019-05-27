@@ -1,7 +1,9 @@
-import { User } from 'src/app/_models/user';
-export interface Engenere {
+import { User } from './user';
+
+export interface Voter {
   id: number;
   codeEngenere: number;
+  codePharmacist: number;
   firstNameArabic: string;
   fatherNameArabic: string;
   familyArabic: string;

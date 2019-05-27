@@ -15,11 +15,16 @@ export class VoterService {
   addEngenere(voter: Engenere) {
     return this.http.post(this.baseUrl + this.voterRepo, voter);
   }
-  getEngeneres(page?, itemsPerPage?): Observable<PaginatedResult<Engenere[]>> {
+  getEngeneres(
+    voterTypeId,
+    page?,
+    itemsPerPage?
+  ): Observable<PaginatedResult<Engenere[]>> {
     const paginatedResult: PaginatedResult<Engenere[]> = new PaginatedResult<
       Engenere[]
     >();
     let params = new HttpParams();
+    params = params.append('voterTypeId', voterTypeId);
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);

@@ -1,3 +1,6 @@
+import { OrganizationService } from './../../../_services/organization/organization.service';
+
+import { VoterType } from './../../../_models/VoterType';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Engenere } from 'src/app/_models/Engenere';
@@ -13,19 +16,22 @@ import { Router } from '@angular/router';
 export class AddEngenereComponent implements OnInit {
   voterForm: FormGroup;
   voter: Engenere;
+  voterTypes: VoterType[];
   constructor(
     private fb: FormBuilder,
     private alertify: AlertifyService,
     private voterService: VoterService,
-    private router: Router
+    private router: Router,
+    private organizationService: OrganizationService
   ) {}
 
   ngOnInit() {
     this.createVoterForm();
+    this.getOrganizationTypesList();
   }
   createVoterForm() {
     this.voterForm = this.fb.group({
-      codeEngenere: ['', Validators.required],
+      code: ['', Validators.required],
       firstNameArabic: ['', Validators.required],
       fatherNameArabic: ['', Validators.required],
       familyArabic: ['', Validators.required],
@@ -56,7 +62,8 @@ export class AddEngenereComponent implements OnInit {
       phoneHome: ['', Validators.required],
       email: ['', Validators.required],
       religion: ['', Validators.required],
-      politic: ['', Validators.required]
+      politic: ['', Validators.required],
+      VoterTypeId: [1, Validators.required]
     });
   }
   addVoter() {
@@ -74,6 +81,16 @@ export class AddEngenereComponent implements OnInit {
         () => {}
       );
     }
+  }
+  getOrganizationTypesList() {
+    this.organizationService.getOrganizationTypes().subscribe(
+      (types: VoterType[]) => {
+        this.voterTypes = types;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
   cancel() {
     this.router.navigate(['/admin']);

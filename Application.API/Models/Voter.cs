@@ -4,6 +4,7 @@ namespace Application.API.Models {
     public class Voter {
         public int Id { get; set; }
         public int CodeEngenere { get; set; }
+        public int CodePharmacist { get; set; }
         public string FirstNameArabic { get; set; }
         public string FatherNameArabic { get; set; }
         public string FamilyArabic { get; set; }

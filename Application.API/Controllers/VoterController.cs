@@ -29,7 +29,18 @@ namespace Application.API.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> AddVoter (VoterForCreationDto voterForCreationDto) {
+            switch (voterForCreationDto.VoterTypeId) {
 
+                case 1:
+                    voterForCreationDto.CodeEngenere = voterForCreationDto.Code;
+                    break;
+
+                case 2:
+                    voterForCreationDto.CodePharmacist = voterForCreationDto.Code;
+                    break;
+                default:
+                    break;
+            }
             var voterToCreate = _mapper.Map<Voter> (voterForCreationDto);
 
             _repo.Add (voterToCreate);
@@ -42,7 +53,7 @@ namespace Application.API.Controllers {
 
         [HttpGet]
         public async Task<IActionResult> GetVoters ([FromQuery] EngenereParams engenereParams) {
-            var voterFromRepo = await _repo.GetEngeneres (engenereParams);
+            var voterFromRepo = await _repo.GetVoters (engenereParams);
 
             var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
             Response.AddPagination (voterFromRepo.CurrentPage, voterFromRepo.PageSize, voterFromRepo.TotalCount, voterFromRepo.TotalPages);

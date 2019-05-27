@@ -2,7 +2,9 @@ using System;
 
 namespace Application.API.Dtos {
     public class VoterForCreationDto {
+        public int Code { get; set; }
         public int CodeEngenere { get; set; }
+        public int CodePharmacist{ get; set; }
         public string FirstNameArabic { get; set; }
         public string FatherNameArabic { get; set; }
         public string FamilyArabic { get; set; }
@@ -34,5 +36,6 @@ namespace Application.API.Dtos {
         public string Email { get; set; }
         public string Religion { get; set; }
         public string Politic { get; set; }
+        public int VoterTypeId { get; set; }
     }
 }

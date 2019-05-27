@@ -1,0 +1,11 @@
+.table-header-row {
+  justify-content: space-between;
+  margin: 0px;
+  & .btn-section {
+    & > button {
+      &:first-child {
+        margin-left: 5px;
+      }
+    }
+  }
+}

@@ -1,19 +1,35 @@
 <div class="row">
   <div class="col-12">
-    <button
-      class="btn btn-success add-btn"
-      *appHasRole="['Admin']"
-      [routerLink]="['/admin/add-engenere']"
-    >
-      Add Engenere
-    </button>
-    <button
-      class="btn btn-success add-btn"
-      *appHasRole="['Admin']"
-      [routerLink]="['/admin/upload-engenere']"
-    >
-      Upload Data
-    </button>
+    <div class="row table-header-row">
+      <div class="filter-section">
+        <select
+          class="form-control"
+          [(ngModel)]="voterTypeId"
+          (change)="voterTypeChange()"
+        >
+          <option [ngValue]="0"> All</option>
+          <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
+            {{ voterType.name }}</option
+          >
+        </select>
+      </div>
+      <div class="btn-section">
+        <button
+          class="btn btn-success add-btn"
+          *appHasRole="['Admin']"
+          [routerLink]="['/admin/add-engenere']"
+        >
+          Add Engenere
+        </button>
+        <button
+          class="btn btn-success add-btn"
+          *appHasRole="['Admin']"
+          [routerLink]="['/admin/upload-engenere']"
+        >
+          Upload Data
+        </button>
+      </div>
+    </div>
   </div>
   <table class="table">
     <tr>
@@ -27,7 +43,14 @@
     </tr>
     <tr *ngFor="let voter of voters">
       <td>
-        {{ voter.codeEngenere }}
+        <ng-container [ngSwitch]="voter.voterTypeId">
+          <ng-container *ngSwitchCase="VoterType.engenere">
+            {{ voter.codeEngenere }}
+          </ng-container>
+          <ng-container *ngSwitchCase="VoterType.pharmacist">
+            {{ voter.codePharmacist }}
+          </ng-container>
+        </ng-container>
       </td>
       <td>
         {{ voter.firstNameArabic }}

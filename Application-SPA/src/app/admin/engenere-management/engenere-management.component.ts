@@ -1,7 +1,11 @@
+import { OrganizationService } from 'src/app/_services/organization/organization.service';
+import { Voter } from './../../_models/Voter';
 import { Engenere } from '../../_models/Engenere';
 import { Component, OnInit } from '@angular/core';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
+import { VoterType } from 'src/app/_models/VoterType';
 
 @Component({
   selector: 'app-engenere-management',
@@ -9,29 +13,57 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
   styleUrls: ['./engenere-management.component.scss']
 })
 export class EngenereManagementComponent implements OnInit {
-  voters: Engenere[];
+  voters: Voter[];
   pageNumber = 1;
   pageSize = 10;
   pagination: Pagination;
-  constructor(private voterService: VoterService) {}
+  VoterType = VoterTypeEnum;
+  voterTypeId = VoterTypeEnum.all;
+  voterTypes: VoterType[];
+  constructor(
+    private voterService: VoterService,
+    private organizationService: OrganizationService
+  ) {}
 
   ngOnInit() {
-    this.loadItems();
+    this.getOrganizationTypesList();
+    this.loadItems(this.voterTypeId);
   }
 
-  loadItems(pageNumber?, pageSize?) {
+  loadItems(voterTypeId, pageNumber?, pageSize?) {
     this.voterService
-      .getEngeneres(pageNumber, pageSize)
-      .subscribe((res: PaginatedResult<Engenere[]>) => {
+      .getEngeneres(voterTypeId, pageNumber, pageSize)
+      .subscribe((res: PaginatedResult<Voter[]>) => {
         this.voters = res.result;
         this.pagination = res.pagination;
       });
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadItems(this.pagination.currentPage, this.pagination.itemsPerPage);
+    this.loadItems(
+      this.voterTypeId,
+      this.pagination.currentPage,
+      this.pagination.itemsPerPage
+    );
   }
 
+  getOrganizationTypesList() {
+    this.organizationService.getOrganizationTypes().subscribe(
+      (types: VoterType[]) => {
+        this.voterTypes = types;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  voterTypeChange() {
+    this.loadItems(
+      this.voterTypeId,
+      this.pagination.currentPage,
+      this.pagination.itemsPerPage
+    );
+  }
   // exportVoters() {
   //   this.voterService.exportVoters().subscribe(next => {
   //     console.log(next);
