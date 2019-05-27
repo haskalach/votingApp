@@ -52,8 +52,8 @@ namespace Application.API.Controllers {
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetVoters ([FromQuery] EngenereParams engenereParams) {
-            var voterFromRepo = await _repo.GetVoters (engenereParams);
+        public async Task<IActionResult> GetVoters ([FromQuery] VoterParams voterParams) {
+            var voterFromRepo = await _repo.GetVoters (voterParams);
 
             var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
             Response.AddPagination (voterFromRepo.CurrentPage, voterFromRepo.PageSize, voterFromRepo.TotalCount, voterFromRepo.TotalPages);

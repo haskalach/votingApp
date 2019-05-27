@@ -49,12 +49,14 @@ namespace Application.API.Data {
             return user;
         }
 
-        public async Task<PagedList<Voter>> GetVoters (EngenereParams engenereParams) {
+        public async Task<PagedList<Voter>> GetVoters (VoterParams engenereParams) {
             var voters = _context.Voters.AsQueryable ();
             if (engenereParams.voterTypeId > 0) {
                 voters = voters.Where (x => x.VoterTypeId == engenereParams.voterTypeId);
             }
-
+            if (!string.IsNullOrEmpty (engenereParams.religion)) {
+                voters = voters.Where (x => x.Religion == engenereParams.religion);
+            }
             return await PagedList<Voter>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
         }
         public async Task<bool> SaveAll () {

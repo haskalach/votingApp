@@ -18,8 +18,8 @@ export class EngenereManagementComponent implements OnInit {
   pageSize = 10;
   pagination: Pagination;
   VoterType = VoterTypeEnum;
-  voterTypeId = VoterTypeEnum.all;
   voterTypes: VoterType[];
+  voterParams: any = { voterTypeId: VoterTypeEnum.all, religion: '' };
   constructor(
     private voterService: VoterService,
     private organizationService: OrganizationService
@@ -27,12 +27,12 @@ export class EngenereManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getOrganizationTypesList();
-    this.loadItems(this.voterTypeId);
+    this.loadItems(null, null, this.voterParams);
   }
 
-  loadItems(voterTypeId, pageNumber?, pageSize?) {
+  loadItems(pageNumber?, pageSize?, voterParams?) {
     this.voterService
-      .getEngeneres(voterTypeId, pageNumber, pageSize)
+      .getEngeneres(pageNumber, pageSize, voterParams)
       .subscribe((res: PaginatedResult<Voter[]>) => {
         this.voters = res.result;
         this.pagination = res.pagination;
@@ -40,11 +40,7 @@ export class EngenereManagementComponent implements OnInit {
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadItems(
-      this.voterTypeId,
-      this.pagination.currentPage,
-      this.pagination.itemsPerPage
-    );
+    this.loadItems(this.pagination.currentPage, this.pagination.itemsPerPage);
   }
 
   getOrganizationTypesList() {
@@ -57,11 +53,12 @@ export class EngenereManagementComponent implements OnInit {
       }
     );
   }
-  voterTypeChange() {
+
+  refreshData() {
     this.loadItems(
-      this.voterTypeId,
       this.pagination.currentPage,
-      this.pagination.itemsPerPage
+      this.pagination.itemsPerPage,
+      this.voterParams
     );
   }
   // exportVoters() {

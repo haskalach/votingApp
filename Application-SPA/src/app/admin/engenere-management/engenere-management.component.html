@@ -4,14 +4,19 @@
       <div class="filter-section">
         <select
           class="form-control"
-          [(ngModel)]="voterTypeId"
-          (change)="voterTypeChange()"
+          [(ngModel)]="voterParams.voterTypeId"
+          (change)="refreshData()"
         >
           <option [ngValue]="0"> All</option>
           <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
             {{ voterType.name }}</option
           >
         </select>
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.religion"
+          placeholder="Religion"
+        />
       </div>
       <div class="btn-section">
         <button
@@ -27,6 +32,13 @@
           [routerLink]="['/admin/upload-engenere']"
         >
           Upload Data
+        </button>
+        <button
+          class="btn btn-success add-btn"
+          *appHasRole="['Admin']"
+          (click)="refreshData()"
+        >
+          Filter
         </button>
       </div>
     </div>
