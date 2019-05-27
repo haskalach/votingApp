@@ -27,15 +27,15 @@ namespace Application.API.Data {
         }
 
         public async Task<IEnumerable<Organization>> GetOrganizations () {
-            var organizations = await _context.Organizations.Include (o => o.Users).Include (o => o.OrganizationType).ToListAsync ();
+            var organizations = await _context.Organizations.Include (o => o.Users).Include (o => o.VoterType).ToListAsync ();
             return organizations;
         }
-        public async Task<IEnumerable<OrganizationType>> GetOrganizationTypes () {
-            var organizationTypes = await _context.OrganizationTypes.ToListAsync ();
+        public async Task<IEnumerable<VoterType>> GetOrganizationTypes () {
+            var organizationTypes = await _context.VoterTypes.ToListAsync ();
             return organizationTypes;
         }
         public async Task<Organization> GetOrganization (int orgId) {
-            var organization = await _context.Organizations.Include (o => o.Users).Include (o => o.OrganizationType).Where (o => o.Id == orgId).FirstOrDefaultAsync ();
+            var organization = await _context.Organizations.Include (o => o.Users).Include (o => o.VoterType).Where (o => o.Id == orgId).FirstOrDefaultAsync ();
             return organization;
         }
 
@@ -49,9 +49,9 @@ namespace Application.API.Data {
             return user;
         }
 
-        public async Task<PagedList<Engeneres>> GetEngeneres (EngenereParams engenereParams) {
-            var voters = _context.Engeneres.AsQueryable ();
-            return await PagedList<Engeneres>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
+        public async Task<PagedList<Voter>> GetEngeneres (EngenereParams engenereParams) {
+            var voters = _context.Voters.AsQueryable ();
+            return await PagedList<Voter>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
         }
         public async Task<bool> SaveAll () {
             return await _context.SaveChangesAsync () > 0;
@@ -62,8 +62,8 @@ namespace Application.API.Data {
             return users;
         }
 
-        public async Task<Engeneres> GetEngenere (int code) {
-            var eng = await _context.Engeneres.FirstOrDefaultAsync (x => x.Code == code);
+        public async Task<Voter> GetEngenere (int code) {
+            var eng = await _context.Voters.FirstOrDefaultAsync (x => x.CodeEngenere == code);
             return eng;
         }
     }

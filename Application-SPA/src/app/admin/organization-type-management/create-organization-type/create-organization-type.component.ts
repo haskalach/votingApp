@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OrganizationService } from 'src/app/_services/organization/organization.service';
 import { UtilitiesService } from 'src/app/_services/utilities/utilities.service';
-import { OrganizationType } from 'src/app/_models/OrganizationType';
+import { VoterType } from 'src/app/_models/VoterType';
 
 @Component({
   selector: 'app-create-organization-type',
@@ -13,7 +13,7 @@ import { OrganizationType } from 'src/app/_models/OrganizationType';
 })
 export class CreateOrganizationTypeComponent implements OnInit {
   regitrationForm: FormGroup;
-  organizationType: OrganizationType;
+  organizationType: VoterType;
   constructor(
     private alertify: AlertifyService,
     private fb: FormBuilder,

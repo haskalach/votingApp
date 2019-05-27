@@ -1,3 +1,4 @@
+import { VoterType } from './../../../_models/VoterType';
 import { UtilitiesService } from './../../../_services/utilities/utilities.service';
 import { Organization } from 'src/app/_models/Organization';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +6,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
 import { OrganizationService } from 'src/app/_services/organization/organization.service';
-import { OrganizationType } from 'src/app/_models/OrganizationType';
 
 @Component({
   selector: 'app-creat-organization',
@@ -15,7 +15,7 @@ import { OrganizationType } from 'src/app/_models/OrganizationType';
 export class CreatOrganizationComponent implements OnInit {
   regitrationForm: FormGroup;
   organization: Organization;
-  organizationTypes: OrganizationType[];
+  organizationTypes: VoterType[];
   constructor(
     private alertify: AlertifyService,
     private fb: FormBuilder,
@@ -30,7 +30,7 @@ export class CreatOrganizationComponent implements OnInit {
   createRegisterForm() {
     this.regitrationForm = this.fb.group({
       name: ['', Validators.required],
-      organizationTypeId: [null, Validators.required]
+      voterTypeId: [null, Validators.required]
     });
   }
   register() {
@@ -62,7 +62,7 @@ export class CreatOrganizationComponent implements OnInit {
   }
   getOrganizationTypesList() {
     this.organizationService.getOrganizationTypes().subscribe(
-      (types: OrganizationType[]) => {
+      (types: VoterType[]) => {
         this.organizationTypes = types;
       },
       error => {

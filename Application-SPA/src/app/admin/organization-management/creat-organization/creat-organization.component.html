@@ -29,10 +29,10 @@
       class="form-control"
       [ngClass]="{
         'is-invalid':
-          regitrationForm.get('organizationTypeId').errors &&
-          regitrationForm.get('organizationTypeId').touched
+          regitrationForm.get('voterTypeId').errors &&
+          regitrationForm.get('voterTypeId').touched
       }"
-      formControlName="organizationTypeId"
+      formControlName="voterTypeId"
     >
       <option [ngValue]="null">Select Organization Type</option>
       <option
@@ -44,8 +44,8 @@
     <div
       class="invalid-feedback"
       *ngIf="
-        regitrationForm.get('organizationTypeId').touched &&
-        regitrationForm.get('organizationTypeId').hasError('required')
+        regitrationForm.get('voterTypeId').touched &&
+        regitrationForm.get('voterTypeId').hasError('required')
       "
     >
       Organization Type Is Required

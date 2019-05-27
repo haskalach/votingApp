@@ -19,85 +19,6 @@ namespace Application.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Application.API.Models.Engeneres", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddressHome");
-
-                    b.Property<string>("AddressWork");
-
-                    b.Property<string>("BirthCountry");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("BirthPlace");
-
-                    b.Property<string>("CivilIdKadaa");
-
-                    b.Property<string>("CivilIdMouhavaza");
-
-                    b.Property<string>("CivilIdPlace");
-
-                    b.Property<string>("CivilIdRegion");
-
-                    b.Property<int>("Code");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Family");
-
-                    b.Property<string>("FamilyArabic");
-
-                    b.Property<string>("FatherName");
-
-                    b.Property<string>("FatherNameArabic");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("FirstNameArabic");
-
-                    b.Property<DateTime>("Graduation");
-
-                    b.Property<string>("GraduationCountry");
-
-                    b.Property<string>("LastCoveredYear");
-
-                    b.Property<string>("MobileHome");
-
-                    b.Property<string>("MobileWork");
-
-                    b.Property<string>("Nationality");
-
-                    b.Property<string>("PhoneHome");
-
-                    b.Property<string>("PhoneWork");
-
-                    b.Property<string>("Politic");
-
-                    b.Property<int?>("ReferenceId");
-
-                    b.Property<string>("RegisteryNumber");
-
-                    b.Property<DateTime>("Registration");
-
-                    b.Property<string>("Religion");
-
-                    b.Property<string>("School");
-
-                    b.Property<string>("Speciality");
-
-                    b.Property<string>("SubChapter");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReferenceId");
-
-                    b.ToTable("Engeneres");
-                });
-
             modelBuilder.Entity("Application.API.Models.Organization", b =>
                 {
                     b.Property<int>("Id")
@@ -106,26 +27,13 @@ namespace Application.API.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("OrganizationTypeId");
+                    b.Property<int>("VoterTypeId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationTypeId");
+                    b.HasIndex("VoterTypeId");
 
                     b.ToTable("Organizations");
-                });
-
-            modelBuilder.Entity("Application.API.Models.OrganizationType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrganizationTypes");
                 });
 
             modelBuilder.Entity("Application.API.Models.Photo", b =>
@@ -267,6 +175,102 @@ namespace Application.API.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
+            modelBuilder.Entity("Application.API.Models.Voter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddressHome");
+
+                    b.Property<string>("AddressWork");
+
+                    b.Property<string>("BirthCountry");
+
+                    b.Property<DateTime>("BirthDate");
+
+                    b.Property<string>("BirthPlace");
+
+                    b.Property<string>("CivilIdKadaa");
+
+                    b.Property<string>("CivilIdMouhavaza");
+
+                    b.Property<string>("CivilIdPlace");
+
+                    b.Property<string>("CivilIdRegion");
+
+                    b.Property<int>("CodeEngenere");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Family");
+
+                    b.Property<string>("FamilyArabic");
+
+                    b.Property<string>("FatherName");
+
+                    b.Property<string>("FatherNameArabic");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("FirstNameArabic");
+
+                    b.Property<DateTime>("Graduation");
+
+                    b.Property<string>("GraduationCountry");
+
+                    b.Property<string>("LastCoveredYear");
+
+                    b.Property<string>("MobileHome");
+
+                    b.Property<string>("MobileWork");
+
+                    b.Property<string>("Nationality");
+
+                    b.Property<string>("PhoneHome");
+
+                    b.Property<string>("PhoneWork");
+
+                    b.Property<string>("Politic");
+
+                    b.Property<int?>("ReferenceId");
+
+                    b.Property<string>("RegisteryNumber");
+
+                    b.Property<DateTime>("Registration");
+
+                    b.Property<string>("Religion");
+
+                    b.Property<string>("School");
+
+                    b.Property<string>("Speciality");
+
+                    b.Property<string>("SubChapter");
+
+                    b.Property<int>("VoterTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReferenceId");
+
+                    b.HasIndex("VoterTypeId");
+
+                    b.ToTable("Voters");
+                });
+
+            modelBuilder.Entity("Application.API.Models.VoterType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VoterTypes");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -337,18 +341,11 @@ namespace Application.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Application.API.Models.Engeneres", b =>
-                {
-                    b.HasOne("Application.API.Models.User", "Reference")
-                        .WithMany()
-                        .HasForeignKey("ReferenceId");
-                });
-
             modelBuilder.Entity("Application.API.Models.Organization", b =>
                 {
-                    b.HasOne("Application.API.Models.OrganizationType", "OrganizationType")
+                    b.HasOne("Application.API.Models.VoterType", "VoterType")
                         .WithMany()
-                        .HasForeignKey("OrganizationTypeId")
+                        .HasForeignKey("VoterTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -377,6 +374,18 @@ namespace Application.API.Migrations
                     b.HasOne("Application.API.Models.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Application.API.Models.Voter", b =>
+                {
+                    b.HasOne("Application.API.Models.User", "Reference")
+                        .WithMany()
+                        .HasForeignKey("ReferenceId");
+
+                    b.HasOne("Application.API.Models.VoterType", "VoterType")
+                        .WithMany()
+                        .HasForeignKey("VoterTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,3 +1,5 @@
+import { VoterType } from './../../../_enum/VoterType.enum';
+
 import { AlertifyService } from './../../../_services/alertify.service';
 import { VoterService } from './../../../_services/voter/voter.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -36,7 +38,7 @@ export class UploadEngeneresComponent implements OnInit {
 
   uploadFiles() {
     this.voterService
-      .uploadData(this.formData, 'Engenere/Upload')
+      .uploadData(this.formData, 'Voter/Upload/' + VoterType.engenere)
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);

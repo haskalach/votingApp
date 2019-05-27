@@ -9,11 +9,11 @@ import { PaginatedResult } from 'src/app/_models/pagination';
   providedIn: 'root'
 })
 export class VoterService {
-  engrepo = 'Engenere';
+  voterRepo = 'Voter';
   baseUrl = 'http://localhost:5000/api/';
   constructor(private http: HttpClient) {}
   addEngenere(voter: Engenere) {
-    return this.http.post(this.baseUrl + this.engrepo, voter);
+    return this.http.post(this.baseUrl + this.voterRepo, voter);
   }
   getEngeneres(page?, itemsPerPage?): Observable<PaginatedResult<Engenere[]>> {
     const paginatedResult: PaginatedResult<Engenere[]> = new PaginatedResult<
@@ -25,7 +25,7 @@ export class VoterService {
       params = params.append('pageSize', itemsPerPage);
     }
     return this.http
-      .get<Engenere[]>(this.baseUrl + this.engrepo, {
+      .get<Engenere[]>(this.baseUrl + this.voterRepo, {
         observe: 'response',
         params
       })

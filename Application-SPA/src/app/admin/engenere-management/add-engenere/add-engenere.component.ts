@@ -25,7 +25,7 @@ export class AddEngenereComponent implements OnInit {
   }
   createVoterForm() {
     this.voterForm = this.fb.group({
-      code: ['', Validators.required],
+      codeEngenere: ['', Validators.required],
       firstNameArabic: ['', Validators.required],
       fatherNameArabic: ['', Validators.required],
       familyArabic: ['', Validators.required],

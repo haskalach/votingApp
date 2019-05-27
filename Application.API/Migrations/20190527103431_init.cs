@@ -24,7 +24,7 @@ namespace Application.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganizationTypes",
+                name: "VoterTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -33,7 +33,7 @@ namespace Application.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganizationTypes", x => x.Id);
+                    table.PrimaryKey("PK_VoterTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,15 +64,15 @@ namespace Application.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    OrganizationTypeId = table.Column<int>(nullable: false)
+                    VoterTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Organizations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Organizations_OrganizationTypes_OrganizationTypeId",
-                        column: x => x.OrganizationTypeId,
-                        principalTable: "OrganizationTypes",
+                        name: "FK_Organizations_VoterTypes_VoterTypeId",
+                        column: x => x.VoterTypeId,
+                        principalTable: "VoterTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -206,12 +206,36 @@ namespace Application.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Engeneres",
+                name: "Photos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Code = table.Column<int>(nullable: false),
+                    Url = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    IsMain = table.Column<bool>(nullable: false),
+                    PublicID = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Voters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CodeEngenere = table.Column<int>(nullable: false),
                     FirstNameArabic = table.Column<string>(nullable: true),
                     FatherNameArabic = table.Column<string>(nullable: true),
                     FamilyArabic = table.Column<string>(nullable: true),
@@ -243,39 +267,22 @@ namespace Application.API.Migrations
                     Email = table.Column<string>(nullable: true),
                     Religion = table.Column<string>(nullable: true),
                     Politic = table.Column<string>(nullable: true),
-                    ReferenceId = table.Column<int>(nullable: true)
+                    ReferenceId = table.Column<int>(nullable: true),
+                    VoterTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Engeneres", x => x.Id);
+                    table.PrimaryKey("PK_Voters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Engeneres_AspNetUsers_ReferenceId",
+                        name: "FK_Voters_AspNetUsers_ReferenceId",
                         column: x => x.ReferenceId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Photos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Url = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    DateAdded = table.Column<DateTime>(nullable: false),
-                    IsMain = table.Column<bool>(nullable: false),
-                    PublicID = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Photos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Photos_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Voters_VoterTypes_VoterTypeId",
+                        column: x => x.VoterTypeId,
+                        principalTable: "VoterTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -325,19 +332,24 @@ namespace Application.API.Migrations
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Engeneres_ReferenceId",
-                table: "Engeneres",
-                column: "ReferenceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Organizations_OrganizationTypeId",
+                name: "IX_Organizations_VoterTypeId",
                 table: "Organizations",
-                column: "OrganizationTypeId");
+                column: "VoterTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_UserId",
                 table: "Photos",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Voters_ReferenceId",
+                table: "Voters",
+                column: "ReferenceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Voters_VoterTypeId",
+                table: "Voters",
+                column: "VoterTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -358,10 +370,10 @@ namespace Application.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Engeneres");
+                name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "Photos");
+                name: "Voters");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -373,7 +385,7 @@ namespace Application.API.Migrations
                 name: "Organizations");
 
             migrationBuilder.DropTable(
-                name: "OrganizationTypes");
+                name: "VoterTypes");
         }
     }
 }

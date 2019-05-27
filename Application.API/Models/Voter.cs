@@ -1,8 +1,9 @@
 using System;
 
-namespace Application.API.Dtos {
-    public class EngenereForReturnDto {
-        public int Code { get; set; }
+namespace Application.API.Models {
+    public class Voter {
+        public int Id { get; set; }
+        public int CodeEngenere { get; set; }
         public string FirstNameArabic { get; set; }
         public string FatherNameArabic { get; set; }
         public string FamilyArabic { get; set; }
@@ -34,5 +35,9 @@ namespace Application.API.Dtos {
         public string Email { get; set; }
         public string Religion { get; set; }
         public string Politic { get; set; }
+        public int? ReferenceId { get; set; }
+        public User Reference { get; set; }
+        public int VoterTypeId { get; set; }
+        public VoterType VoterType { get; set; }
     }
 }

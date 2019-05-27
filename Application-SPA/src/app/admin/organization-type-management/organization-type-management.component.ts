@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizationType } from 'src/app/_models/OrganizationType';
 import { OrganizationService } from 'src/app/_services/organization/organization.service';
+import { VoterType } from 'src/app/_models/VoterType';
 
 @Component({
   selector: 'app-organization-type-management',
@@ -8,7 +8,7 @@ import { OrganizationService } from 'src/app/_services/organization/organization
   styleUrls: ['./organization-type-management.component.scss']
 })
 export class OrganizationTypeManagementComponent implements OnInit {
-  organizationTypes: OrganizationType[];
+  organizationTypes: VoterType[];
   constructor(private organizationService: OrganizationService) {}
 
   ngOnInit() {
@@ -16,7 +16,7 @@ export class OrganizationTypeManagementComponent implements OnInit {
   }
   getOrganizationTypesList() {
     this.organizationService.getOrganizationTypes().subscribe(
-      (types: OrganizationType[]) => {
+      (types: VoterType[]) => {
         this.organizationTypes = types;
       },
       error => {

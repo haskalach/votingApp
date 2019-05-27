@@ -102,7 +102,7 @@ namespace Application.API.Controllers {
             };
             if (user.OrganizationId.HasValue && user.OrganizationId > 0) {
                 var organization = await _repo.GetOrganization (user.OrganizationId ?? default (int));
-                claims.Add (new System.Security.Claims.Claim ("organizationType", organization.OrganizationType.Name));
+                claims.Add (new System.Security.Claims.Claim ("organizationType", organization.VoterType.Name));
             }
 
             var roles = await _userManager.GetRolesAsync (user);

@@ -1,29 +1,30 @@
 using System;
 
-namespace Application.API.Dtos
-{
-    public class VoterForCreationDto
-    {
-        public int Code { get; set; }
+namespace Application.API.Dtos {
+    public class VoterForCreationDto {
+        public int CodeEngenere { get; set; }
+        public string FirstNameArabic { get; set; }
+        public string FatherNameArabic { get; set; }
+        public string FamilyArabic { get; set; }
         public string FirstName { get; set; }
+        public string FatherName { get; set; }
+        public string Family { get; set; }
+        public string Nationality { get; set; }
         public string Speciality { get; set; }
         public string SubChapter { get; set; }
-        public string Religion { get; set; }
-        public string Politic { get; set; }
-        public string Reference { get; set; }
-        public string VotedYear { get; set; }
         public DateTime BirthDate { get; set; }
         public string BirthCountry { get; set; }
         public string BirthPlace { get; set; }
-        public string CivilIdMother { get; set; }
-        public string CivilIdKad { get; set; }
+        public string CivilIdMouhavaza { get; set; }
+        public string CivilIdKadaa { get; set; }
         public string CivilIdRegion { get; set; }
         public string RegisteryNumber { get; set; }
         public string CivilIdPlace { get; set; }
         public DateTime Registration { get; set; }
+        public string LastCoveredYear { get; set; }
         public DateTime Graduation { get; set; }
         public string School { get; set; }
-        public string GraduationLocation { get; set; }
+        public string GraduationCountry { get; set; }
         public string AddressWork { get; set; }
         public string MobileWork { get; set; }
         public string PhoneWork { get; set; }
@@ -31,9 +32,7 @@ namespace Application.API.Dtos
         public string MobileHome { get; set; }
         public string PhoneHome { get; set; }
         public string Email { get; set; }
-        public int Vote { get; set; }
-        public int Attend { get; set; }
-        public int Transport { get; set; }
-        public int Voted { get; set; }
+        public string Religion { get; set; }
+        public string Politic { get; set; }
     }
 }

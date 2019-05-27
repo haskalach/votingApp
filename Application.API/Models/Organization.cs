@@ -7,7 +7,7 @@ namespace Application.API.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<User> Users { get; set; }
-        public int OrganizationTypeId { get; set; }
-        public OrganizationType OrganizationType { get; set; }
+        public int VoterTypeId { get; set; }
+        public VoterType VoterType { get; set; }
     }
 }

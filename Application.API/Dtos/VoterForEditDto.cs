@@ -1,7 +1,5 @@
-using System;
-
 namespace Application.API.Dtos {
-    public class EngenereForEditDto {
+    public class VoterForEditDto {
         public string LastCoveredYear { get; set; }
         public string AddressWork { get; set; }
         public string MobileWork { get; set; }

@@ -49,7 +49,7 @@ namespace Application.API.Controllers {
         [HttpPost ("type")]
         public async Task<IActionResult> AddOrganizationType (OrganizationTypeForCreationDto organizationTypeForCreationDto) {
 
-            var organizationTypeToCreate = _mapper.Map<OrganizationType> (organizationTypeForCreationDto);
+            var organizationTypeToCreate = _mapper.Map<VoterType> (organizationTypeForCreationDto);
 
             _repo.Add (organizationTypeToCreate);
 

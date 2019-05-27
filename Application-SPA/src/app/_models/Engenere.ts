@@ -1,7 +1,7 @@
 import { User } from 'src/app/_models/user';
 export interface Engenere {
   id: number;
-  code: number;
+  codeEngenere: number;
   firstNameArabic: string;
   fatherNameArabic: string;
   familyArabic: string;

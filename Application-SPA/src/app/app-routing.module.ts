@@ -87,7 +87,7 @@ const routes: Routes = [
             component: RegisterComponent
           },
           {
-            path: 'engeneres',
+            path: 'voters',
             data: { roles: ['Admin'] },
             component: EngenereManagementComponent
           },

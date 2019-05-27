@@ -1,4 +1,4 @@
-import { OrganizationType } from './../../_models/OrganizationType';
+import { VoterType } from '../../_models/VoterType';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,8 +15,8 @@ export class OrganizationService {
   getOrganizations(): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.baseUrl + this.repo);
   }
-  getOrganizationTypes(): Observable<OrganizationType[]> {
-    return this.http.get<OrganizationType[]>(
+  getOrganizationTypes(): Observable<VoterType[]> {
+    return this.http.get<VoterType[]>(
       this.baseUrl + this.repo + '/type'
     );
   }

@@ -1,8 +1,8 @@
 namespace Application.API.Models
 {
-    public class OrganizationType
+    public class VoterType
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string  Name { get; set; }
     }
 }

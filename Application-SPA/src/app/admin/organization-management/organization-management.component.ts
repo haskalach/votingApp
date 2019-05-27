@@ -1,4 +1,4 @@
-import { OrganizationType } from './../../_models/OrganizationType';
+import { VoterType } from './../../_models/VoterType';
 import { Organization } from './../../_models/Organization';
 import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from 'src/app/_services/organization/organization.service';
@@ -10,7 +10,7 @@ import { OrganizationService } from 'src/app/_services/organization/organization
 })
 export class OrganizationManagementComponent implements OnInit {
   organizations: Organization[];
-  organizationTypes: OrganizationType[];
+  organizationTypes: VoterType[];
   constructor(private organizationService: OrganizationService) {}
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class OrganizationManagementComponent implements OnInit {
   updateOrganizationType(org: Organization) {
     const assignObject = {
       rganizationId: org.id,
-      organizationTypeId: org.organizationTypeId
+      organizationTypeId: org.voterTypeId
     };
     console.log({ assignObject });
   }
@@ -37,7 +37,7 @@ export class OrganizationManagementComponent implements OnInit {
   }
   getOrganizationTypesList() {
     this.organizationService.getOrganizationTypes().subscribe(
-      (types: OrganizationType[]) => {
+      (types: VoterType[]) => {
         this.organizationTypes = types;
       },
       error => {
