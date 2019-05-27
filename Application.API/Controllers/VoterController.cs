@@ -94,14 +94,12 @@ namespace Application.API.Controllers {
 
                         foreach (DataRow row in sheet.Rows) {
                             Voter dataItem = new Voter ();
-                            int code;
+                            int codeEngenere;
+                            int codePahrmacist;
 
                             DateTime birthDate;
                             DateTime registration;
                             DateTime graduation;
-
-                            Int32.TryParse (row["Code"].ToString (), out code);
-                            dataItem.CodeEngenere = code;
                             DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
                             DateTime.TryParse (row["Registration"].ToString (), out registration);
                             DateTime.TryParse (row["Graduation"].ToString (), out graduation);
@@ -138,15 +136,39 @@ namespace Application.API.Controllers {
                             dataItem.Politic = NullToString (row["Politic"]);
                             dataItem.VoterTypeId = Id;
                             bool exists = false;
-                            list.ForEach (item => {
-                                if (item.CodeEngenere == dataItem.CodeEngenere) {
-                                    exists = true;
-                                }
-                            });
-                            if (_repo.GetEngenere (dataItem.CodeEngenere).Result == null && exists == false) {
-                                list.Add (dataItem);
-                                _repo.Add (dataItem);
+
+                            switch (dataItem.VoterTypeId) {
+                                case 1:
+                                    Int32.TryParse (row["Code"].ToString (), out codeEngenere);
+                                    dataItem.CodeEngenere = codeEngenere;
+                                    list.ForEach (item => {
+                                        if (item.CodeEngenere == dataItem.CodeEngenere) {
+                                            exists = true;
+                                        }
+                                    });
+                                    if (_repo.GetVoter (dataItem.CodeEngenere, Id).Result == null && exists == false) {
+                                        list.Add (dataItem);
+                                        _repo.Add (dataItem);
+                                    }
+                                    break;
+
+                                case 2:
+                                    Int32.TryParse (row["Code"].ToString (), out codePahrmacist);
+                                    dataItem.CodePharmacist = codePahrmacist;
+                                    list.ForEach (item => {
+                                        if (item.CodePharmacist == dataItem.CodePharmacist) {
+                                            exists = true;
+                                        }
+                                    });
+                                    if (_repo.GetVoter (dataItem.CodePharmacist, Id).Result == null && exists == false) {
+                                        list.Add (dataItem);
+                                        _repo.Add (dataItem);
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
+
                         }
                         System.IO.File.Delete (fullPath);
                     }

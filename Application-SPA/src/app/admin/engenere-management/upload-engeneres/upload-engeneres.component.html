@@ -1,5 +1,10 @@
 <h1>File Upload 1</h1>
 <input #file type="file" multiple (change)="upload(file.files)" />
+<select class="form-control" [(ngModel)]="VoterTypeId">
+  <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
+    {{ voterType.name }}</option
+  >
+</select>
 <br />
 <span
   style="font-weight:bold;color:green;"
@@ -7,4 +12,4 @@
 >
   {{ progress }}%
 </span>
-<button type="button" (click)="uploadFiles()"> Upload Selected Files</button>
+<button type="button" (click)="uploadFiles()">Upload Selected Files</button>

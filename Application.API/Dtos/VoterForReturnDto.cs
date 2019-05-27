@@ -1,9 +1,10 @@
 using System;
+using Application.API.Models;
 
 namespace Application.API.Dtos {
     public class VoterForReturnDto {
         public int CodeEngenere { get; set; }
-        public int CodePharmacist{ get; set; }
+        public int CodePharmacist { get; set; }
         public string FirstNameArabic { get; set; }
         public string FatherNameArabic { get; set; }
         public string FamilyArabic { get; set; }
@@ -36,5 +37,6 @@ namespace Application.API.Dtos {
         public string Religion { get; set; }
         public string Politic { get; set; }
         public int VoterTypeId { get; set; }
+        public VoterType VoterType { get; set; }
     }
 }

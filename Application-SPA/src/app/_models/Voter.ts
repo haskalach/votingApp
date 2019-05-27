@@ -38,4 +38,10 @@ export interface Voter {
   referenceId: string;
   reference: User;
   voterTypeId: number;
+  voterType: VoterType;
+}
+
+export interface VoterType {
+  id: number;
+  name: string;
 }

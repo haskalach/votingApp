@@ -17,7 +17,7 @@ namespace Application.API.Data {
         Task<IEnumerable<Organization>> GetOrganizations ();
         Task<IEnumerable<VoterType>> GetOrganizationTypes ();
         Task<Organization> GetOrganization (int orgId);
-        Task<Voter> GetEngenere (int code);
+        Task<Voter> GetVoter (int code,int VoterTypeId);
 
     }
 }

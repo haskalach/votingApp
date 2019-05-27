@@ -50,6 +50,7 @@
   </div>
   <table class="table">
     <tr>
+      <th>Type</th>
       <th>Code</th>
       <th>First Name Arabic</th>
       <th>First Name</th>
@@ -59,6 +60,7 @@
       <th>Politic</th>
     </tr>
     <tr *ngFor="let voter of voters">
+      <td>{{ voter.voterType.name }}</td>
       <td>
         <ng-container [ngSwitch]="voter.voterTypeId">
           <ng-container *ngSwitchCase="VoterType.engenere">

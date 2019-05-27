@@ -50,7 +50,7 @@ namespace Application.API.Data {
         }
 
         public async Task<PagedList<Voter>> GetVoters (VoterParams engenereParams) {
-            var voters = _context.Voters.AsQueryable ();
+            var voters = _context.Voters.Include (v => v.VoterType).AsQueryable ();
             if (engenereParams.voterTypeId > 0) {
                 voters = voters.Where (x => x.VoterTypeId == engenereParams.voterTypeId);
             }
@@ -72,9 +72,21 @@ namespace Application.API.Data {
             return users;
         }
 
-        public async Task<Voter> GetEngenere (int code) {
-            var eng = await _context.Voters.FirstOrDefaultAsync (x => x.CodeEngenere == code);
-            return eng;
+        public async Task<Voter> GetVoter (int code, int VoterTypeId) {
+            var eng = _context.Voters.AsQueryable ();
+            switch (VoterTypeId) {
+                case 1:
+                    eng = eng.Where (x => x.CodeEngenere == code);
+                    break;
+
+                case 2:
+                    eng = eng.Where (x => x.CodePharmacist == code);
+                    break;
+                default:
+                    break;
+            }
+
+            return await eng.FirstOrDefaultAsync ();
         }
     }
 }
