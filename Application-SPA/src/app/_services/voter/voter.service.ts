@@ -26,7 +26,12 @@ export class VoterService {
     let params = new HttpParams();
     if (voterParams) {
       params = params.append('voterTypeId', voterParams.voterTypeId);
-      params = params.append('religion', voterParams.religion);
+      if (voterParams.religion) {
+        params = params.append('religion', voterParams.religion);
+      }
+      if (voterParams.politic) {
+        params = params.append('politic', voterParams.politic);
+      }
     }
 
     if (page != null && itemsPerPage != null) {

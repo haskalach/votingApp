@@ -19,7 +19,9 @@ export class EngenereManagementComponent implements OnInit {
   pagination: Pagination;
   VoterType = VoterTypeEnum;
   voterTypes: VoterType[];
-  voterParams: any = { voterTypeId: VoterTypeEnum.all, religion: '' };
+  voterParams: any = {
+    voterTypeId: VoterTypeEnum.all
+  };
   constructor(
     private voterService: VoterService,
     private organizationService: OrganizationService

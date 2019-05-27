@@ -3,8 +3,16 @@
   margin: 0px;
   & .btn-section {
     & > button {
+      margin-left: 5px;
+    }
+  }
+
+  & .filter-section {
+    display: flex;
+    & > .form-control {
+      margin-right: 5px !important;
       &:first-child {
-        margin-left: 5px;
+        margin-right: 0px;
       }
     }
   }

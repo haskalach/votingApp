@@ -55,7 +55,11 @@ namespace Application.API.Data {
                 voters = voters.Where (x => x.VoterTypeId == engenereParams.voterTypeId);
             }
             if (!string.IsNullOrEmpty (engenereParams.religion)) {
-                voters = voters.Where (x => x.Religion == engenereParams.religion);
+                voters = voters.Where (x => x.Religion == (engenereParams.religion).Trim ());
+            }
+            if (!string.IsNullOrEmpty (engenereParams.politic)) {
+
+                voters = voters.Where (x => x.Politic == (engenereParams.politic).Trim ());
             }
             return await PagedList<Voter>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
         }
