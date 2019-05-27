@@ -1,59 +1,742 @@
 <form [formGroup]="voterForm" (ngSubmit)="addVoter()">
   <h2 class="text-center text-primary">Add A New Engenere</h2>
-  <hr>
-
+  <hr />
 
   <div class="form-group">
-    <input type="text" class="form-control" formControlName="code" [ngClass]="{'is-invalid': voterForm.get('code').errors && voterForm.get('code').touched}" placeholder="Code">
-    <div class="invalid-feedback" *ngIf="voterForm.get('code').touched && voterForm.get('code').hasError('required')">Code Is Required</div>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="code"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('code').errors && voterForm.get('code').touched
+      }"
+      placeholder="Code"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('code').touched &&
+        voterForm.get('code').hasError('required')
+      "
+    >
+      Code Is Required
+    </div>
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" formControlName="firstName" [ngClass]="{'is-invalid': voterForm.get('firstName').errors && voterForm.get('firstName').touched}" placeholder="First Name">
-    <div class="invalid-feedback" *ngIf="voterForm.get('firstName').touched && voterForm.get('firstName').hasError('required')">First Name Is Required</div>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="firstNameArabic"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('firstNameArabic').errors &&
+          voterForm.get('firstNameArabic').touched
+      }"
+      placeholder="First Name Arabic"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('firstNameArabic').touched &&
+        voterForm.get('firstNameArabic').hasError('required')
+      "
+    >
+      First Name Arabic Is Required
+    </div>
   </div>
 
   <div class="form-group">
-    <input [ngClass]="{'is-invalid': voterForm.get('birthDate').errors && voterForm.get('birthDate').touched}"
-      class="form-control" placeholder="Date of Birth" formControlName="birthDate" type="text" bsDatepicker>
-    <div class="invalid-feedback" *ngIf="voterForm.get('birthDate').touched && voterForm.get('birthDate').hasError('required')">Date Of Birth Is Required</div>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="fatherNameArabic"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('fatherNameArabic').errors &&
+          voterForm.get('fatherNameArabic').touched
+      }"
+      placeholder="Father Name Arabic"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('fatherNameArabic').touched &&
+        voterForm.get('fatherNameArabic').hasError('required')
+      "
+    >
+      Father Name Arabic Is Required
+    </div>
   </div>
 
   <div class="form-group">
-    <input [ngClass]="{'is-invalid': voterForm.get('registration').errors && voterForm.get('registration').touched}"
-      class="form-control" placeholder="Date of Birth" formControlName="registration" type="text" bsDatepicker>
-    <div class="invalid-feedback" *ngIf="voterForm.get('registration').touched && voterForm.get('registration').hasError('required')">Registration Date Is Required</div>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="familyArabic"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('familyArabic').errors &&
+          voterForm.get('familyArabic').touched
+      }"
+      placeholder="Family Arabic"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('familyArabic').touched &&
+        voterForm.get('familyArabic').hasError('required')
+      "
+    >
+      Family Arabic Is Required
+    </div>
   </div>
 
   <div class="form-group">
-    <input [ngClass]="{'is-invalid': voterForm.get('graduation').errors && voterForm.get('graduation').touched}"
-      class="form-control" placeholder="Date of Birth" formControlName="graduation" type="text" bsDatepicker>
-    <div class="invalid-feedback" *ngIf="voterForm.get('graduation').touched && voterForm.get('graduation').hasError('required')">Graduation Date Is Required</div>
-  </div>
-  <div class="form-group">
-    <input type="number" class="form-control" formControlName="vote" [ngClass]="{'is-invalid': voterForm.get('vote').errors && voterForm.get('vote').touched}" placeholder="Vote">
-    <div class="invalid-feedback" *ngIf="voterForm.get('vote').touched && voterForm.get('vote').hasError('required')">Vote Is Required</div>
-  </div>
-  <div class="form-group">
-    <input type="number" class="form-control" formControlName="attend" [ngClass]="{'is-invalid': voterForm.get('attend').errors && voterForm.get('attend').touched}" placeholder="Attend">
-    <div class="invalid-feedback" *ngIf="voterForm.get('attend').touched && voterForm.get('attend').hasError('required')">Attend Is Required</div>
-  </div>
-  <div class="form-group">
-    <input type="number" class="form-control" formControlName="transport" [ngClass]="{'is-invalid': voterForm.get('transport').errors && voterForm.get('transport').touched}" placeholder="Transport">
-    <div class="invalid-feedback" *ngIf="voterForm.get('transport').touched && voterForm.get('transport').hasError('required')">Transport Is Required</div>
-  </div>
-  <div class="form-group">
-    <input type="number" class="form-control" formControlName="voted" [ngClass]="{'is-invalid': voterForm.get('voted').errors && voterForm.get('voted').touched}" placeholder="Voted">
-    <div class="invalid-feedback" *ngIf="voterForm.get('voted').touched && voterForm.get('voted').hasError('required')">Voted Is Required</div>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="firstName"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('firstName').errors &&
+          voterForm.get('firstName').touched
+      }"
+      placeholder="First Name"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('firstName').touched &&
+        voterForm.get('firstName').hasError('required')
+      "
+    >
+      First Name Is Required
+    </div>
   </div>
 
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="fatherName"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('fatherName').errors &&
+          voterForm.get('fatherName').touched
+      }"
+      placeholder="Father Name"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('fatherName').touched &&
+        voterForm.get('fatherName').hasError('required')
+      "
+    >
+      Father Name Is Required
+    </div>
+  </div>
 
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="family"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('family').errors && voterForm.get('family').touched
+      }"
+      placeholder="Family"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('family').touched &&
+        voterForm.get('family').hasError('required')
+      "
+    >
+      Family Is Required
+    </div>
+  </div>
 
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="nationality"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('nationality').errors &&
+          voterForm.get('nationality').touched
+      }"
+      placeholder="Nationality"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('nationality').touched &&
+        voterForm.get('nationality').hasError('required')
+      "
+    >
+      Nationality Is Required
+    </div>
+  </div>
 
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="speciality"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('speciality').errors &&
+          voterForm.get('speciality').touched
+      }"
+      placeholder="Speciality"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('speciality').touched &&
+        voterForm.get('speciality').hasError('required')
+      "
+    >
+      Speciality Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="subChapter"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('subChapter').errors &&
+          voterForm.get('subChapter').touched
+      }"
+      placeholder="Sub Chapter"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('subChapter').touched &&
+        voterForm.get('subChapter').hasError('required')
+      "
+    >
+      Sub Chapter Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('birthDate').errors &&
+          voterForm.get('birthDate').touched
+      }"
+      class="form-control"
+      placeholder="Date of Birth"
+      formControlName="birthDate"
+      type="text"
+      bsDatepicker
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('birthDate').touched &&
+        voterForm.get('birthDate').hasError('required')
+      "
+    >
+      Date Of Birth Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="birthCountry"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('birthCountry').errors &&
+          voterForm.get('birthCountry').touched
+      }"
+      placeholder="Birth Country"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('birthCountry').touched &&
+        voterForm.get('birthCountry').hasError('required')
+      "
+    >
+      Birth Country Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="birthPlace"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('birthPlace').errors &&
+          voterForm.get('birthPlace').touched
+      }"
+      placeholder="Birth Place"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('birthPlace').touched &&
+        voterForm.get('birthPlace').hasError('required')
+      "
+    >
+      Birth Place Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="civilIdMouhafava"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('civilIdMouhafava').errors &&
+          voterForm.get('civilIdMouhafava').touched
+      }"
+      placeholder="Civil Id Mouhafava"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('civilIdMouhafava').touched &&
+        voterForm.get('civilIdMouhafava').hasError('required')
+      "
+    >
+      Civil Id Mouhafava Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="civilIdKadaa"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('civilIdKadaa').errors &&
+          voterForm.get('civilIdKadaa').touched
+      }"
+      placeholder="Civil Id Kadaa"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('civilIdKadaa').touched &&
+        voterForm.get('civilIdKadaa').hasError('required')
+      "
+    >
+      Civil Id Kadaa Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="civilIdRegion"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('civilIdRegion').errors &&
+          voterForm.get('civilIdRegion').touched
+      }"
+      placeholder="Civil Id Region"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('civilIdRegion').touched &&
+        voterForm.get('civilIdRegion').hasError('required')
+      "
+    >
+      Civil Id Region Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="RegisteryNumber"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('RegisteryNumber').errors &&
+          voterForm.get('RegisteryNumber').touched
+      }"
+      placeholder="Registery Number"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('RegisteryNumber').touched &&
+        voterForm.get('RegisteryNumber').hasError('required')
+      "
+    >
+      Registery Number Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="civilIdPlace"
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('civilIdPlace').errors &&
+          voterForm.get('civilIdPlace').touched
+      }"
+      placeholder="Civil Id Place"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('civilIdPlace').touched &&
+        voterForm.get('civilIdPlace').hasError('required')
+      "
+    >
+      Civil Id Place Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('registration').errors &&
+          voterForm.get('registration').touched
+      }"
+      class="form-control"
+      placeholder="Registration"
+      formControlName="registration"
+      type="text"
+      bsDatepicker
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('registration').touched &&
+        voterForm.get('registration').hasError('required')
+      "
+    >
+      Registration Date Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('lastCoveredYear').errors &&
+          voterForm.get('lastCoveredYear').touched
+      }"
+      class="form-control"
+      placeholder="Last Covered Year"
+      formControlName="lastCoveredYear"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('lastCoveredYear').touched &&
+        voterForm.get('lastCoveredYear').hasError('required')
+      "
+    >
+      Last Covered Year Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('graduation').errors &&
+          voterForm.get('graduation').touched
+      }"
+      class="form-control"
+      placeholder="Graduation"
+      formControlName="graduation"
+      type="text"
+      bsDatepicker
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('graduation').touched &&
+        voterForm.get('graduation').hasError('required')
+      "
+    >
+      Graduation Date Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('school').errors && voterForm.get('school').touched
+      }"
+      class="form-control"
+      placeholder="School"
+      formControlName="school"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('school').touched &&
+        voterForm.get('school').hasError('required')
+      "
+    >
+      School Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('graduationCountry').errors &&
+          voterForm.get('graduationCountry').touched
+      }"
+      class="form-control"
+      placeholder="Graduation Country"
+      formControlName="graduationCountry"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('graduationCountry').touched &&
+        voterForm.get('school').hasError('required')
+      "
+    >
+      Graduation Country Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('addressWork').errors &&
+          voterForm.get('addressWork').touched
+      }"
+      class="form-control"
+      placeholder="Address Work"
+      formControlName="addressWork"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('addressWork').touched &&
+        voterForm.get('school').hasError('required')
+      "
+    >
+      Address Work Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('mobileWork').errors &&
+          voterForm.get('mobileWork').touched
+      }"
+      class="form-control"
+      placeholder="Mobile Work"
+      formControlName="mobileWork"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('mobileWork').touched &&
+        voterForm.get('mobileWork').hasError('required')
+      "
+    >
+      Mobile Work Is Required
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('phoneWork').errors &&
+          voterForm.get('phoneWork').touched
+      }"
+      class="form-control"
+      placeholder="Phone Work"
+      formControlName="phoneWork"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('phoneWork').touched &&
+        voterForm.get('phoneWork').hasError('required')
+      "
+    >
+      Phone Work Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('addressHome').errors &&
+          voterForm.get('addressHome').touched
+      }"
+      class="form-control"
+      placeholder="Address Home"
+      formControlName="addressHome"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('addressHome').touched &&
+        voterForm.get('school').hasError('required')
+      "
+    >
+      Address Home Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('mobileHome').errors &&
+          voterForm.get('mobileHome').touched
+      }"
+      class="form-control"
+      placeholder="Mobile Home"
+      formControlName="mobileHome"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('mobileHome').touched &&
+        voterForm.get('mobileHome').hasError('required')
+      "
+    >
+      Mobile Home Is Required
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('phoneHome').errors &&
+          voterForm.get('phoneHome').touched
+      }"
+      class="form-control"
+      placeholder="Phone Home"
+      formControlName="phoneHome"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('phoneHome').touched &&
+        voterForm.get('phoneHome').hasError('required')
+      "
+    >
+      Phone Home Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('email').errors && voterForm.get('email').touched
+      }"
+      class="form-control"
+      placeholder="Email"
+      formControlName="email"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('email').touched &&
+        voterForm.get('email').hasError('required')
+      "
+    >
+      Email Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('religion').errors && voterForm.get('religion').touched
+      }"
+      class="form-control"
+      placeholder="Religion"
+      formControlName="religion"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('religion').touched &&
+        voterForm.get('religion').hasError('required')
+      "
+    >
+      Religion Is Required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          voterForm.get('politic').errors && voterForm.get('politic').touched
+      }"
+      class="form-control"
+      placeholder="Politic"
+      formControlName="politic"
+      type="text"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('politic').touched &&
+        voterForm.get('politic').hasError('required')
+      "
+    >
+      Politic Is Required
+    </div>
+  </div>
 
   <div class="form-group text-center">
     <button class="btn btn-success" type="submit">Add</button>
-    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">
+      Cancel
+    </button>
   </div>
-
 </form>

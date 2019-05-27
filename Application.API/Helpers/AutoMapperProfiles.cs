@@ -28,8 +28,8 @@ namespace Application.API.Helpers {
             CreateMap<PhotoForCreationDto, Photo> ();
             CreateMap<UserForRegisterDto, User> ();
             CreateMap<UserForReferenceRegisterDto, User> ();
-            CreateMap<VoterForCreationDto, Engeneres> ();
-            CreateMap<Engeneres, VoterForReturnDto> ();
+            CreateMap<EngenereForCreationDto, Engeneres> ();
+            CreateMap<Engeneres, EngenereForReturnDto> ();
             CreateMap<OrganizationForCreationDto, Organization> ();
             CreateMap<OrganizationTypeForCreationDto, OrganizationType> ();
             

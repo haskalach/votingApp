@@ -29,9 +29,9 @@ namespace Application.API.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddVoter (VoterForCreationDto voterForCreationDto) {
+        public async Task<IActionResult> AddVoter (EngenereForCreationDto engenereForCreationDto) {
 
-            var voterToCreate = _mapper.Map<Engeneres> (voterForCreationDto);
+            var voterToCreate = _mapper.Map<Engeneres> (engenereForCreationDto);
 
             _repo.Add (voterToCreate);
 
@@ -45,12 +45,12 @@ namespace Application.API.Controllers {
         public async Task<IActionResult> GetVoters ([FromQuery] EngenereParams engenereParams) {
             var voterFromRepo = await _repo.GetEngeneres (engenereParams);
 
-            var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
+            var voterList = _mapper.Map<ICollection<EngenereForReturnDto>> (voterFromRepo);
             Response.AddPagination (voterFromRepo.CurrentPage, voterFromRepo.PageSize, voterFromRepo.TotalCount, voterFromRepo.TotalPages);
             return Ok (voterList);
         }
 
-         [HttpPost("upload"), DisableRequestSizeLimit]
+        [HttpPost ("upload"), DisableRequestSizeLimit]
         public ActionResult UploadFile () {
             try {
                 var file = Request.Form.Files[0];
@@ -85,57 +85,51 @@ namespace Application.API.Controllers {
                         foreach (DataRow row in sheet.Rows) {
                             Engeneres dataItem = new Engeneres ();
                             int code;
-                            int vote;
-                            int attend;
-                            int transport;
-                            int voted;
+
                             DateTime birthDate;
                             DateTime registration;
                             DateTime graduation;
-                            
+
                             Int32.TryParse (row["Code"].ToString (), out code);
-                            Int32.TryParse (row["Vote"].ToString (), out vote);
-                            Int32.TryParse (row["Attend"].ToString (), out attend);
-                            Int32.TryParse (row["Transport"].ToString (), out transport);
-                            Int32.TryParse (row["Voted"].ToString (), out voted);
                             DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
                             DateTime.TryParse (row["Registration"].ToString (), out registration);
                             DateTime.TryParse (row["Graduation"].ToString (), out graduation);
                             dataItem.Code = code;
-                            dataItem.FirstName = row["FirstName"].ToString ();
-                            dataItem.Speciality = row["Speciality"].ToString ();
-                            dataItem.SubChapter = row["SubChapter"].ToString ();
-                            dataItem.Religion = row["Religion"].ToString ();
-                            dataItem.Politic = row["Politic"].ToString ();
-                            dataItem.Reference = row["Reference"].ToString ();
-                            dataItem.VotedYear = row["VotedYear"].ToString ();
+                            dataItem.FirstNameArabic = NullToString (row["FirstNameArabic"]);
+                            dataItem.FatherNameArabic = NullToString (row["FatherNameArabic"]);
+                            dataItem.FamilyArabic = NullToString (row["FamilyArabic"]);
+                            dataItem.FirstName = NullToString (row["FirstName"]);
+                            dataItem.FatherName = NullToString (row["FatherName"]);
+                            dataItem.Family = NullToString (row["Family"]);
+                            dataItem.Nationality = NullToString (row["Nationality"]);
+                            dataItem.Speciality = NullToString (row["Speciality"]);
+                            dataItem.SubChapter = NullToString (row["SubChapter"]);
                             dataItem.BirthDate = birthDate;
-                            dataItem.BirthCountry = row["BirthCountry"].ToString ();
-                            dataItem.BirthPlace = row["BirthPlace"].ToString ();
-                            dataItem.CivilIdMother = row["CivilIdMother"].ToString ();
-                            dataItem.CivilIdKad = row["CivilIdKad"].ToString ();
-                            dataItem.CivilIdRegion = row["CivilIdRegion"].ToString ();
-                            dataItem.RegisteryNumber = row["RegisteryNumber"].ToString ();
-                            dataItem.CivilIdPlace = row["CivilIdPlace"].ToString ();
+                            dataItem.BirthCountry = NullToString (row["BirthCountry"]);
+                            dataItem.BirthPlace = NullToString (row["BirthPlace"]);
+                            dataItem.CivilIdMouhavaza = NullToString (row["CivilIdMouhavaza"]);
+                            dataItem.CivilIdKadaa = NullToString (row["CivilIdKadaa"]);
+                            dataItem.CivilIdRegion = NullToString (row["CivilIdRegion"]);
+                            dataItem.RegisteryNumber = NullToString (row["RegisteryNumber"]);
+                            dataItem.CivilIdPlace = NullToString (row["CivilIdPlace"]);
                             dataItem.Registration = registration;
+                            dataItem.LastCoveredYear = NullToString (row["LastCoveredYear"]);
                             dataItem.Graduation = graduation;
-                            dataItem.School = row["School"].ToString ();
-                            dataItem.GraduationLocation = row["GraduationLocation"].ToString ();
-                            dataItem.AddressWork = row["AddressWork"].ToString ();
-                            dataItem.MobileWork = row["MobileWork"].ToString ();
-                            dataItem.PhoneWork = row["PhoneWork"].ToString ();
-                            dataItem.AddressHome = row["AddressHome"].ToString ();
-                            dataItem.MobileHome = row["MobileHome"].ToString ();
-                            dataItem.PhoneHome = row["PhoneHome"].ToString ();
-                            dataItem.AddressHome = row["AddressHome"].ToString ();
-                            dataItem.Email = row["Email"].ToString ();
-                            dataItem.Vote = vote;
-                            dataItem.Attend = attend;
-                            dataItem.Transport = transport;
-                            dataItem.Voted = voted;
+                            dataItem.School = NullToString (row["School"]);
+                            dataItem.GraduationCountry = NullToString (row["GraduationCountry"]);
+                            dataItem.AddressWork = NullToString (row["AddressWork"]);
+                            dataItem.MobileWork = NullToString (row["MobileWork"]);
+                            dataItem.PhoneWork = NullToString (row["PhoneWork"]);
+                            dataItem.AddressHome = NullToString (row["AddressHome"]);
+                            dataItem.MobileHome = NullToString (row["MobileHome"]);
+                            dataItem.PhoneHome = NullToString (row["PhoneHome"]);
+                            dataItem.Email = NullToString (row["Email"]);
+                            dataItem.Religion = NullToString (row["Religion"]);
+                            dataItem.Politic = NullToString (row["Politic"]);
+
                             bool exists = false;
-                            list.ForEach (item => { 
-                                if(item.Code == dataItem.Code){
+                            list.ForEach (item => {
+                                if (item.Code == dataItem.Code) {
                                     exists = true;
                                 }
                             });
@@ -209,5 +203,16 @@ namespace Application.API.Controllers {
             var fil = Path.Combine (Directory.GetCurrentDirectory (), sFileName);
             return new FileStream (fil, FileMode.Open, FileAccess.Read);
         }
+        static string NullToString (object Value) {
+
+            // Value.ToString() allows for Value being DBNull, but will also convert int, double, etc.
+            return Value == null ? "" : Value.ToString ();
+
+            // If this is not what you want then this form may suit you better, handles 'Null' and DBNull otherwise tries a straight cast
+            // which will throw if Value isn't actually a string object.
+            //return Value == null || Value == DBNull.Value ? "" : (string)Value;
+
+        }
     }
+
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application.API.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,49 +21,6 @@ namespace Application.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Engeneres",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Code = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    Speciality = table.Column<string>(nullable: true),
-                    SubChapter = table.Column<string>(nullable: true),
-                    Religion = table.Column<string>(nullable: true),
-                    Politic = table.Column<string>(nullable: true),
-                    Reference = table.Column<string>(nullable: true),
-                    VotedYear = table.Column<string>(nullable: true),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    BirthCountry = table.Column<string>(nullable: true),
-                    BirthPlace = table.Column<string>(nullable: true),
-                    CivilIdMother = table.Column<string>(nullable: true),
-                    CivilIdKad = table.Column<string>(nullable: true),
-                    CivilIdRegion = table.Column<string>(nullable: true),
-                    RegisteryNumber = table.Column<string>(nullable: true),
-                    CivilIdPlace = table.Column<string>(nullable: true),
-                    Registration = table.Column<DateTime>(nullable: false),
-                    Graduation = table.Column<DateTime>(nullable: false),
-                    School = table.Column<string>(nullable: true),
-                    GraduationLocation = table.Column<string>(nullable: true),
-                    AddressWork = table.Column<string>(nullable: true),
-                    MobileWork = table.Column<string>(nullable: true),
-                    PhoneWork = table.Column<string>(nullable: true),
-                    AddressHome = table.Column<string>(nullable: true),
-                    MobileHome = table.Column<string>(nullable: true),
-                    PhoneHome = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Vote = table.Column<int>(nullable: false),
-                    Attend = table.Column<int>(nullable: false),
-                    Transport = table.Column<int>(nullable: false),
-                    Voted = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Engeneres", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,6 +206,57 @@ namespace Application.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Engeneres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Code = table.Column<int>(nullable: false),
+                    FirstNameArabic = table.Column<string>(nullable: true),
+                    FatherNameArabic = table.Column<string>(nullable: true),
+                    FamilyArabic = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    FatherName = table.Column<string>(nullable: true),
+                    Family = table.Column<string>(nullable: true),
+                    Nationality = table.Column<string>(nullable: true),
+                    Speciality = table.Column<string>(nullable: true),
+                    SubChapter = table.Column<string>(nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    BirthCountry = table.Column<string>(nullable: true),
+                    BirthPlace = table.Column<string>(nullable: true),
+                    CivilIdMouhavaza = table.Column<string>(nullable: true),
+                    CivilIdKadaa = table.Column<string>(nullable: true),
+                    CivilIdRegion = table.Column<string>(nullable: true),
+                    RegisteryNumber = table.Column<string>(nullable: true),
+                    CivilIdPlace = table.Column<string>(nullable: true),
+                    Registration = table.Column<DateTime>(nullable: false),
+                    LastCoveredYear = table.Column<string>(nullable: true),
+                    Graduation = table.Column<DateTime>(nullable: false),
+                    School = table.Column<string>(nullable: true),
+                    GraduationCountry = table.Column<string>(nullable: true),
+                    AddressWork = table.Column<string>(nullable: true),
+                    MobileWork = table.Column<string>(nullable: true),
+                    PhoneWork = table.Column<string>(nullable: true),
+                    AddressHome = table.Column<string>(nullable: true),
+                    MobileHome = table.Column<string>(nullable: true),
+                    PhoneHome = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Religion = table.Column<string>(nullable: true),
+                    Politic = table.Column<string>(nullable: true),
+                    ReferenceId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Engeneres", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Engeneres_AspNetUsers_ReferenceId",
+                        column: x => x.ReferenceId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -315,6 +323,11 @@ namespace Application.API.Migrations
                 name: "IX_AspNetUsers_OrganizationId",
                 table: "AspNetUsers",
                 column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Engeneres_ReferenceId",
+                table: "Engeneres",
+                column: "ReferenceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Organizations_OrganizationTypeId",

@@ -17,54 +17,51 @@
   </div>
   <table class="table">
     <tr>
-      <th style="width:10%">Voter Id</th>
-      <th style="width:10%">Code</th>
-      <th style="width:10%">First Name</th>
-      <th style="width:15%">Birth Date</th>
-      <th style="width:15%">Registration Date</th>
-      <th style="width:20%">Graduation Date</th>
-      <th style="width:5%">Vote</th>
-      <th style="width:5%">Attend</th>
-      <th style="width:5%">Transport</th>
-      <th style="width:5%">Voted</th>
+      <th>Code</th>
+      <th>First Name Arabic</th>
+      <th>First Name</th>
+      <th>Family</th>
+      <th>Birth Date</th>
+      <th>Religion</th>
+      <th>Politic</th>
     </tr>
     <tr *ngFor="let voter of voters">
       <td>
-        {{ voter.id }}
+        {{ voter.code }}
       </td>
       <td>
-        {{ voter.code }}
+        {{ voter.firstNameArabic }}
       </td>
       <td>
         {{ voter.firstName }}
       </td>
       <td>
+        {{ voter.family }}
+      </td>
+      <td>
         {{ voter.birthDate | date }}
       </td>
       <td>
-        {{ voter.registration | date }}
+        {{ voter.religion }}
       </td>
       <td>
-        {{ voter.graduation | date }}
-      </td>
-      <td>
-        {{ voter.vote }}
-      </td>
-      <td>
-        {{ voter.attend }}
-      </td>
-      <td>
-        {{ voter.transport }}
-      </td>
-      <td>
-        {{ voter.voted }}
+        {{ voter.politic }}
       </td>
     </tr>
   </table>
 </div>
 <div class="pagination-container d-flex justify-content-center">
-  <pagination *ngIf="pagination&&pagination.totalItems>0" [boundaryLinks]="true" [totalItems]="pagination.totalItems"
-    [(ngModel)]="pagination.currentPage" [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  <pagination
+    *ngIf="pagination && pagination.totalItems > 0"
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [(ngModel)]="pagination.currentPage"
+    [itemsPerPage]="pagination.itemsPerPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
   </pagination>
 </div>

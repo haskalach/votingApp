@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190519074858_Init")]
-    partial class Init
+    [Migration("20190527084605_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,17 +31,15 @@ namespace Application.API.Migrations
 
                     b.Property<string>("AddressWork");
 
-                    b.Property<int>("Attend");
-
                     b.Property<string>("BirthCountry");
 
                     b.Property<DateTime>("BirthDate");
 
                     b.Property<string>("BirthPlace");
 
-                    b.Property<string>("CivilIdKad");
+                    b.Property<string>("CivilIdKadaa");
 
-                    b.Property<string>("CivilIdMother");
+                    b.Property<string>("CivilIdMouhavaza");
 
                     b.Property<string>("CivilIdPlace");
 
@@ -51,15 +49,29 @@ namespace Application.API.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("Family");
+
+                    b.Property<string>("FamilyArabic");
+
+                    b.Property<string>("FatherName");
+
+                    b.Property<string>("FatherNameArabic");
+
                     b.Property<string>("FirstName");
+
+                    b.Property<string>("FirstNameArabic");
 
                     b.Property<DateTime>("Graduation");
 
-                    b.Property<string>("GraduationLocation");
+                    b.Property<string>("GraduationCountry");
+
+                    b.Property<string>("LastCoveredYear");
 
                     b.Property<string>("MobileHome");
 
                     b.Property<string>("MobileWork");
+
+                    b.Property<string>("Nationality");
 
                     b.Property<string>("PhoneHome");
 
@@ -67,7 +79,7 @@ namespace Application.API.Migrations
 
                     b.Property<string>("Politic");
 
-                    b.Property<string>("Reference");
+                    b.Property<int?>("ReferenceId");
 
                     b.Property<string>("RegisteryNumber");
 
@@ -81,15 +93,9 @@ namespace Application.API.Migrations
 
                     b.Property<string>("SubChapter");
 
-                    b.Property<int>("Transport");
-
-                    b.Property<int>("Vote");
-
-                    b.Property<int>("Voted");
-
-                    b.Property<string>("VotedYear");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ReferenceId");
 
                     b.ToTable("Engeneres");
                 });
@@ -331,6 +337,13 @@ namespace Application.API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Application.API.Models.Engeneres", b =>
+                {
+                    b.HasOne("Application.API.Models.User", "Reference")
+                        .WithMany()
+                        .HasForeignKey("ReferenceId");
                 });
 
             modelBuilder.Entity("Application.API.Models.Organization", b =>

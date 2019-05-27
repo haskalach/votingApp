@@ -26,14 +26,37 @@ export class AddEngenereComponent implements OnInit {
   createVoterForm() {
     this.voterForm = this.fb.group({
       code: ['', Validators.required],
+      firstNameArabic: ['', Validators.required],
+      fatherNameArabic: ['', Validators.required],
+      familyArabic: ['', Validators.required],
       firstName: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      family: ['', Validators.required],
+      nationality: ['', Validators.required],
+      speciality: ['', Validators.required],
+      subChapter: ['', Validators.required],
       birthDate: ['', Validators.required],
+      birthCountry: ['', Validators.required],
+      birthPlace: ['', Validators.required],
+      civilIdMouhafava: ['', Validators.required],
+      civilIdKadaa: ['', Validators.required],
+      civilIdRegion: ['', Validators.required],
+      RegisteryNumber: ['', Validators.required],
+      civilIdPlace: ['', Validators.required],
       registration: ['', Validators.required],
+      lastCoveredYear: ['', Validators.required],
       graduation: ['', Validators.required],
-      vote: [null, Validators.required],
-      attend: [null, Validators.required],
-      transport: [null, Validators.required],
-      voted: [null, Validators.required]
+      school: ['', Validators.required],
+      graduationCountry: ['', Validators.required],
+      addressWork: ['', Validators.required],
+      mobileWork: ['', Validators.required],
+      phoneWork: ['', Validators.required],
+      addressHome: ['', Validators.required],
+      mobileHome: ['', Validators.required],
+      phoneHome: ['', Validators.required],
+      email: ['', Validators.required],
+      religion: ['', Validators.required],
+      politic: ['', Validators.required]
     });
   }
   addVoter() {
@@ -55,5 +78,4 @@ export class AddEngenereComponent implements OnInit {
   cancel() {
     this.router.navigate(['/admin']);
   }
-
 }
