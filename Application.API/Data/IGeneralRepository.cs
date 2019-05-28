@@ -18,6 +18,8 @@ namespace Application.API.Data {
         Task<IEnumerable<VoterType>> GetOrganizationTypes ();
         Task<Organization> GetOrganization (int orgId);
         Task<Voter> GetVoter (int code,int VoterTypeId);
+        Task<Voter> GetVoterById(int voterId,int OrganzationId);
+        Task<VotingYears> GetVotingYear (int VoterId,int OrganizationId,string Year);
 
     }
 }

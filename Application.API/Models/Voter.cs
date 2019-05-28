@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Application.API.Models {
     public class Voter {
@@ -40,5 +41,6 @@ namespace Application.API.Models {
         public User Reference { get; set; }
         public int VoterTypeId { get; set; }
         public VoterType VoterType { get; set; }
+        public ICollection<VotingYears> VotingYears { get; set; }
     }
 }

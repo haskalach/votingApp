@@ -273,6 +273,23 @@ namespace Application.API.Migrations
                     b.ToTable("VoterTypes");
                 });
 
+            modelBuilder.Entity("Application.API.Models.VotingYears", b =>
+                {
+                    b.Property<int>("VoterId");
+
+                    b.Property<int>("OrganizationId");
+
+                    b.Property<string>("Year");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("VoterId", "OrganizationId", "Year");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("VotingYears");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -389,6 +406,19 @@ namespace Application.API.Migrations
                         .WithMany()
                         .HasForeignKey("VoterTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Application.API.Models.VotingYears", b =>
+                {
+                    b.HasOne("Application.API.Models.Organization", "Organization")
+                        .WithMany("VotingYears")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Application.API.Models.Voter", "Voter")
+                        .WithMany("VotingYears")
+                        .HasForeignKey("VoterId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

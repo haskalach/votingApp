@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Application.API.Data;
 using Application.API.Dtos;
@@ -12,7 +13,6 @@ using AutoMapper;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Application.API.Controllers {
     [Route ("api/[controller]")]
     [ApiController]
@@ -58,6 +58,37 @@ namespace Application.API.Controllers {
             var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
             Response.AddPagination (voterFromRepo.CurrentPage, voterFromRepo.PageSize, voterFromRepo.TotalCount, voterFromRepo.TotalPages);
             return Ok (voterList);
+        }
+
+        [HttpGet ("{Id}")]
+        public async Task<IActionResult> GetVoter (int Id) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var voterFromRepo = await _repo.GetVoterById (Id, OrganizationId ?? default (int));
+            return Ok (voterFromRepo);
+        }
+
+        [HttpPost ("vote")]
+        public async Task<IActionResult> Vote (VotingYearForCreationDto votingYearForCreationDto) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            votingYearForCreationDto.OrganizationId = OrganizationId ?? default (int);
+            var OrganizationFromRepo = await _repo.GetOrganization (OrganizationId ?? default (int));
+            var VotingYear = _mapper.Map<VotingYears> (votingYearForCreationDto);
+            var VotingYearFromRepo = await _repo.GetVotingYear (VotingYear.VoterId, VotingYear.OrganizationId, VotingYear.Year);
+            if (VotingYearFromRepo != null) {
+                return BadRequest ("Already Voted This Year");
+            } else {
+                _repo.Add (VotingYear);
+                if (await _repo.SaveAll ()) {
+                    return Ok ();
+                } else {
+                    return BadRequest ("Could not Voter For This User");
+                }
+            }
+
         }
 
         [HttpPost ("upload/{Id}"), DisableRequestSizeLimit]

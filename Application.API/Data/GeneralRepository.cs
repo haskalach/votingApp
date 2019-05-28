@@ -88,5 +88,16 @@ namespace Application.API.Data {
 
             return await eng.FirstOrDefaultAsync ();
         }
+
+        public async Task<VotingYears> GetVotingYear (int VoterId, int OrganizationId, string Year) {
+            var VotingYear = await _context.VotingYears.Where (v => v.VoterId == VoterId).Where (v => v.OrganizationId == OrganizationId).Where (v => v.Year == Year).FirstOrDefaultAsync ();
+            return VotingYear;
+        }
+
+        public async Task<Voter> GetVoterById (int VoterId, int OrganzationId) {
+            var Voter = await _context.Voters.Where (v => v.Id == VoterId).Include (v => v.VotingYears).FirstOrDefaultAsync ();
+            Voter.VotingYears = Voter.VotingYears.Where(y => y.OrganizationId == OrganzationId).ToList();
+            return Voter;
+        }
     }
 }

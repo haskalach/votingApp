@@ -236,6 +236,7 @@ namespace Application.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CodeEngenere = table.Column<int>(nullable: false),
+                    CodePharmacist = table.Column<int>(nullable: false),
                     FirstNameArabic = table.Column<string>(nullable: true),
                     FatherNameArabic = table.Column<string>(nullable: true),
                     FamilyArabic = table.Column<string>(nullable: true),
@@ -285,6 +286,32 @@ namespace Application.API.Migrations
                         principalTable: "VoterTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VotingYears",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    OrganizationId = table.Column<int>(nullable: false),
+                    VoterId = table.Column<int>(nullable: false),
+                    Year = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VotingYears", x => new { x.VoterId, x.OrganizationId, x.Year });
+                    table.ForeignKey(
+                        name: "FK_VotingYears_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VotingYears_Voters_VoterId",
+                        column: x => x.VoterId,
+                        principalTable: "Voters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -350,6 +377,11 @@ namespace Application.API.Migrations
                 name: "IX_Voters_VoterTypeId",
                 table: "Voters",
                 column: "VoterTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VotingYears_OrganizationId",
+                table: "VotingYears",
+                column: "OrganizationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -373,10 +405,13 @@ namespace Application.API.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "Voters");
+                name: "VotingYears");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Voters");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

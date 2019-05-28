@@ -10,8 +10,12 @@ namespace Application.API.Data {
         public DbSet<Voter> Voters { get; set; }
         public DbSet<VoterType> VoterTypes { get; set; }
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<VotingYears> VotingYears { get; set; }
         protected override void OnModelCreating (ModelBuilder builder) {
             base.OnModelCreating (builder);
+            builder.Entity<VotingYears> ().HasKey (v => new { v.VoterId, v.OrganizationId, v.Year });
+            builder.Entity<VotingYears> ().HasOne (v => v.Organization).WithMany (v => v.VotingYears).HasForeignKey (v => v.OrganizationId).OnDelete (DeleteBehavior.Restrict);
+            builder.Entity<VotingYears> ().HasOne (v => v.Voter).WithMany (v => v.VotingYears).HasForeignKey (v => v.VoterId).OnDelete (DeleteBehavior.Restrict);
 
             builder.Entity<UserRole> (userRole => {
 
