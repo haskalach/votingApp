@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Application.API.Models;
 
 namespace Application.API.Dtos {
@@ -38,5 +39,6 @@ namespace Application.API.Dtos {
         public string Politic { get; set; }
         public int VoterTypeId { get; set; }
         public VoterType VoterType { get; set; }
+        public ICollection<VotingYearForReturnDto> VotingYears { get; set; }
     }
 }

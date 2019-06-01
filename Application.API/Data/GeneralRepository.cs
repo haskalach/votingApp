@@ -95,8 +95,8 @@ namespace Application.API.Data {
         }
 
         public async Task<Voter> GetVoterById (int VoterId, int OrganzationId) {
-            var Voter = await _context.Voters.Where (v => v.Id == VoterId).Include (v => v.VotingYears).FirstOrDefaultAsync ();
-            Voter.VotingYears = Voter.VotingYears.Where(y => y.OrganizationId == OrganzationId).ToList();
+            var Voter = await _context.Voters.Where (v => v.Id == VoterId).Include (v => v.VotingYears).Include (v => v.VoterType).FirstOrDefaultAsync ();
+            Voter.VotingYears = Voter.VotingYears.Where (y => y.OrganizationId == OrganzationId).ToList ();
             return Voter;
         }
     }

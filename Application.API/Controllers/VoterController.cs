@@ -66,7 +66,21 @@ namespace Application.API.Controllers {
             var userFromRepo = await _repo.GetUser (userId);
             var OrganizationId = userFromRepo.OrganizationId;
             var voterFromRepo = await _repo.GetVoterById (Id, OrganizationId ?? default (int));
-            return Ok (voterFromRepo);
+            var voterToReturn = _mapper.Map<VoterForReturnDto> (voterFromRepo);
+            return Ok (voterToReturn);
+        }
+
+        [HttpPut ("{Id}")]
+        public async Task<IActionResult> EditVoter (int Id, VoterForEditDto voterForEditDto) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var voterFromRepo = await _repo.GetVoterById (Id, OrganizationId ?? default (int));
+            _mapper.Map (voterForEditDto, voterFromRepo);
+            if (await _repo.SaveAll ()) {
+                return NoContent ();
+            }
+            throw new Exception ($"Updating Voter {Id} failed on save");
         }
 
         [HttpPost ("vote")]
@@ -76,6 +90,8 @@ namespace Application.API.Controllers {
             var OrganizationId = userFromRepo.OrganizationId;
             votingYearForCreationDto.OrganizationId = OrganizationId ?? default (int);
             var OrganizationFromRepo = await _repo.GetOrganization (OrganizationId ?? default (int));
+            var year = DateTime.Today.Year.ToString ();
+            votingYearForCreationDto.Year = year;
             var VotingYear = _mapper.Map<VotingYears> (votingYearForCreationDto);
             var VotingYearFromRepo = await _repo.GetVotingYear (VotingYear.VoterId, VotingYear.OrganizationId, VotingYear.Year);
             if (VotingYearFromRepo != null) {

@@ -33,7 +33,7 @@ namespace Application.API.Helpers {
             CreateMap<Voter, VoterForReturnDto> ();
             CreateMap<OrganizationForCreationDto, Organization> ();
             CreateMap<VotingYearForCreationDto, VotingYears> ();
-            
+            CreateMap<VoterForEditDto, Voter> ();
         }
     }
 }
