@@ -1,3 +1,6 @@
+import { VoterViewComponent } from './pages/voter/voter-view/voter-view.component';
+import { VoterEditComponent } from './pages/voter/voter-edit/voter-edit.component';
+import { VoterListComponent } from './pages/voter/voter-list/voter-list.component';
 import { UploadEngeneresComponent } from './admin/engenere-management/upload-engeneres/upload-engeneres.component';
 import { OrganizationManagementComponent } from './admin/organization-management/organization-management.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
@@ -61,6 +64,18 @@ const routes: Routes = [
             path: 'createUser',
             data: { roles: ['OrganizationAdmin'] },
             component: CreateReferenceUserComponent
+          },
+          {
+            path: 'voter-list',
+            component: VoterListComponent
+          },
+          {
+            path: 'voter-edit/:id',
+            component: VoterEditComponent
+          },
+          {
+            path: 'voter-view/:id',
+            component: VoterViewComponent
           }
         ]
       },

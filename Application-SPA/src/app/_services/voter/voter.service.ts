@@ -4,6 +4,7 @@ import { Engenere } from 'src/app/_models/Engenere';
 import { HttpClient, HttpRequest, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from 'src/app/_models/pagination';
+import { Voter } from 'src/app/_models/Voter';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,19 @@ export class VoterService {
       }
     );
     return this.http.request(uploadReq);
+  }
+  getVoter(id: number): Observable<Voter> {
+    return this.http.get<Voter>(this.baseUrl + this.voterRepo + '/' + id);
+  }
+  updateVoter(id: number, voterupdate) {
+    return this.http.put<Voter>(
+      this.baseUrl + this.voterRepo + '/' + id,
+      voterupdate
+    );
+  }
+  vote(id): Observable<Voter> {
+    return this.http.post<Voter>(this.baseUrl + this.voterRepo + '/vote', {
+      voterId: id
+    });
   }
 }

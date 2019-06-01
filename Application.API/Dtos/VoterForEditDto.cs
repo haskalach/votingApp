@@ -4,7 +4,6 @@ namespace Application.API.Dtos
     {
         public string LastCoveredYear { get; set; }
         public string AddressWork { get; set; }
-        
         public string MobileWork { get; set; }
         public string PhoneWork { get; set; }
         public string AddressHome { get; set; }

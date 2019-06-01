@@ -2,27 +2,19 @@
   <a class="navbar-brand" [routerLink]="['/home']">App</a>
 
   <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
-    <li
-      *appHasRole="['Admin']"
-      class="nav-item"
-      [routerLinkActive]="'active'"
-    >
+    <li *appHasRole="['Admin']" class="nav-item" [routerLinkActive]="'active'">
       <a class="nav-link" [routerLink]="['/admin']">Admin</a>
     </li>
     <li
-      *appHasOrgType="'eng'"
+      *appHasRole="['OrganizationAdmin']"
       class="nav-item"
       [routerLinkActive]="'active'"
     >
-      <a class="nav-link" [routerLink]="['/home']">Enggeneeres</a>
+      <a class="nav-link" [routerLink]="['/users']">Org Users</a>
     </li>
-    <li
-    *appHasRole="['OrganizationAdmin']"
-    class="nav-item"
-    [routerLinkActive]="'active'"
-  >
-    <a class="nav-link" [routerLink]="['/users']">Org Users</a>
-  </li>
+    <li class="nav-item" [routerLinkActive]="'active'">
+      <a class="nav-link" [routerLink]="['/voter-list']">Voters</a>
+    </li>
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown top-panel-heading" dropdown>

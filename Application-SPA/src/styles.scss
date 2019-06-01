@@ -76,3 +76,13 @@ input.ng-invalid.ng-touched {
   float: right;
   margin-bottom: 10px;
 }
+.field-container {
+  & > label {
+    font-weight: bold;
+    min-width: 160px;
+  }
+}
+.heading-section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

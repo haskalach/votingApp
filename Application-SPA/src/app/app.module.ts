@@ -60,8 +60,9 @@ import { EngenereService } from './_services/engenere/engenere.service';
 import { AddEngenereComponent } from './admin/engenere-management/add-engenere/add-engenere.component';
 import { EngenereManagementComponent } from './admin/engenere-management/engenere-management.component';
 import { UploadEngeneresComponent } from './admin/engenere-management/upload-engeneres/upload-engeneres.component';
-
-
+import { VoterViewComponent } from './pages/voter/voter-view/voter-view.component';
+import { VoterListComponent } from './pages/voter/voter-list/voter-list.component';
+import { VoterEditComponent } from './pages/voter/voter-edit/voter-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -92,7 +93,10 @@ export function tokenGetter() {
     CreateReferenceUserComponent,
     AddEngenereComponent,
     EngenereManagementComponent,
-    UploadEngeneresComponent
+    UploadEngeneresComponent,
+    VoterViewComponent,
+    VoterListComponent,
+    VoterEditComponent
   ],
   imports: [
     ButtonsModule.forRoot(),
@@ -134,9 +138,7 @@ export function tokenGetter() {
     UtilitiesService,
     EngenereService
   ],
-  entryComponents: [
-    RolesModalComponent
-  ],
+  entryComponents: [RolesModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

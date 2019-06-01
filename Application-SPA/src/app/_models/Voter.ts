@@ -39,9 +39,13 @@ export interface Voter {
   reference: User;
   voterTypeId: number;
   voterType: VoterType;
+  votingYears: VotingYear[];
 }
 
 export interface VoterType {
   id: number;
   name: string;
+}
+export interface VotingYear {
+  year: string;
 }

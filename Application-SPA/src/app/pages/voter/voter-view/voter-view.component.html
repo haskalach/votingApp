@@ -1,0 +1,223 @@
+<div class="container" *ngIf="voter">
+  <div class="row">
+    <ng-container *ngIf="voter.voterTypeId === VoterTypeEnum.engenere">
+      <div class="col-12 heading-section">
+        <h1>{{ voter.codeEngenere }} - Engenere</h1>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="voter.voterTypeId === VoterTypeEnum.pharmacist">
+      <div class="col-12 heading-section">
+        <h1>{{ voter.codePharmacist }} - Pahrmacist</h1>
+      </div>
+    </ng-container>
+    <div class="col-12 col-sm-6 field-container">
+      <label>First Name Arabic:</label>
+      <span>
+        {{ voter.firstNameArabic }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Father Name Arabic:</label>
+      <span>
+        {{ voter.fatherNameArabic }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Family Arabic:</label>
+      <span>
+        {{ voter.familyArabic }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>First Name:</label>
+      <span>
+        {{ voter.firstName }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Father Name:</label>
+      <span>
+        {{ voter.fatherName }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Family Name:</label>
+      <span>
+        {{ voter.family }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Nationality:</label>
+      <span>
+        {{ voter.nationality }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Speciality:</label>
+      <span>
+        {{ voter.speciality }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Sub Chapter:</label>
+      <span>
+        {{ voter.subChapter }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Birth Date:</label>
+      <span>
+        {{ voter.birthDate | date }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Birth Country:</label>
+      <span>
+        {{ voter.birthCountry }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Birth Place:</label>
+      <span>
+        {{ voter.birthPlace }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Civil Id Mouhavaza:</label>
+      <span>
+        {{ voter.civilIdMouhavaza }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Civil Id Kadaa:</label>
+      <span>
+        {{ voter.civilIdKadaa }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Civil Id Region:</label>
+      <span>
+        {{ voter.civilIdRegion }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Registery Number:</label>
+      <span>
+        {{ voter.registeryNumber }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Civil Id place:</label>
+      <span>
+        {{ voter.civilIdPlace }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Registration:</label>
+      <span>
+        {{ voter.registration | date }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Last Covered Year:</label>
+      <span>
+        {{ voter.lastCoveredYear }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Graduation:</label>
+      <span>
+        {{ voter.graduation | date }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>School:</label>
+      <span>
+        {{ voter.school }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Graduation Country:</label>
+      <span>
+        {{ voter.graduationCountry }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Address Work:</label>
+      <span>
+        {{ voter.addressWork }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Mobile Work:</label>
+      <span>
+        {{ voter.mobileWork }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Phone Work:</label>
+      <span>
+        {{ voter.phoneWork }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Address Home:</label>
+      <span>
+        {{ voter.addressHome }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Mobile Home:</label>
+      <span>
+        {{ voter.mobileHome }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Phone Home:</label>
+      <span>
+        {{ voter.phoneHome }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Email:</label>
+      <span>
+        {{ voter.email }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Religion:</label>
+      <span>
+        {{ voter.religion }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Politic:</label>
+      <span>
+        {{ voter.politic }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Voting Years:</label>
+      <ng-container *ngFor="let year of VotingYears; let i = index">
+        <span>
+          {{ year }} <span *ngIf="i < VotingYears.length - 1">,</span></span
+        >
+      </ng-container>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Voted This Year ?</label>
+      <ng-container *ngIf="Voted()">
+        Yes
+      </ng-container>
+      <ng-container *ngIf="!Voted()">
+        <span>
+          No
+        </span>
+        <span class="vote-icon" (click)="vote()">
+          Vote Now
+          <fa-icon [icon]="['fas', 'vote-yea']"></fa-icon>
+        </span>
+      </ng-container>
+    </div>
+  </div>
+</div>
