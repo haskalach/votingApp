@@ -1,3 +1,4 @@
+import { ReferenceVoterListComponent } from './pages/voter/reference-voter-list/reference-voter-list.component';
 import { VoterViewComponent } from './pages/voter/voter-view/voter-view.component';
 import { VoterEditComponent } from './pages/voter/voter-edit/voter-edit.component';
 import { VoterListComponent } from './pages/voter/voter-list/voter-list.component';
@@ -68,6 +69,10 @@ const routes: Routes = [
           {
             path: 'voter-list',
             component: VoterListComponent
+          },
+          {
+            path: 'reference-voter-list',
+            component: ReferenceVoterListComponent
           },
           {
             path: 'voter-edit/:id',

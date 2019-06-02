@@ -111,5 +111,20 @@ namespace Application.API.Data {
             var list = await _context.UserRoles.Where (r => r.RoleId == 5).Select (r => r.UserId).ToListAsync ();
             return list;
         }
+
+        public async Task<PagedList<Voter>> GetReferenceVoters (int referenceId, VoterParams engenereParams) {
+            var voters = _context.Voters.Where (v => v.ReferenceId == referenceId).Include (v => v.VoterType).AsQueryable ();
+            if (engenereParams.voterTypeId > 0) {
+                voters = voters.Where (x => x.VoterTypeId == engenereParams.voterTypeId);
+            }
+            if (!string.IsNullOrEmpty (engenereParams.religion)) {
+                voters = voters.Where (x => x.Religion == (engenereParams.religion).Trim ());
+            }
+            if (!string.IsNullOrEmpty (engenereParams.politic)) {
+
+                voters = voters.Where (x => x.Politic == (engenereParams.politic).Trim ());
+            }
+            return await PagedList<Voter>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
+        }
     }
 }

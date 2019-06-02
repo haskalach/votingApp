@@ -87,4 +87,44 @@ export class VoterService {
       voterId: id
     });
   }
+  getReferenceVoters(
+    page?,
+    itemsPerPage?,
+    voterParams?
+  ): Observable<PaginatedResult<Engenere[]>> {
+    const paginatedResult: PaginatedResult<Engenere[]> = new PaginatedResult<
+      Engenere[]
+    >();
+    let params = new HttpParams();
+    if (voterParams) {
+      params = params.append('voterTypeId', voterParams.voterTypeId);
+      if (voterParams.religion) {
+        params = params.append('religion', voterParams.religion);
+      }
+      if (voterParams.politic) {
+        params = params.append('politic', voterParams.politic);
+      }
+    }
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return this.http
+      .get<Engenere[]>(this.baseUrl + this.voterRepo + '/ReferenceVoters', {
+        observe: 'response',
+        params
+      })
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
+            return paginatedResult;
+          }
+        })
+      );
+  }
 }

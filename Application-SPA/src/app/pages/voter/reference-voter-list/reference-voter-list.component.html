@@ -1,0 +1,81 @@
+<div class="row row-container">
+  <div class="col-12">
+    <div class="row table-header-row">
+      <div class="filter-section">
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.religion"
+          placeholder="Religion"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.politic"
+          placeholder="Politic"
+        />
+      </div>
+      <div class="btn-section">
+        <button class="btn btn-success add-btn" (click)="refreshData()">
+          Filter
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <tr>
+        <th>Code</th>
+        <th>First Name Arabic</th>
+        <th>First Name</th>
+        <th>Family</th>
+        <th>Birth Date</th>
+        <th>Religion</th>
+        <th>Politic</th>
+      </tr>
+      <tr *ngFor="let voter of voters">
+        <td>
+          <ng-container [ngSwitch]="voter.voterTypeId">
+            <ng-container *ngSwitchCase="VoterType.engenere">
+              {{ voter.codeEngenere }}
+            </ng-container>
+            <ng-container *ngSwitchCase="VoterType.pharmacist">
+              {{ voter.codePharmacist }}
+            </ng-container>
+          </ng-container>
+        </td>
+        <td>
+          {{ voter.firstNameArabic }}
+        </td>
+        <td>
+          {{ voter.firstName }}
+        </td>
+        <td>
+          {{ voter.family }}
+        </td>
+        <td>
+          {{ voter.birthDate | date }}
+        </td>
+        <td>
+          {{ voter.religion }}
+        </td>
+        <td>
+          {{ voter.politic }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="pagination-container d-flex justify-content-center">
+  <pagination
+    *ngIf="pagination && pagination.totalItems > 0"
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [(ngModel)]="pagination.currentPage"
+    [itemsPerPage]="pagination.itemsPerPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>

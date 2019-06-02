@@ -63,6 +63,7 @@ import { UploadEngeneresComponent } from './admin/engenere-management/upload-eng
 import { VoterViewComponent } from './pages/voter/voter-view/voter-view.component';
 import { VoterListComponent } from './pages/voter/voter-list/voter-list.component';
 import { VoterEditComponent } from './pages/voter/voter-edit/voter-edit.component';
+import { ReferenceVoterListComponent } from './pages/voter/reference-voter-list/reference-voter-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -96,7 +97,8 @@ export function tokenGetter() {
     UploadEngeneresComponent,
     VoterViewComponent,
     VoterListComponent,
-    VoterEditComponent
+    VoterEditComponent,
+    ReferenceVoterListComponent
   ],
   imports: [
     ButtonsModule.forRoot(),

@@ -60,6 +60,15 @@ namespace Application.API.Controllers {
             return Ok (voterList);
         }
 
+        [HttpGet ("ReferenceVoters")]
+        public async Task<IActionResult> GetReferenceVoters ([FromQuery] VoterParams voterParams) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var voterFromRepo = await _repo.GetReferenceVoters (userId, voterParams);
+            var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
+            Response.AddPagination (voterFromRepo.CurrentPage, voterFromRepo.PageSize, voterFromRepo.TotalCount, voterFromRepo.TotalPages);
+            return Ok (voterList);
+        }
+
         [HttpGet ("{Id}")]
         public async Task<IActionResult> GetVoter (int Id) {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);

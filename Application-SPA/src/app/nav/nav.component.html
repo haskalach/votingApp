@@ -12,8 +12,19 @@
     >
       <a class="nav-link" [routerLink]="['/users']">Org Users</a>
     </li>
-    <li class="nav-item" [routerLinkActive]="'active'">
+    <li
+      *appHasRole="['OrganizationAdmin', 'LaptopUser', 'MobileUser']"
+      class="nav-item"
+      [routerLinkActive]="'active'"
+    >
       <a class="nav-link" [routerLink]="['/voter-list']">Voters</a>
+    </li>
+    <li
+      *appHasRole="['Reference']"
+      class="nav-item"
+      [routerLinkActive]="'active'"
+    >
+      <a class="nav-link" [routerLink]="['/reference-voter-list']">Voters</a>
     </li>
   </ul>
 

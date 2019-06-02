@@ -1,0 +1,28 @@
+.table-header-row {
+  justify-content: space-between;
+  margin: 0px;
+  & .btn-section {
+    & > button {
+      margin-left: 5px;
+    }
+  }
+
+  & .filter-section {
+    display: flex;
+    & > .form-control {
+      margin-right: 5px !important;
+      &:first-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}
+.row-container {
+  margin: 15px;
+}
+
+.action-tab {
+  & > a {
+    margin-left: 5px;
+  }
+}
