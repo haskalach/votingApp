@@ -41,5 +41,7 @@ namespace Application.API.Dtos {
         public int VoterTypeId { get; set; }
         public VoterType VoterType { get; set; }
         public ICollection<VotingYearForReturnDto> VotingYears { get; set; }
+        public int? ReferenceId { get; set; }
+        public User Reference { get; set; }
     }
 }

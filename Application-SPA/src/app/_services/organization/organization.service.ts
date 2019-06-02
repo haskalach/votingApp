@@ -16,9 +16,7 @@ export class OrganizationService {
     return this.http.get<Organization[]>(this.baseUrl + this.repo);
   }
   getOrganizationTypes(): Observable<VoterType[]> {
-    return this.http.get<VoterType[]>(
-      this.baseUrl + this.repo + '/type'
-    );
+    return this.http.get<VoterType[]>(this.baseUrl + this.repo + '/type');
   }
   createOrganization(model) {
     return this.http.post(this.baseUrl + this.repo, model);
@@ -26,5 +24,7 @@ export class OrganizationService {
   createOrganizationType(model) {
     return this.http.post(this.baseUrl + this.repo + '/type', model);
   }
-  updateOrganizationType(obj) {}
+  updateOrganizationType(obj) {
+    return this.http.put(this.baseUrl + this.repo + '/updateType', obj);
+  }
 }

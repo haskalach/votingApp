@@ -107,6 +107,21 @@ namespace Application.API.Controllers {
 
         }
 
+        [HttpPut ("updateReference")]
+
+        public async Task<IActionResult> updateReference (ReferenceUpdateDto referenceUpdateDto) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var OrganizationFromRepo = await _repo.GetOrganization (OrganizationId ?? default (int));
+            var voterFromRepo = await _repo.GetVoterById (referenceUpdateDto.Id, OrganizationId ?? default (int));
+            _mapper.Map (referenceUpdateDto, voterFromRepo);
+            if (await _repo.SaveAll ()) {
+                return NoContent ();
+            }
+            throw new Exception ($"Could Not Set Reference Use For {referenceUpdateDto.Id}");
+        }
+
         [HttpPost ("upload/{Id}"), DisableRequestSizeLimit]
         public ActionResult UploadFile (int Id) {
             try {

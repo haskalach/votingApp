@@ -76,6 +76,12 @@ export class VoterService {
       voterupdate
     );
   }
+  updateVoterReference(voterReference) {
+    return this.http.put<Voter>(
+      this.baseUrl + this.voterRepo + '/updateReference',
+      voterReference
+    );
+  }
   vote(id): Observable<Voter> {
     return this.http.post<Voter>(this.baseUrl + this.voterRepo + '/vote', {
       voterId: id

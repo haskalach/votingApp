@@ -19,7 +19,7 @@ export class OrganizationManagementComponent implements OnInit {
   }
   updateOrganizationType(org: Organization) {
     const assignObject = {
-      rganizationId: org.id,
+      organizationId: org.id,
       organizationTypeId: org.voterTypeId
     };
     console.log({ assignObject });

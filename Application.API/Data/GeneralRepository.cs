@@ -95,9 +95,21 @@ namespace Application.API.Data {
         }
 
         public async Task<Voter> GetVoterById (int VoterId, int OrganzationId) {
-            var Voter = await _context.Voters.Where (v => v.Id == VoterId).Include (v => v.VotingYears).Include (v => v.VoterType).FirstOrDefaultAsync ();
+            var Voter = await _context.Voters.Where (v => v.Id == VoterId).Include (v => v.VotingYears).Include (v => v.VoterType).Include (v => v.Reference).FirstOrDefaultAsync ();
             Voter.VotingYears = Voter.VotingYears.Where (y => y.OrganizationId == OrganzationId).ToList ();
             return Voter;
+        }
+
+        public async Task<IEnumerable<User>> GetOrganizationReferences (int orgId, int userId) {
+            var userRolesId = await GetReferenceUserId ();
+            var users = await _context.Users.Where (u => u.OrganizationId == orgId && u.Id != userId).Include (u => u.UserRoles).ThenInclude (r => r.Role).ToListAsync ();
+            users = users.Where (u => userRolesId.Contains (u.Id)).ToList ();
+            return users;
+        }
+
+        private async Task<IEnumerable<int>> GetReferenceUserId () {
+            var list = await _context.UserRoles.Where (r => r.RoleId == 5).Select (r => r.UserId).ToListAsync ();
+            return list;
         }
     }
 }

@@ -1,3 +1,4 @@
+import { UserService } from './../../../_services/user/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { Voter } from 'src/app/_models/Voter';
 import { ActivatedRoute } from '@angular/router';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-voter-edit',
@@ -18,10 +20,12 @@ export class VoterEditComponent implements OnInit {
   currentYear: number;
   VoterTypeEnum = VoterTypeEnum;
   VoterForm: FormGroup;
+  ReferenceUsers: User[];
   constructor(
     private route: ActivatedRoute,
     private voterSrvice: VoterService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -43,6 +47,7 @@ export class VoterEditComponent implements OnInit {
         this.getVoter(this.id);
       }
     });
+    this.getReferenceUsers();
   }
 
   getVoter(id) {
@@ -65,5 +70,10 @@ export class VoterEditComponent implements OnInit {
         this.alertifyService.error(error);
       }
     );
+  }
+  getReferenceUsers() {
+    this.userService.getOrgReference().subscribe((next: User[]) => {
+      this.ReferenceUsers = next;
+    });
   }
 }

@@ -187,6 +187,15 @@
           >
         </ng-container>
       </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Reference:</label>
+        <select  formControlName="referenceId">
+          <option [ngValue]="null">Select Reference</option>
+          <option *ngFor="let ref of ReferenceUsers" [ngValue]="ref.id">
+            {{ ref.userName }}
+          </option>
+        </select>
+      </div>
     </div>
     <button type="submit" class="btn btn-success" style="float:right">
       Update

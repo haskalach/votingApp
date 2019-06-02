@@ -34,6 +34,7 @@ namespace Application.API.Helpers {
             CreateMap<OrganizationForCreationDto, Organization> ();
             CreateMap<VotingYearForCreationDto, VotingYears> ();
             CreateMap<VoterForEditDto, Voter> ();
+            CreateMap<ReferenceUpdateDto, Voter> ();
         }
     }
 }

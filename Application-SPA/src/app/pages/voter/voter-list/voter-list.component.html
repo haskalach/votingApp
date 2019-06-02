@@ -31,6 +31,7 @@
         <th>Birth Date</th>
         <th>Religion</th>
         <th>Politic</th>
+        <th>Reference</th>
         <th>Actions</th>
       </tr>
       <tr *ngFor="let voter of voters">
@@ -62,6 +63,18 @@
         </td>
         <td>
           {{ voter.politic }}
+        </td>
+        <td>
+          <select
+            class="form-control"
+            [(ngModel)]="voter.referenceId"
+            (change)="setUserReference(voter)"
+          >
+            <option [ngValue]="null">Select Reference</option>
+            <option *ngFor="let ref of ReferenceUsers" [ngValue]="ref.id">
+              {{ ref.userName }}
+            </option>
+          </select>
         </td>
         <td class="action-tab">
           <a [routerLink]="['/voter-view/' + voter.id]">

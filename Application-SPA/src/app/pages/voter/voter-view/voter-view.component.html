@@ -219,5 +219,11 @@
         </span>
       </ng-container>
     </div>
+    <div class="col-12 col-sm-6 field-container" *ngIf="voter.referenceId">
+      <label>Reference:</label>
+      <a [routerLink]="['/members/' + voter.referenceId]">
+        {{ voter.reference?.userName }}</a
+      >
+    </div>
   </div>
 </div>

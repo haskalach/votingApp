@@ -52,6 +52,6 @@ export class CreateReferenceUserComponent implements OnInit {
     }
   }
   cancel() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/users']);
   }
 }

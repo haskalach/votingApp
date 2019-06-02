@@ -63,6 +63,9 @@ export class UserService {
   getOrgUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + this.repo + '/organizationUser');
   }
+  getOrgReference(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl + this.repo + '/organizationReference');
+  }
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(this.baseUrl + this.repo, user);
   }
