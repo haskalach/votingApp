@@ -1,15 +1,21 @@
-<h1>File Upload 1</h1>
-<input #file type="file" multiple (change)="upload(file.files)" />
-<select class="form-control" [(ngModel)]="VoterTypeId">
-  <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
-    {{ voterType.name }}</option
-  >
-</select>
-<br />
-<span
+<h1>File Upload</h1>
+<div class="form-group">
+  <input #file type="file" multiple (change)="upload(file.files)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+</div>
+<div class="form-group">
+  <select [(ngModel)]="VoterTypeId">
+    <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
+      {{ voterType.name }}</option
+    >
+  </select>
+</div>
+
+<!-- <span
   style="font-weight:bold;color:green;"
   *ngIf="progress > 0 && progress < 100"
 >
   {{ progress }}%
-</span>
-<button type="button" (click)="uploadFiles()">Upload Selected Files</button>
+</span> -->
+<button type="button" class="btn btn-success" (click)="uploadFiles()">
+  Upload Selected Files
+</button>

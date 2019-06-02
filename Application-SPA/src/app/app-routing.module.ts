@@ -112,12 +112,12 @@ const routes: Routes = [
             component: EngenereManagementComponent
           },
           {
-            path: 'add-engenere',
+            path: 'add-voter',
             data: { roles: ['Admin'] },
             component: AddEngenereComponent
           },
           {
-            path: 'upload-engenere',
+            path: 'upload',
             data: { roles: ['Admin'] },
             component: UploadEngeneresComponent
           },

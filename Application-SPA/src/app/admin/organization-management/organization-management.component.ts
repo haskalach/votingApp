@@ -1,3 +1,4 @@
+import { AlertifyService } from './../../_services/alertify.service';
 import { VoterType } from './../../_models/VoterType';
 import { Organization } from './../../_models/Organization';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,10 @@ import { OrganizationService } from 'src/app/_services/organization/organization
 export class OrganizationManagementComponent implements OnInit {
   organizations: Organization[];
   organizationTypes: VoterType[];
-  constructor(private organizationService: OrganizationService) {}
+  constructor(
+    private organizationService: OrganizationService,
+    private alertifyService: AlertifyService
+  ) {}
 
   ngOnInit() {
     this.getOrganizationList();
@@ -19,10 +23,17 @@ export class OrganizationManagementComponent implements OnInit {
   }
   updateOrganizationType(org: Organization) {
     const assignObject = {
-      organizationId: org.id,
-      organizationTypeId: org.voterTypeId
+      id: org.id,
+      VoterTypeId: org.voterTypeId
     };
-    console.log({ assignObject });
+    this.organizationService.updateOrganizationType(assignObject).subscribe(
+      next => {
+        this.alertifyService.success('updatedSuccesfully');
+      },
+      error => {
+        this.alertifyService.error(error);
+      }
+    );
   }
 
   getOrganizationList() {

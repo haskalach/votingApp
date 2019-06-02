@@ -46,6 +46,17 @@ namespace Application.API.Controllers {
         }
 
         [Authorize (Policy = "RequireAdminRole")]
+        [HttpPut("UpdateType")]
+        public async Task<IActionResult> SetOrganizationType (OrganizationTypeUpdateDto organizationTypeUpdateDto) {
+            var OrganizationFromRepo = await _repo.GetOrganization (organizationTypeUpdateDto.Id);
+            _mapper.Map (organizationTypeUpdateDto, OrganizationFromRepo);
+            if (await _repo.SaveAll ()) {
+                return Ok ();
+            }
+            return BadRequest ("Could not add Organzation");
+        }
+
+        [Authorize (Policy = "RequireAdminRole")]
         [HttpPost ("type")]
         public async Task<IActionResult> AddOrganizationType (OrganizationTypeForCreationDto organizationTypeForCreationDto) {
 
