@@ -50,18 +50,22 @@ export class AuthService {
   }
   roleMatch(allowedRoles): boolean {
     let isMatch = false;
-    let userRoles = this.decodedToken.role as Array<string>;
-    if (userRoles instanceof Array) {
+    if (!this.decodedToken) {
+      return isMatch;
     } else {
-      userRoles = [userRoles];
-    }
-    allowedRoles.forEach(element => {
-      if (userRoles.includes(element)) {
-        isMatch = true;
-        return;
+      let userRoles = this.decodedToken.role as Array<string>;
+      if (userRoles instanceof Array) {
+      } else {
+        userRoles = [userRoles];
       }
-    });
-    return isMatch;
+      allowedRoles.forEach(element => {
+        if (userRoles.includes(element)) {
+          isMatch = true;
+          return;
+        }
+      });
+      return isMatch;
+    }
   }
   TypeMatch(allowedTypes): boolean {
     let isMatch = false;
