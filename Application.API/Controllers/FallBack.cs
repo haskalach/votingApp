@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.API.Controllers {
-        [AllowAnonymous]
-        public class FallBack : Controller {
+    [AllowAnonymous]
+    public class FallBack : Controller {
         public IActionResult Index () {
             return PhysicalFile (Path.Combine (Directory.GetCurrentDirectory (),
                 "wwwroot", "index.html"), "text/HTML");
