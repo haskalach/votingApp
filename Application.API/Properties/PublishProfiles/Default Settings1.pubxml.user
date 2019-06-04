@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAEJKdQDp8506Upn9CQ6hygwAAAAACAAAAAAAQZgAAAAEAACAAAAA7PqFudt/Dv674DcCjb0sWokWDkvfSAZWyLLP1HA2OYwAAAAAOgAAAAAIAACAAAAAKy2+tLNXxewzFNENeQLfdNyc7TAN1YeFAjLiVUxBPBSAAAADO67edEcKJ8swf5t4dUCttqtVQTh+P1XMCCe9UdPuqMUAAAAB9nj3lMUjmReWu3fGWHm8FQFginEBQoaGMjmfRmJpI7mWijR2xeToZFoK/5Ls3n2GbxmsrSQXh3lxtSkqPf7gA</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>"Data Source=SQL5041.site4now.net%3bInitial Catalog=DB_A476D3_hkalach%3bUser Id=DB_A476D3_hkalach_admin%3bPassword=malika12345K%3b"</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Application.API.Data.DataContext">
+      <Value>"Data Source=SQL5041.site4now.net%3bInitial Catalog=DB_A476D3_hkalach%3bUser Id=DB_A476D3_hkalach_admin%3bPassword=malika12345K%3b"</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
