@@ -37,14 +37,7 @@
       <tr *ngFor="let voter of voters">
         <td>{{ voter.voterType.name }}</td>
         <td>
-          <ng-container [ngSwitch]="voter.voterTypeId">
-            <ng-container *ngSwitchCase="VoterType.engenere">
-              {{ voter.codeEngenere }}
-            </ng-container>
-            <ng-container *ngSwitchCase="VoterType.pharmacist">
-              {{ voter.codePharmacist }}
-            </ng-container>
-          </ng-container>
+          {{ voter.code }}
         </td>
         <td>
           {{ voter.firstNameArabic }}

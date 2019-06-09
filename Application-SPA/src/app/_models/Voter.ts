@@ -2,8 +2,7 @@ import { User } from './user';
 
 export interface Voter {
   id: number;
-  codeEngenere: number;
-  codePharmacist: number;
+  code: number;
   firstNameArabic: string;
   fatherNameArabic: string;
   familyArabic: string;

@@ -1,28 +1,28 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Engenere } from 'src/app/_models/Engenere';
 import { HttpClient, HttpRequest, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from 'src/app/_models/pagination';
 import { Voter } from 'src/app/_models/Voter';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoterService {
   voterRepo = 'Voter';
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
-  addEngenere(voter: Engenere) {
+  addVoter(voter: Voter) {
     return this.http.post(this.baseUrl + this.voterRepo, voter);
   }
-  getEngeneres(
+  getVoters(
     page?,
     itemsPerPage?,
     voterParams?
-  ): Observable<PaginatedResult<Engenere[]>> {
-    const paginatedResult: PaginatedResult<Engenere[]> = new PaginatedResult<
-      Engenere[]
+  ): Observable<PaginatedResult<Voter[]>> {
+    const paginatedResult: PaginatedResult<Voter[]> = new PaginatedResult<
+      Voter[]
     >();
     let params = new HttpParams();
     if (voterParams) {
@@ -40,7 +40,7 @@ export class VoterService {
       params = params.append('pageSize', itemsPerPage);
     }
     return this.http
-      .get<Engenere[]>(this.baseUrl + this.voterRepo, {
+      .get<Voter[]>(this.baseUrl + this.voterRepo, {
         observe: 'response',
         params
       })
@@ -91,9 +91,9 @@ export class VoterService {
     page?,
     itemsPerPage?,
     voterParams?
-  ): Observable<PaginatedResult<Engenere[]>> {
-    const paginatedResult: PaginatedResult<Engenere[]> = new PaginatedResult<
-      Engenere[]
+  ): Observable<PaginatedResult<Voter[]>> {
+    const paginatedResult: PaginatedResult<Voter[]> = new PaginatedResult<
+      Voter[]
     >();
     let params = new HttpParams();
     if (voterParams) {
@@ -111,7 +111,7 @@ export class VoterService {
       params = params.append('pageSize', itemsPerPage);
     }
     return this.http
-      .get<Engenere[]>(this.baseUrl + this.voterRepo + '/ReferenceVoters', {
+      .get<Voter[]>(this.baseUrl + this.voterRepo + '/ReferenceVoters', {
         observe: 'response',
         params
       })

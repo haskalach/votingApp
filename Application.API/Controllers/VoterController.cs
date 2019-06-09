@@ -29,18 +29,6 @@ namespace Application.API.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> AddVoter (VoterForCreationDto voterForCreationDto) {
-            switch (voterForCreationDto.VoterTypeId) {
-
-                case 1:
-                    voterForCreationDto.CodeEngenere = voterForCreationDto.Code;
-                    break;
-
-                case 2:
-                    voterForCreationDto.CodePharmacist = voterForCreationDto.Code;
-                    break;
-                default:
-                    break;
-            }
             var voterToCreate = _mapper.Map<Voter> (voterForCreationDto);
 
             _repo.Add (voterToCreate);
@@ -53,6 +41,13 @@ namespace Application.API.Controllers {
 
         [HttpGet]
         public async Task<IActionResult> GetVoters ([FromQuery] VoterParams voterParams) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            if (userFromRepo.OrganizationId > 0) {
+                var orgFromRepo = await _repo.GetOrganization (userFromRepo.OrganizationId ?? default (int));
+                voterParams.voterTypeId = orgFromRepo.VoterTypeId;
+            }
+
             var voterFromRepo = await _repo.GetVoters (voterParams);
 
             var voterList = _mapper.Map<ICollection<VoterForReturnDto>> (voterFromRepo);
@@ -165,8 +160,7 @@ namespace Application.API.Controllers {
 
                         foreach (DataRow row in sheet.Rows) {
                             Voter dataItem = new Voter ();
-                            int codeEngenere;
-                            int codePahrmacist;
+                            int code;
 
                             DateTime birthDate;
                             DateTime registration;
@@ -208,36 +202,16 @@ namespace Application.API.Controllers {
                             dataItem.VoterTypeId = Id;
                             bool exists = false;
 
-                            switch (dataItem.VoterTypeId) {
-                                case 1:
-                                    Int32.TryParse (row["Code"].ToString (), out codeEngenere);
-                                    dataItem.CodeEngenere = codeEngenere;
-                                    list.ForEach (item => {
-                                        if (item.CodeEngenere == dataItem.CodeEngenere) {
-                                            exists = true;
-                                        }
-                                    });
-                                    if (_repo.GetVoter (dataItem.CodeEngenere, Id).Result == null && exists == false) {
-                                        list.Add (dataItem);
-                                        _repo.Add (dataItem);
-                                    }
-                                    break;
-
-                                case 2:
-                                    Int32.TryParse (row["Code"].ToString (), out codePahrmacist);
-                                    dataItem.CodePharmacist = codePahrmacist;
-                                    list.ForEach (item => {
-                                        if (item.CodePharmacist == dataItem.CodePharmacist) {
-                                            exists = true;
-                                        }
-                                    });
-                                    if (_repo.GetVoter (dataItem.CodePharmacist, Id).Result == null && exists == false) {
-                                        list.Add (dataItem);
-                                        _repo.Add (dataItem);
-                                    }
-                                    break;
-                                default:
-                                    break;
+                            Int32.TryParse (row["Code"].ToString (), out code);
+                            dataItem.Code = code;
+                            list.ForEach (item => {
+                                if (item.Code == dataItem.Code) {
+                                    exists = true;
+                                }
+                            });
+                            if (_repo.GetVoter (dataItem.Code, Id).Result == null && exists == false) {
+                                list.Add (dataItem);
+                                _repo.Add (dataItem);
                             }
 
                         }

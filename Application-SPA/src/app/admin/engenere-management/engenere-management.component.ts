@@ -1,6 +1,5 @@
 import { OrganizationService } from 'src/app/_services/organization/organization.service';
 import { Voter } from './../../_models/Voter';
-import { Engenere } from '../../_models/Engenere';
 import { Component, OnInit } from '@angular/core';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
@@ -34,7 +33,7 @@ export class EngenereManagementComponent implements OnInit {
 
   loadItems(pageNumber?, pageSize?, voterParams?) {
     this.voterService
-      .getEngeneres(pageNumber, pageSize, voterParams)
+      .getVoters(pageNumber, pageSize, voterParams)
       .subscribe((res: PaginatedResult<Voter[]>) => {
         this.voters = res.result;
         this.pagination = res.pagination;

@@ -39,7 +39,7 @@ export class VoterListComponent implements OnInit {
 
   loadItems(pageNumber?, pageSize?, voterParams?) {
     this.voterService
-      .getEngeneres(pageNumber, pageSize, voterParams)
+      .getVoters(pageNumber, pageSize, voterParams)
       .subscribe((res: PaginatedResult<Voter[]>) => {
         this.voters = res.result;
         this.pagination = res.pagination;

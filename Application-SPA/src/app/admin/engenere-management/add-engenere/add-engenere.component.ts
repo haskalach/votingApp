@@ -3,10 +3,11 @@ import { OrganizationService } from './../../../_services/organization/organizat
 import { VoterType } from './../../../_models/VoterType';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Engenere } from 'src/app/_models/Engenere';
+
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { Router } from '@angular/router';
+import { Voter } from 'src/app/_models/Voter';
 
 @Component({
   selector: 'app-add-engenere',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AddEngenereComponent implements OnInit {
   voterForm: FormGroup;
-  voter: Engenere;
+  voter: Voter;
   voterTypes: VoterType[];
   constructor(
     private fb: FormBuilder,
@@ -69,7 +70,7 @@ export class AddEngenereComponent implements OnInit {
   addVoter() {
     if (this.voterForm.valid) {
       this.voter = Object.assign({}, this.voterForm.value);
-      this.voterService.addEngenere(this.voter).subscribe(
+      this.voterService.addVoter(this.voter).subscribe(
         next => {
           this.alertify.success('Voter Added Succesfully');
           this.voterForm.reset();

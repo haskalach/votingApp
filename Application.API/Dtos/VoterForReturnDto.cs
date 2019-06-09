@@ -5,8 +5,7 @@ using Application.API.Models;
 namespace Application.API.Dtos {
     public class VoterForReturnDto {
         public int Id { get; set; }
-        public int CodeEngenere { get; set; }
-        public int CodePharmacist { get; set; }
+        public int Code { get; set; }
         public string FirstNameArabic { get; set; }
         public string FatherNameArabic { get; set; }
         public string FamilyArabic { get; set; }

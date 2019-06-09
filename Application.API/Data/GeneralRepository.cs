@@ -73,20 +73,20 @@ namespace Application.API.Data {
         }
 
         public async Task<Voter> GetVoter (int code, int VoterTypeId) {
-            var eng = _context.Voters.AsQueryable ();
-            switch (VoterTypeId) {
-                case 1:
-                    eng = eng.Where (x => x.CodeEngenere == code);
-                    break;
+            var eng = await _context.Voters.Where (v => v.VoterTypeId == VoterTypeId && v.Code == code).FirstOrDefaultAsync ();
+            // switch (VoterTypeId) {
+            //     case 1:
+            //         eng = eng.Where (x => x.CodeEngenere == code);
+            //         break;
 
-                case 2:
-                    eng = eng.Where (x => x.CodePharmacist == code);
-                    break;
-                default:
-                    break;
-            }
+            //     case 2:
+            //         eng = eng.Where (x => x.CodePharmacist == code);
+            //         break;
+            //     default:
+            //         break;
+            // }
 
-            return await eng.FirstOrDefaultAsync ();
+            return eng;
         }
 
         public async Task<VotingYears> GetVotingYear (int VoterId, int OrganizationId, string Year) {
