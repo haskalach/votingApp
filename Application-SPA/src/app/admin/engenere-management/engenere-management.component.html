@@ -38,6 +38,9 @@
         >
           Upload Data
         </button>
+        <button class="btn btn-success add-btn" (click)="exportData()">
+          Export
+        </button>
         <button
           class="btn btn-success add-btn"
           *appHasRole="['Admin']"
@@ -58,6 +61,7 @@
       <th>Birth Date</th>
       <th>Religion</th>
       <th>Politic</th>
+      <th>Actions</th>
     </tr>
     <tr *ngFor="let voter of voters">
       <td>{{ voter.voterType.name }}</td>
@@ -81,6 +85,14 @@
       </td>
       <td>
         {{ voter.politic }}
+      </td>
+      <td class="action-tab">
+        <a [routerLink]="['/admin/voter-view/' + voter.id]">
+          <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+        </a>
+        <a [routerLink]="['/admin/voter-edit/' + voter.id]">
+          <fa-icon [icon]="['fas', 'user-edit']"></fa-icon>
+        </a>
       </td>
     </tr>
   </table>

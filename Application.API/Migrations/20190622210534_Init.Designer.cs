@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190527221543_init")]
-    partial class init
+    [Migration("20190622210534_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -114,8 +114,6 @@ namespace Application.API.Migrations
 
                     b.Property<string>("Introduction");
 
-                    b.Property<string>("KnowAs");
-
                     b.Property<DateTime>("LastActive");
 
                     b.Property<bool>("LockoutEnabled");
@@ -123,6 +121,8 @@ namespace Application.API.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("LookingFor");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -183,9 +183,13 @@ namespace Application.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Abroad");
+
                     b.Property<string>("AddressHome");
 
                     b.Property<string>("AddressWork");
+
+                    b.Property<bool>("Attend");
 
                     b.Property<string>("BirthCountry");
 
@@ -201,11 +205,13 @@ namespace Application.API.Migrations
 
                     b.Property<string>("CivilIdRegion");
 
-                    b.Property<int>("CodeEngenere");
+                    b.Property<int>("Code");
 
-                    b.Property<int>("CodePharmacist");
+                    b.Property<bool>("Contacted");
 
                     b.Property<string>("Email");
+
+                    b.Property<bool>("Enabled");
 
                     b.Property<string>("Family");
 

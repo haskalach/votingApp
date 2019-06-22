@@ -112,8 +112,6 @@ namespace Application.API.Migrations
 
                     b.Property<string>("Introduction");
 
-                    b.Property<string>("KnowAs");
-
                     b.Property<DateTime>("LastActive");
 
                     b.Property<bool>("LockoutEnabled");
@@ -121,6 +119,8 @@ namespace Application.API.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("LookingFor");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -181,9 +181,13 @@ namespace Application.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Abroad");
+
                     b.Property<string>("AddressHome");
 
                     b.Property<string>("AddressWork");
+
+                    b.Property<bool>("Attend");
 
                     b.Property<string>("BirthCountry");
 
@@ -201,7 +205,11 @@ namespace Application.API.Migrations
 
                     b.Property<int>("Code");
 
+                    b.Property<bool>("Contacted");
+
                     b.Property<string>("Email");
+
+                    b.Property<bool>("Enabled");
 
                     b.Property<string>("Family");
 

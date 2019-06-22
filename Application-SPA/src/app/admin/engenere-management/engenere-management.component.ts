@@ -5,7 +5,6 @@ import { VoterService } from 'src/app/_services/voter/voter.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
 import { VoterType } from 'src/app/_models/VoterType';
-
 @Component({
   selector: 'app-engenere-management',
   templateUrl: './engenere-management.component.html',
@@ -69,4 +68,35 @@ export class EngenereManagementComponent implements OnInit {
   //     // this.downloadFile(next.toString());
   //   });
   // }
+  // downloadFile(data: Response) {
+  //   const blob = new Blob([data], { type: 'text/csv' });
+  //   const url= window.URL.createObjectURL(blob);
+  //   window.open(url);
+  // }
+
+  // exportData() {
+  //   this.voterService.exportData().subscribe(res => {
+  //     this.writeContents(res, 'test.txt', 'text/txt'); // file extension
+  //   });
+  // }
+
+  // writeContents(content, fileName, contentType) {
+  //   const a = document.createElement('a');
+  //   const file = new Blob([content], { type: contentType });
+  //   a.href = URL.createObjectURL(file);
+  //   a.download = fileName;
+  //   a.click();
+  // }
+  exportData() {
+    // window.location.href = 'http://localhost:5000/demo.xlsx';
+    this.voterService.exportData().subscribe(
+      next => {
+        console.log({ next });
+        window.location.href = next['url'];
+      },
+      error => {
+        console.log({ error });
+      }
+    );
+  }
 }

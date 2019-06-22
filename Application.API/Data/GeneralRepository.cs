@@ -63,6 +63,12 @@ namespace Application.API.Data {
             }
             return await PagedList<Voter>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
         }
+
+        public async Task<IEnumerable<Voter>> GetAllVoters () {
+            var voters = _context.Voters.Include (v => v.VoterType).ToListAsync ();
+
+            return await voters;
+        }
         public async Task<bool> SaveAll () {
             return await _context.SaveChangesAsync () > 0;
         }

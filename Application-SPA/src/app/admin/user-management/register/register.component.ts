@@ -33,20 +33,19 @@ export class RegisterComponent implements OnInit {
       {
         gender: ['male'],
         userName: ['', Validators.required],
-        email: ['', Validators.required],
-        knownAs: ['', Validators.required],
+        name: [''],
         dateOfBirth: [null, Validators.required],
-        city: ['', Validators.required],
-        country: ['', Validators.required],
+        city: [''],
+        country: [''],
         password: [
-          '',
+          null,
           [
             Validators.required,
             Validators.minLength(4),
             Validators.maxLength(8)
           ]
         ],
-        confirmPassword: ['', Validators.required]
+        confirmPassword: [null, Validators.required]
       },
       { validator: this.passwordMatchValidators }
     );
@@ -59,6 +58,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    console.log(this.regitrationForm);
     if (this.regitrationForm.valid) {
       this.user = Object.assign({}, this.regitrationForm.value);
       this.auth.resgiter(this.user).subscribe(

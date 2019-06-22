@@ -3,7 +3,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Voter } from 'src/app/_models/Voter';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
 import { User } from 'src/app/_models/user';
@@ -22,6 +22,7 @@ export class VoterEditComponent implements OnInit {
   VoterForm: FormGroup;
   ReferenceUsers: User[];
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private voterSrvice: VoterService,
     private alertifyService: AlertifyService,
@@ -30,7 +31,6 @@ export class VoterEditComponent implements OnInit {
 
   ngOnInit() {
     this.VoterForm = new FormGroup({
-      lastCoveredYear: new FormControl(),
       addressWork: new FormControl(),
       mobileWork: new FormControl(),
       phoneWork: new FormControl(),
@@ -65,6 +65,7 @@ export class VoterEditComponent implements OnInit {
     this.voterSrvice.updateVoter(this.id, this.VoterForm.value).subscribe(
       next => {
         this.alertifyService.success('updated succesfully');
+        this.router.navigate(['/voters']);
       },
       error => {
         this.alertifyService.error(error);

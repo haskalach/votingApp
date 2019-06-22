@@ -1,6 +1,6 @@
 [{
   "Username": "Freda",
-  "Email": "freda@mailinator.com",
+  "Name":"Freda",
   "Gender": "female",
   "DateOfBirth": "1980-03-12",
   "Password": "password",

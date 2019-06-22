@@ -7,7 +7,7 @@ namespace Application.API.Models {
 
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string KnowAs { get; set; }  
+        public string Name { get; set; }  
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }    
         public string Introduction { get; set; }    

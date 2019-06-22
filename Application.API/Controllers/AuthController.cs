@@ -62,7 +62,7 @@ namespace Application.API.Controllers {
 
             userToCreate.OrganizationId = OrganizationId;
 
-            if (result.Succeeded && Rolesresult.Succeeded&& await _repo.SaveAll ()) {
+            if (result.Succeeded && Rolesresult.Succeeded && await _repo.SaveAll ()) {
                 return CreatedAtRoute ("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
             }
             return BadRequest (result.Errors);
@@ -71,13 +71,13 @@ namespace Application.API.Controllers {
         [HttpPost ("login")]
         public async Task<IActionResult> login (UserForLoginDto userForLoginDto) {
 
-            var user = await _userManager.FindByEmailAsync (userForLoginDto.Email);
+            var user = await _userManager.FindByNameAsync (userForLoginDto.UserName);
             if (user == null) {
-                return BadRequest ("wrong user email");
+                return BadRequest ("wrong user Name");
             }
             var result = await _signInManager.CheckPasswordSignInAsync (user, userForLoginDto.Password, false);
             if (result.Succeeded) {
-                var appUser = await _userManager.Users.Include (p => p.Photos).FirstOrDefaultAsync (u => u.NormalizedEmail == userForLoginDto.Email.ToUpper ());
+                var appUser = await _userManager.Users.Include (p => p.Photos).FirstOrDefaultAsync (u => u.NormalizedUserName == userForLoginDto.UserName.ToUpper ());
                 var roles = await _userManager.GetRolesAsync (appUser);
                 if ((roles.IndexOf ("Admin") == -1) && (user.OrganizationId == null)) {
                     return BadRequest ("Could Not sign in Untill User is linked to organization");
@@ -98,7 +98,7 @@ namespace Application.API.Controllers {
 
             var claims = new List<Claim> {
                 new Claim (ClaimTypes.NameIdentifier, user.Id.ToString ()),
-                new Claim (ClaimTypes.Email, user.Email)
+                new Claim (ClaimTypes.Email, user.UserName)
             };
             if (user.OrganizationId.HasValue && user.OrganizationId > 0) {
                 var organization = await _repo.GetOrganization (user.OrganizationId ?? default (int));

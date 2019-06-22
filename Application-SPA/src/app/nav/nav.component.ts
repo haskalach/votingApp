@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
       this.photoUrl = p;
     });
     this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
+      userName: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
   }

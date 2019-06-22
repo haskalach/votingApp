@@ -127,4 +127,7 @@ export class VoterService {
         })
       );
   }
+  exportData() {
+    return this.http.get<string>(this.baseUrl + this.voterRepo + '/export');
+  }
 }

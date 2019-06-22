@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application.API.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -99,7 +99,7 @@ namespace Application.API.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Gender = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
-                    KnowAs = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastActive = table.Column<DateTime>(nullable: false),
                     Introduction = table.Column<string>(nullable: true),
@@ -235,8 +235,7 @@ namespace Application.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CodeEngenere = table.Column<int>(nullable: false),
-                    CodePharmacist = table.Column<int>(nullable: false),
+                    Code = table.Column<int>(nullable: false),
                     FirstNameArabic = table.Column<string>(nullable: true),
                     FatherNameArabic = table.Column<string>(nullable: true),
                     FamilyArabic = table.Column<string>(nullable: true),
@@ -268,7 +267,11 @@ namespace Application.API.Migrations
                     Email = table.Column<string>(nullable: true),
                     Religion = table.Column<string>(nullable: true),
                     Politic = table.Column<string>(nullable: true),
+                    Attend = table.Column<bool>(nullable: false),
+                    Contacted = table.Column<bool>(nullable: false),
+                    Abroad = table.Column<bool>(nullable: false),
                     ReferenceId = table.Column<int>(nullable: true),
+                    Enabled = table.Column<bool>(nullable: false),
                     VoterTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

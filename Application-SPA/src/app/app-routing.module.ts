@@ -112,6 +112,14 @@ const routes: Routes = [
             component: EngenereManagementComponent
           },
           {
+            path: 'voter-edit/:id',
+            component: VoterEditComponent
+          },
+          {
+            path: 'voter-view/:id',
+            component: VoterViewComponent
+          },
+          {
             path: 'add-voter',
             data: { roles: ['Admin'] },
             component: AddEngenereComponent
