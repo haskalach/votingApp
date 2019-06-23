@@ -37,6 +37,9 @@ namespace Application.API.Dtos {
         public string Email { get; set; }
         public string Religion { get; set; }
         public string Politic { get; set; }
+        public bool Attend { get; set; }
+        public bool Contacted { get; set; }
+        public bool Abroad { get; set; }
         public int VoterTypeId { get; set; }
         public VoterType VoterType { get; set; }
         public ICollection<VotingYearForReturnDto> VotingYears { get; set; }

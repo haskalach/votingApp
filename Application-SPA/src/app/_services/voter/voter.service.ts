@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PaginatedResult } from 'src/app/_models/pagination';
 import { Voter } from 'src/app/_models/Voter';
 import { environment } from 'src/environments/environment';
+import { ConfigList } from 'src/app/_models/configList';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,65 @@ export class VoterService {
     >();
     let params = new HttpParams();
     if (voterParams) {
-      params = params.append('voterTypeId', voterParams.voterTypeId);
+      if (voterParams.voterTypeId) {
+        params = params.append('voterTypeId', voterParams.voterTypeId);
+      }
       if (voterParams.religion) {
         params = params.append('religion', voterParams.religion);
       }
       if (voterParams.politic) {
         params = params.append('politic', voterParams.politic);
+      }
+      if (voterParams.code) {
+        params = params.append('code', voterParams.code);
+      }
+      if (voterParams.firstNameArabic) {
+        params = params.append(
+          'cofirstNameArabicde',
+          voterParams.firstNameArabic
+        );
+      }
+      if (voterParams.familyArabic) {
+        params = params.append('familyArabic', voterParams.familyArabic);
+      }
+      if (voterParams.fatherNameArabic) {
+        params = params.append(
+          'fatherNameArabic',
+          voterParams.fatherNameArabic
+        );
+      }
+      if (voterParams.subChapter) {
+        params = params.append('subChapter', voterParams.subChapter);
+      }
+      if (voterParams.contacted !== null) {
+        params = params.append('contacted', voterParams.contacted);
+      }
+      if (voterParams.attend !== null) {
+        params = params.append('attend', voterParams.attend);
+      }
+      if (voterParams.abroad !== null) {
+        params = params.append('abroad', voterParams.abroad);
+      }
+      if (voterParams.reiligion) {
+        params = params.append('reiligion', voterParams.reiligion);
+      }
+      if (voterParams.school) {
+        params = params.append('school', voterParams.school);
+      }
+      if (voterParams.civilIdMouhavaza) {
+        params = params.append(
+          'civilIdMouhavaza',
+          voterParams.civilIdMouhavaza
+        );
+      }
+      if (voterParams.civilIdKadaa) {
+        params = params.append('civilIdKadaa', voterParams.civilIdKadaa);
+      }
+      if (voterParams.civilIdRegion) {
+        params = params.append('civilIdRegion', voterParams.civilIdRegion);
+      }
+      if (voterParams.civilIdPlace) {
+        params = params.append('civilIdPlace', voterParams.civilIdPlace);
       }
     }
 
@@ -69,6 +123,11 @@ export class VoterService {
   }
   getVoter(id: number): Observable<Voter> {
     return this.http.get<Voter>(this.baseUrl + this.voterRepo + '/' + id);
+  }
+  getVoterByCode(code: string): Observable<Voter> {
+    return this.http.get<Voter>(
+      this.baseUrl + this.voterRepo + '/code/' + code
+    );
   }
   updateVoter(id: number, voterupdate) {
     return this.http.put<Voter>(
@@ -129,5 +188,10 @@ export class VoterService {
   }
   exportData() {
     return this.http.get<string>(this.baseUrl + this.voterRepo + '/export');
+  }
+  getConfig() {
+    return this.http.get<ConfigList>(
+      this.baseUrl + this.voterRepo + '/configuration'
+    );
   }
 }

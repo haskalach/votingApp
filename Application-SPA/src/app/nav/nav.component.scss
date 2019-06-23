@@ -3,7 +3,7 @@
 }
 
 .dropdown-item {
-  &>fa-icon {
+  & > fa-icon {
     margin-right: 3px;
   }
 }
@@ -31,4 +31,12 @@
 
 .navbar {
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 400px) {
+  .top-panel-heading {
+    & .user-img {
+      max-height: 20px;
+    }
+  }
 }

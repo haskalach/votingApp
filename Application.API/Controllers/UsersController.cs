@@ -41,6 +41,7 @@ namespace Application.API.Controllers {
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>> (users);
             return Ok (usersToReturn);
         }
+
         [HttpGet ("organizationReference")]
         public async Task<IActionResult> GetOrganizationReferemces () {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
@@ -68,7 +69,7 @@ namespace Application.API.Controllers {
         [Authorize (Policy = "RequireAdminRole")]
         [HttpPost ("assignOrganization")]
         public async Task<IActionResult> AssignOrganization (AssignOrganizationDto assignOrganizationDto) {
-            var user = await _userManager.FindByEmailAsync (assignOrganizationDto.UserEmail);
+            var user = await _userManager.FindByNameAsync (assignOrganizationDto.UserName);
             var organization = await _repo.GetOrganization (assignOrganizationDto.OrganizationId);
             if (organization == null) {
                 user.OrganizationId = null;

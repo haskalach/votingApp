@@ -1,28 +1,6 @@
 <div class="row">
   <div class="col-12">
     <div class="row table-header-row">
-      <div class="filter-section">
-        <select
-          class="form-control"
-          [(ngModel)]="voterParams.voterTypeId"
-          (change)="refreshData()"
-        >
-          <option [ngValue]="0"> All</option>
-          <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
-            {{ voterType.name }}</option
-          >
-        </select>
-        <input
-          class="form-control"
-          [(ngModel)]="voterParams.religion"
-          placeholder="Religion"
-        />
-        <input
-          class="form-control"
-          [(ngModel)]="voterParams.politic"
-          placeholder="Politic"
-        />
-      </div>
       <div class="btn-section">
         <button
           class="btn btn-success add-btn"
@@ -48,6 +26,30 @@
         >
           Filter
         </button>
+      </div>
+    </div>
+    <div class="row table-header-row">
+      <div class="filter-section">
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.voterTypeId"
+          (change)="refreshData()"
+        >
+          <option [ngValue]="0"> All</option>
+          <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
+            {{ voterType.name }}</option
+          >
+        </select>
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.religion"
+          placeholder="Religion"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.politic"
+          placeholder="Politic"
+        />
       </div>
     </div>
   </div>

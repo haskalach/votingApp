@@ -13,11 +13,25 @@
       <a class="nav-link" [routerLink]="['/users']">Org Users</a>
     </li>
     <li
-      *appHasRole="['OrganizationAdmin', 'LaptopUser', 'MobileUser']"
+      *appHasRole="['OrganizationAdmin', 'LaptopUser']"
       class="nav-item"
       [routerLinkActive]="'active'"
     >
       <a class="nav-link" [routerLink]="['/voter-list']">Voters</a>
+    </li>
+    <li
+      *appHasRole="['MobileUser']"
+      class="nav-item"
+      [routerLinkActive]="'active'"
+    >
+      <a class="nav-link" [routerLink]="['/mobile-voter-list']">Voters</a>
+    </li>
+    <li
+      *appHasRole="['MobileUser']"
+      class="nav-item"
+      [routerLinkActive]="'active'"
+    >
+      <a class="nav-link" [routerLink]="['/mobile-voter-search']">Voters Search</a>
     </li>
     <li
       *appHasRole="['Reference']"

@@ -76,6 +76,20 @@ namespace Application.API.Controllers {
             return Ok (voterToReturn);
         }
 
+        [HttpGet ("Code/{code}")]
+        public async Task<IActionResult> GetVoterByCode (string code) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            int intCode;
+            Int32.TryParse (code, out intCode);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var Organization = await _repo.GetOrganization (OrganizationId?? default (int));
+            var VoterTypeId = Organization.VoterTypeId;
+            var voterFromRepo = await _repo.GetVoter (intCode, VoterTypeId, OrganizationId ?? default (int));
+            var voterToReturn = _mapper.Map<VoterForReturnDto> (voterFromRepo);
+            return Ok (voterToReturn);
+        }
+
         [HttpPut ("{Id}")]
         public async Task<IActionResult> EditVoter (int Id, VoterForEditDto voterForEditDto) {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
@@ -211,7 +225,7 @@ namespace Application.API.Controllers {
                                     exists = true;
                                 }
                             });
-                            if (_repo.GetVoter (dataItem.Code, Id).Result == null && exists == false) {
+                            if (_repo.GetVoter (dataItem.Code, Id, 0).Result == null && exists == false) {
                                 list.Add (dataItem);
                                 _repo.Add (dataItem);
                             }
@@ -231,6 +245,17 @@ namespace Application.API.Controllers {
             } catch (System.Exception ex) {
                 return BadRequest ("Upload Failed: " + ex.Message);
             }
+        }
+
+        [HttpGet ("configuration")]
+        public async Task<IActionResult> GetConfiguration () {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var Organization = await _repo.GetOrganization (OrganizationId?? default (int));
+            var VoterTypeId = Organization.VoterTypeId;
+            var configList = await _repo.GetConfigList (VoterTypeId);
+            return Ok (configList);
         }
 
         [HttpGet ("Export")]

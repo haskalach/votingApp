@@ -26,6 +26,9 @@ import { OrgUsersComponent } from './pages/org-users/org-users.component';
 import { CreateReferenceUserComponent } from './pages/org-users/create-reference-user/create-reference-user.component';
 import { EngenereManagementComponent } from './admin/engenere-management/engenere-management.component';
 import { AddEngenereComponent } from './admin/engenere-management/add-engenere/add-engenere.component';
+import { MobileVoterListComponent } from './pages/voter/mobile-voter-list/mobile-voter-list.component';
+import { MobileVoterViewComponent } from './pages/voter/mobile-voter-view/mobile-voter-view.component';
+import { MobileVoterSearchComponent } from './pages/voter/mobile-voter-search/mobile-voter-search.component';
 
 const routes: Routes = [
   {
@@ -81,6 +84,18 @@ const routes: Routes = [
           {
             path: 'voter-view/:id',
             component: VoterViewComponent
+          },
+          {
+            path: 'mobile-voter-list',
+            component: MobileVoterListComponent
+          },
+          {
+            path: 'mobile-voter-view/:id',
+            component: MobileVoterViewComponent
+          },
+          {
+            path: 'mobile-voter-search',
+            component: MobileVoterSearchComponent
           }
         ]
       },

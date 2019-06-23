@@ -3,21 +3,34 @@
   margin: 0px;
   & .btn-section {
     & > button {
-      margin-left: 5px;
+      margin-top: 5px;
     }
-  }
-
-  & .filter-section {
-    margin-bottom: 5px;
   }
 
   & .filter-section {
     display: flex;
+    flex-flow: wrap;
     & > .form-control {
       margin-right: 5px !important;
+      max-width: 150px;
+      margin-bottom: 5px;
       &:first-child {
         margin-right: 0px;
       }
     }
+  }
+}
+.row-container {
+  margin: 15px;
+}
+
+.action-tab {
+  & > a {
+    margin-left: 5px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .row {
+    font-size: 11px;
   }
 }

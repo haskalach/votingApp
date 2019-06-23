@@ -1,15 +1,8 @@
 <div class="container" *ngIf="voter">
   <div class="row">
-    <ng-container *ngIf="voter.voterTypeId === VoterTypeEnum.engenere">
-      <div class="col-12 heading-section">
-        <h1>{{ voter.code }} - Engenere</h1>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="voter.voterTypeId === VoterTypeEnum.pharmacist">
-      <div class="col-12 heading-section">
-        <h1>{{ voter.code }} - Pahrmacist</h1>
-      </div>
-    </ng-container>
+    <div class="col-12 heading-section">
+      <h1>{{ voter.code }}</h1>
+    </div>
     <div class="col-12 col-sm-6 field-container">
       <label>First Name Arabic:</label>
       <span>

@@ -18,7 +18,23 @@ export class EngenereManagementComponent implements OnInit {
   VoterType = VoterTypeEnum;
   voterTypes: VoterType[];
   voterParams: any = {
-    voterTypeId: VoterTypeEnum.all
+    voterTypeId: VoterTypeEnum.all,
+    religion: '',
+    politic: '',
+    code: 0,
+    firstNameArabic: '',
+    familyArabic: '',
+    fatherNameArabic: '',
+    subChapter: '',
+    contacted: null,
+    attend: null,
+    abroad: null,
+    reiligion: '',
+    school: '',
+    civilIdMouhavaza: '',
+    civilIdKadaa: '',
+    civilIdRegion: '',
+    civilIdPlace: ''
   };
   constructor(
     private voterService: VoterService,
@@ -61,32 +77,6 @@ export class EngenereManagementComponent implements OnInit {
       this.voterParams
     );
   }
-  // exportVoters() {
-  //   this.voterService.exportVoters().subscribe(next => {
-  //     console.log(next);
-  //     window.open(next.toString());
-  //     // this.downloadFile(next.toString());
-  //   });
-  // }
-  // downloadFile(data: Response) {
-  //   const blob = new Blob([data], { type: 'text/csv' });
-  //   const url= window.URL.createObjectURL(blob);
-  //   window.open(url);
-  // }
-
-  // exportData() {
-  //   this.voterService.exportData().subscribe(res => {
-  //     this.writeContents(res, 'test.txt', 'text/txt'); // file extension
-  //   });
-  // }
-
-  // writeContents(content, fileName, contentType) {
-  //   const a = document.createElement('a');
-  //   const file = new Blob([content], { type: contentType });
-  //   a.href = URL.createObjectURL(file);
-  //   a.download = fileName;
-  //   a.click();
-  // }
   exportData() {
     // window.location.href = 'http://localhost:5000/demo.xlsx';
     this.voterService.exportData().subscribe(

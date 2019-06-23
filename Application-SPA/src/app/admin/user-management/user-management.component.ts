@@ -109,7 +109,7 @@ export class UserManagementComponent implements OnInit {
   }
   updateUserOrganization(user: User) {
     const assignObject = {
-      userEmail: user.email,
+      userName: user.userName,
       organizationId: user.organizationId == null ? 0 : user.organizationId
     };
     console.log({ assignObject });

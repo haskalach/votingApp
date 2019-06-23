@@ -1,17 +1,138 @@
 <div class="row row-container">
-  <div class="col-12">
+  <div class="col-12 overflow-auto">
     <div class="row table-header-row">
       <div class="filter-section">
         <input
           class="form-control"
-          [(ngModel)]="voterParams.religion"
-          placeholder="Religion"
+          [(ngModel)]="voterParams.code"
+          placeholder="Code"
+          type="number"
         />
         <input
           class="form-control"
+          [(ngModel)]="voterParams.firstNameArabic"
+          placeholder="First Name"
+          type="text"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.fatherNameArabic"
+          placeholder="Father Name"
+          type="text"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.lastNameArabic"
+          placeholder="Last Name"
+          type="text"
+        />
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.subChapter"
+          placeholder="SubChapter"
+        >
+          <option [ngValue]="null">Select Sub Chapter</option>
+          <option
+            *ngFor="let option of ConfigList.subChapter"
+            [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.civilIdMouhavaza"
+          placeholder="civilIdMouhavaza"
+        >
+          <option [ngValue]="null">Select Mouhafaza</option>
+          <option
+            *ngFor="let option of ConfigList.civilIdMouhavaza"
+            [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.civilIdKadaa"
+          placeholder="civilIdKadaa"
+        >
+          <option [ngValue]="null">Select Kadaa</option>
+          <option
+            *ngFor="let option of ConfigList.civilIdKadaa"
+            [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.civilIdRegion"
+          placeholder="civilIdRegion"
+        >
+          <option [ngValue]="null">Select Region</option>
+          <option
+            *ngFor="let option of ConfigList.civilIdRegion"
+            [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.civilIdPlace"
+          placeholder="civilIdRegion"
+        >
+          <option [ngValue]="null">Select Place</option>
+          <option
+            *ngFor="let option of ConfigList.civilIdPlace"
+            [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.attend"
+          placeholder="Attend"
+        >
+          <option [ngValue]="null">Attend</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.contacted"
+          placeholder="Contacted"
+        >
+          <option [ngValue]="null">Contacted</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.abroad"
+          placeholder="Contacted"
+        >
+          <option [ngValue]="null">Abroad</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.religion"
+          placeholder="Religion"
+        >
+          <option [ngValue]="null">Select Religion</option>
+          <option *ngFor="let option of ConfigList.religion" [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
+        <select
+          class="form-control"
           [(ngModel)]="voterParams.politic"
           placeholder="Politic"
-        />
+        >
+          <option [ngValue]="null">Select Politic</option>
+          <option *ngFor="let option of ConfigList.politics" [ngValue]="option"
+            >{{ option }}
+          </option>
+        </select>
       </div>
       <div class="btn-section">
         <button class="btn btn-success add-btn" (click)="refreshData()">
@@ -23,11 +144,10 @@
   <div class="col-12">
     <table class="table">
       <tr>
-        <th>Type</th>
         <th>Code</th>
-        <th>First Name Arabic</th>
-        <th>First Name</th>
-        <th>Family</th>
+        <th>First Name Ar</th>
+        <th>Father Name Ar</th>
+        <th>Family Ar</th>
         <th>Birth Date</th>
         <th>Religion</th>
         <th>Politic</th>
@@ -35,7 +155,6 @@
         <th>Actions</th>
       </tr>
       <tr *ngFor="let voter of voters">
-        <td>{{ voter.voterType.name }}</td>
         <td>
           {{ voter.code }}
         </td>
@@ -43,10 +162,10 @@
           {{ voter.firstNameArabic }}
         </td>
         <td>
-          {{ voter.firstName }}
+          {{ voter.fatherNameArabic }}
         </td>
         <td>
-          {{ voter.family }}
+          {{ voter.familyArabic }}
         </td>
         <td>
           {{ voter.birthDate | date }}

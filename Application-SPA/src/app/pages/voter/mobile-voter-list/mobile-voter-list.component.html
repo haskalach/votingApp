@@ -1,0 +1,86 @@
+<div class="row row-container">
+  <div class="col-12">
+    <div class="row table-header-row">
+      <div class="filter-section">
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.code"
+          placeholder="Code"
+          type="number"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.firstNameArabic"
+          placeholder="First Name"
+          type="text"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.fatherNameArabic"
+          placeholder="Father Name"
+          type="text"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.lastNameArabic"
+          placeholder="Last Name"
+          type="text"
+        />
+      </div>
+      <div class="btn-section">
+        <button class="btn btn-success add-btn" (click)="refreshData()">
+          Filter
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 overflow-auto">
+    <table class="table">
+      <tr>
+        <th>Code</th>
+        <th>First Name</th>
+        <th>Father Name</th>
+        <th>Family</th>
+        <th>Birth</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let voter of voters">
+        <td>
+          {{ voter.code }}
+        </td>
+        <td>
+          {{ voter.firstNameArabic }}
+        </td>
+        <td>
+          {{ voter.fatherNameArabic }}
+        </td>
+        <td>
+          {{ voter.familyArabic }}
+        </td>
+        <td>
+          {{ voter.birthDate | date }}
+        </td>
+        <td class="action-tab">
+          <a [routerLink]="['/mobile-voter-view/' + voter.id]">
+            <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="pagination-container d-flex justify-content-center">
+  <pagination
+    *ngIf="pagination && pagination.totalItems > 0"
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [(ngModel)]="pagination.currentPage"
+    [itemsPerPage]="pagination.itemsPerPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>

@@ -1,21 +1,21 @@
-import { AlertifyService } from 'src/app/_services/alertify.service';
-import { UserService } from './../../../_services/user/user.service';
-import { User } from './../../../_models/user';
 import { Component, OnInit } from '@angular/core';
 import { Voter } from 'src/app/_models/Voter';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
 import { VoterType } from 'src/app/_models/VoterType';
+import { User } from 'src/app/_models/user';
+import { ConfigList } from 'src/app/_models/configList';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { OrganizationService } from 'src/app/_services/organization/organization.service';
-import { ConfigList } from 'src/app/_models/configList';
+import { UserService } from 'src/app/_services/user/user.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
-  selector: 'app-voter-list',
-  templateUrl: './voter-list.component.html',
-  styleUrls: ['./voter-list.component.scss']
+  selector: 'app-mobile-voter-list',
+  templateUrl: './mobile-voter-list.component.html',
+  styleUrls: ['./mobile-voter-list.component.scss']
 })
-export class VoterListComponent implements OnInit {
+export class MobileVoterListComponent implements OnInit {
   voters: Voter[];
   pageNumber = 1;
   pageSize = 10;
@@ -27,14 +27,6 @@ export class VoterListComponent implements OnInit {
     firstNameArabic: null,
     fatherNameArabic: null,
     lastNameArabic: null,
-    subChapter: null,
-    civilIdMouhavaza: null,
-    civilIdKadaa: null,
-    civilIdRegion: null,
-    civilIdPlace: null,
-    school: null,
-    religion: null,
-    politic: null,
     attend: null,
     abroad: null,
     contacted: null
