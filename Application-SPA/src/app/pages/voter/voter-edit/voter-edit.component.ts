@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VoterService } from 'src/app/_services/voter/voter.service';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
 import { User } from 'src/app/_models/user';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-voter-edit',
   templateUrl: './voter-edit.component.html',
@@ -26,7 +26,8 @@ export class VoterEditComponent implements OnInit {
     private route: ActivatedRoute,
     private voterSrvice: VoterService,
     private alertifyService: AlertifyService,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -65,7 +66,7 @@ export class VoterEditComponent implements OnInit {
     this.voterSrvice.updateVoter(this.id, this.VoterForm.value).subscribe(
       next => {
         this.alertifyService.success('updated succesfully');
-        this.router.navigate(['/voters']);
+        this.location.back();
       },
       error => {
         this.alertifyService.error(error);
