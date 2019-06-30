@@ -155,7 +155,11 @@ namespace Application.API.Data {
         public async Task<IEnumerable<User>> GetOrganizationReferences (int orgId, int userId) {
             var userRolesId = await GetReferenceUserId ();
             var users = await _context.Users.Where (u => u.OrganizationId == orgId && u.Id != userId).Include (u => u.UserRoles).ThenInclude (r => r.Role).ToListAsync ();
-            users = users.Where (u => userRolesId.Contains (u.Id)).ToList ();
+
+            if (users.Count > 0) {
+                users = users.Where (u => userRolesId.Contains (u.Id)).ToList ();
+            }
+
             return users;
         }
 

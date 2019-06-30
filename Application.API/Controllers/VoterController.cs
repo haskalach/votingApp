@@ -149,12 +149,17 @@ namespace Application.API.Controllers {
         public async Task<IActionResult> UploadFile (int Id) {
             var voters = await _repo.GetAllVotersByType (Id);
             foreach (var voter in voters) {
-                _repo.Delete (voter);
+                if (voter != null) {
+                    _repo.Delete (voter);
+                }
+
             }
             var Organization = await _repo.GetOrganizationByType (Id);
             var referenceUsers = await _repo.GetOrganizationReferences (Organization.Id, 0);
             foreach (var user in referenceUsers) {
+
                 _repo.Delete (user);
+
             }
             if (await _repo.SaveAll ()) {
 
