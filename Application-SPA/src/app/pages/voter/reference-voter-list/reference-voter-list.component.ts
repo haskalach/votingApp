@@ -3,8 +3,8 @@ import { Voter } from 'src/app/_models/Voter';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
 import { VoterType } from 'src/app/_models/VoterType';
-import { User } from 'src/app/_models/user';
 import { VoterService } from 'src/app/_services/voter/voter.service';
+import { ConfigList } from 'src/app/_models/configList';
 
 @Component({
   selector: 'app-reference-voter-list',
@@ -19,7 +19,23 @@ export class ReferenceVoterListComponent implements OnInit {
   VoterType = VoterTypeEnum;
   voterTypes: VoterType[];
   voterParams: any = {
-    voterTypeId: VoterTypeEnum.all
+    code: null,
+    firstNameArabic: null,
+    fatherNameArabic: null,
+    lastNameArabic: null,
+    attend: null,
+    abroad: null,
+    contacted: null,
+    voted: null
+  };
+  ConfigList: ConfigList = {
+    religion: [],
+    politics: [],
+    subChapter: [],
+    civilIdMouhavaza: [],
+    civilIdKadaa: [],
+    civilIdRegion: [],
+    civilIdPlace: []
   };
   constructor(private voterService: VoterService) {}
 
@@ -47,4 +63,9 @@ export class ReferenceVoterListComponent implements OnInit {
       this.voterParams
     );
   }
+  // getConfiguration() {
+  //   this.voterService.getConfig().subscribe(next => {
+  //     this.ConfigList = next;
+  //   });
+  // }
 }

@@ -159,19 +159,33 @@ namespace Application.API.Data {
             return list;
         }
 
-        public async Task<PagedList<Voter>> GetReferenceVoters (int referenceId, VoterParams engenereParams) {
-            var voters = _context.Voters.Where (v => v.ReferenceId == referenceId).Include (v => v.VoterType).AsQueryable ();
-            if (engenereParams.voterTypeId > 0) {
-                voters = voters.Where (x => x.VoterTypeId == engenereParams.voterTypeId);
-            }
-            if (!string.IsNullOrEmpty (engenereParams.religion)) {
-                voters = voters.Where (x => x.Religion == (engenereParams.religion).Trim ());
-            }
-            if (!string.IsNullOrEmpty (engenereParams.politic)) {
+        public async Task<PagedList<Voter>> GetReferenceVoters (int referenceId, VoterParams voterParamas) {
+            var voters = _context.Voters.Where (v => v.ReferenceId == referenceId).Include (v => v.VotingYears).Include (v => v.VoterType).AsQueryable ();
+            if (voterParamas.code > 0) {
 
-                voters = voters.Where (x => x.Politic == (engenereParams.politic).Trim ());
+                voters = voters.Where (x => x.Code == voterParamas.code);
             }
-            return await PagedList<Voter>.CreatAsync (voters, engenereParams.PageNumber, engenereParams.PageSize);
+            if (!string.IsNullOrEmpty (voterParamas.firstNameArabic)) {
+
+                voters = voters.Where (x => x.FirstNameArabic == (voterParamas.firstNameArabic).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.familyArabic)) {
+
+                voters = voters.Where (x => x.FamilyArabic == (voterParamas.familyArabic).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.fatherNameArabic)) {
+
+                voters = voters.Where (x => x.FatherNameArabic == (voterParamas.fatherNameArabic).Trim ());
+            }
+            if (voterParamas.voted != null) {
+                if (voterParamas.voted == true) {
+                    voters = voters.Where (x => (x.VotingYears.Any (year => year.Year == DateTime.Today.Year.ToString ())));
+                } else {
+                    voters = voters.Where (x => x.VotingYears.Count == 0);
+                }
+
+            }
+            return await PagedList<Voter>.CreatAsync (voters, voterParamas.PageNumber, voterParamas.PageSize);
         }
 
         public async Task<ConfigList> GetConfigList (int VoterTypeId) {

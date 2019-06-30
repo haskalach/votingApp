@@ -206,7 +206,11 @@
         <span>
           No
         </span>
-        <span class="vote-icon" (click)="vote()">
+        <span
+          class="vote-icon"
+          (click)="vote()"
+          *appHasRole="['OrganizationAdmin']"
+        >
           Vote Now
           <fa-icon [icon]="['fas', 'vote-yea']"></fa-icon>
         </span>

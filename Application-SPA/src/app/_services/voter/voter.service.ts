@@ -156,12 +156,29 @@ export class VoterService {
     >();
     let params = new HttpParams();
     if (voterParams) {
-      params = params.append('voterTypeId', voterParams.voterTypeId);
-      if (voterParams.religion) {
-        params = params.append('religion', voterParams.religion);
+      if (voterParams.voterTypeId) {
+        params = params.append('voterTypeId', voterParams.voterTypeId);
       }
-      if (voterParams.politic) {
-        params = params.append('politic', voterParams.politic);
+      if (voterParams.code) {
+        params = params.append('code', voterParams.code);
+      }
+      if (voterParams.firstNameArabic) {
+        params = params.append(
+          'cofirstNameArabicde',
+          voterParams.firstNameArabic
+        );
+      }
+      if (voterParams.familyArabic) {
+        params = params.append('familyArabic', voterParams.familyArabic);
+      }
+      if (voterParams.fatherNameArabic) {
+        params = params.append(
+          'fatherNameArabic',
+          voterParams.fatherNameArabic
+        );
+      }
+      if (voterParams.voted !== null) {
+        params = params.append('voted', voterParams.voted);
       }
     }
 

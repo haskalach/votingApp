@@ -29,7 +29,7 @@ export class CreateReferenceUserComponent implements OnInit {
   createRegisterForm() {
     this.regitrationForm = this.fb.group({
       userName: ['', Validators.required],
-      email: ['', Validators.required]
+      name: ['', Validators.required]
     });
   }
 
@@ -42,8 +42,7 @@ export class CreateReferenceUserComponent implements OnInit {
           this.router.navigate(['/users']);
         },
         error => {
-          console.log(error);
-          this.alertify.error(error);
+          this.alertify.error('User Already Exsist');
         },
         () => {}
       );

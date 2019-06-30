@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Application.API.Data;
 using Application.API.Dtos;
@@ -53,6 +54,8 @@ namespace Application.API.Controllers {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _repo.GetUser (userId);
             var OrganizationId = userFromRepo.OrganizationId;
+            var Organization = await _repo.GetOrganization (OrganizationId?? default (int));
+            userForReferenceRegisterDto.UserName = CamelCase (Organization.Name) + "-" + userForReferenceRegisterDto.UserName;
             var userToCreate = _mapper.Map<User> (userForReferenceRegisterDto);
             var result = await _userManager.CreateAsync (userToCreate, "password");
             List<string> selectedRoles = new List<string> ();
@@ -126,6 +129,26 @@ namespace Application.API.Controllers {
             var token = tokenHandler.CreateToken (tokenDescriptor);
 
             return tokenHandler.WriteToken (token);
+        }
+
+        static string CamelCase (string s) {
+            if (s == null || s.Length < 2)
+                return s;
+
+            // Split the string into words.
+            string[] words = s.Split (
+                new char[] { },
+                StringSplitOptions.RemoveEmptyEntries);
+
+            // Combine the words.
+            string result = words[0].ToLower ();
+            for (int i = 1; i < words.Length; i++) {
+                result +=
+                    words[i].Substring (0, 1).ToUpper () +
+                    words[i].Substring (1);
+            }
+
+            return result;
         }
 
     }

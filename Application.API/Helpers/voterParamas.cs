@@ -12,6 +12,7 @@ namespace Application.API.Helpers {
         public string fatherNameArabic { get; set; }
         public string subChapter { get; set; }
         public bool? contacted { get; set; }
+        public bool? voted { get; set; }
         public bool? attend { get; set; }
         public bool? abroad { get; set; }
         public string reiligion { get; set; }

@@ -8,6 +8,28 @@
         <input
           type="text"
           class="form-control"
+          formControlName="name"
+          [ngClass]="{
+            'is-invalid':
+              regitrationForm.get('name').errors &&
+              regitrationForm.get('name').touched
+          }"
+          placeholder="Name"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            regitrationForm.get('name').touched &&
+            regitrationForm.get('name').hasError('required')
+          "
+        >
+          Username Is Required
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
           formControlName="userName"
           [ngClass]="{
             'is-invalid':
@@ -21,29 +43,6 @@
           *ngIf="
             regitrationForm.get('userName').touched &&
             regitrationForm.get('userName').hasError('required')
-          "
-        >
-          Username Is Required
-        </div>
-      </div>
-
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          formControlName="email"
-          [ngClass]="{
-            'is-invalid':
-              regitrationForm.get('email').errors &&
-              regitrationForm.get('email').touched
-          }"
-          placeholder="Email"
-        />
-        <div
-          class="invalid-feedback"
-          *ngIf="
-            regitrationForm.get('email').touched &&
-            regitrationForm.get('email').hasError('required')
           "
         >
           Username Is Required

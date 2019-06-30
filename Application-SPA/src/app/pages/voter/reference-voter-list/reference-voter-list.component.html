@@ -4,14 +4,37 @@
       <div class="filter-section">
         <input
           class="form-control"
-          [(ngModel)]="voterParams.religion"
-          placeholder="Religion"
+          [(ngModel)]="voterParams.code"
+          placeholder="Code"
+          type="number"
         />
         <input
           class="form-control"
-          [(ngModel)]="voterParams.politic"
-          placeholder="Politic"
+          [(ngModel)]="voterParams.firstNameArabic"
+          placeholder="First Name"
+          type="text"
         />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.fatherNameArabic"
+          placeholder="Father Name"
+          type="text"
+        />
+        <input
+          class="form-control"
+          [(ngModel)]="voterParams.lastNameArabic"
+          placeholder="Last Name"
+          type="text"
+        />
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.voted"
+          placeholder="Attend"
+        >
+          <option [ngValue]="null">Voted</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
       </div>
       <div class="btn-section">
         <button class="btn btn-success add-btn" (click)="refreshData()">
@@ -24,34 +47,36 @@
     <table class="table">
       <tr>
         <th>Code</th>
-        <th>First Name Arabic</th>
         <th>First Name</th>
         <th>Family</th>
-        <th>Birth Date</th>
-        <th>Religion</th>
-        <th>Politic</th>
+        <th>Father Name</th>
+        <th>Home Number</th>
+        <th>Mobile Number</th>
+        <th>Actions</th>
       </tr>
       <tr *ngFor="let voter of voters">
         <td>
-          {{voter.code}}
+          {{ voter.code }}
         </td>
         <td>
           {{ voter.firstNameArabic }}
         </td>
         <td>
-          {{ voter.firstName }}
+          {{ voter.familyArabic }}
         </td>
         <td>
-          {{ voter.family }}
+          {{ voter.fatherNameArabic }}
         </td>
         <td>
-          {{ voter.birthDate | date }}
+          {{ voter.phoneHome }}
         </td>
         <td>
-          {{ voter.religion }}
+          {{ voter.mobileHome }}
         </td>
-        <td>
-          {{ voter.politic }}
+        <td class="action-tab">
+          <a [routerLink]="['/voter-view/' + voter.id]">
+            <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+          </a>
         </td>
       </tr>
     </table>
