@@ -142,4 +142,16 @@ export class UserManagementComponent implements OnInit {
       }
     );
   }
+
+  delteUser(userId: number) {
+    this.adminService.deleteUser(userId).subscribe(
+      next => {
+        this.alertityService.success('User Deleted Succesfully');
+        this.getUsersWithRoles();
+      },
+      error => {
+        this.alertityService.error('User Failed To Delete');
+      }
+    );
+  }
 }

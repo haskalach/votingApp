@@ -28,8 +28,8 @@
       <th>UserName</th>
       <th>Active Roles</th>
       <th>Organization</th>
-      <th>Disabled</th>
       <th>Roles Edit</th>
+      <th>Actions</th>
     </tr>
     <tr *ngFor="let user of users">
       <td>
@@ -55,26 +55,32 @@
         </select>
       </td>
       <td>
+        <button class="btn btn-info" (click)="editRolesModal(user)">
+          Edit Roles
+        </button>
+      </td>
+      <td>
         <ng-container *ngIf="user.roles[0] !== 'Admin'">
           {{ user.disable }}
           <button
             (click)="updateUserStatus(user.id, true)"
             *ngIf="user.disable == false"
+            class="statusbtn"
           >
             Disable User
           </button>
           <button
             (click)="updateUserStatus(user.id, false)"
             *ngIf="user.disable == true"
+            class="statusbtn"
           >
             Enable User
           </button>
+          <fa-icon
+            [icon]="['fas', 'trash']"
+            (click)="delteUser(user.id)"
+          ></fa-icon>
         </ng-container>
-      </td>
-      <td>
-        <button class="btn btn-info" (click)="editRolesModal(user)">
-          Edit Roles
-        </button>
       </td>
     </tr>
   </table>

@@ -86,5 +86,16 @@ namespace Application.API.Controllers {
             return BadRequest ($"Updating users Status Failed");
         }
 
+        [Authorize (Policy = "RequireAdminRole")]
+        [HttpDelete ("deleteUser/{userId}")]
+        public async Task<IActionResult> deleteUser (int userId) {
+            var usersFromRepo = await _repo.GetUser (userId);
+            _repo.Delete (usersFromRepo);
+            if (await _repo.SaveAll ()) {
+                return NoContent ();
+            }
+            return BadRequest ($"Failed To Delete User");
+        }
+
     }
 }

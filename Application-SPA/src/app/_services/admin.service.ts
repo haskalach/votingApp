@@ -33,4 +33,7 @@ export class AdminService {
       {}
     );
   }
+  deleteUser(userId: number) {
+    return this.http.delete(this.baseUrl + 'admin/deleteUser/' + userId, {});
+  }
 }
