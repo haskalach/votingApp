@@ -122,4 +122,24 @@ export class UserManagementComponent implements OnInit {
       }
     );
   }
+  updateUserStatus(userId: number, status: boolean) {
+    this.adminService.updateUserStatus(userId, status).subscribe(
+      next => {
+        this.getUsersWithRoles();
+      },
+      error => {
+        this.alertityService.error(error);
+      }
+    );
+  }
+  updateAllUserStatus(status: boolean) {
+    this.adminService.updateAllUsersStatus(status).subscribe(
+      next => {
+        this.getUsersWithRoles();
+      },
+      error => {
+        this.alertityService.error(error);
+      }
+    );
+  }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.API.Data;
@@ -14,10 +15,12 @@ namespace Application.API.Controllers {
     public class AdminController : ControllerBase {
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IGeneralRepository _repo;
 
-        public AdminController (DataContext context, UserManager<User> userManager) {
+        public AdminController (IGeneralRepository repo, DataContext context, UserManager<User> userManager) {
             _context = context;
             _userManager = userManager;
+            _repo = repo;
         }
 
         [Authorize (Policy = "RequireAdminRole")]
@@ -28,7 +31,8 @@ namespace Application.API.Controllers {
                     UserName = user.UserName,
                     Email = user.Email,
                     Roles = (from userRole in user.UserRoles join role in _context.Roles on userRole.RoleId equals role.Id select role.Name).ToList (),
-                    OrganizationId = user.OrganizationId
+                    OrganizationId = user.OrganizationId,
+                    Disable = user.Disable
             }).ToListAsync ();
 
             return Ok (userList);
@@ -51,6 +55,35 @@ namespace Application.API.Controllers {
             }
 
             return Ok (await _userManager.GetRolesAsync (user));
+        }
+
+        [Authorize (Policy = "RequireAdminRole")]
+        [HttpPost ("changeUserStatus")]
+        public async Task<IActionResult> UpdateUserStatus (UserStatusUpdateDto userStatusUpdateDto) {
+            var userFromRepo = await _repo.GetUser (userStatusUpdateDto.UserId);
+            if (userFromRepo.Disable != userStatusUpdateDto.Disable) {
+                userFromRepo.Disable = userStatusUpdateDto.Disable;
+                if (await _repo.SaveAll ()) {
+                    return NoContent ();
+                }
+                return BadRequest ($"Updating user {userStatusUpdateDto.UserId} failed on save");
+            } else {
+                return BadRequest ("Noi ChangesWhere Applied");
+            }
+
+        }
+
+        [Authorize (Policy = "RequireAdminRole")]
+        [HttpPost ("changeAllUserStatus/{status}")]
+        public async Task<IActionResult> disableAllUsers (Boolean status) {
+            var usersFromRepo = await _repo.GetAllUsers ();
+            foreach (var user in usersFromRepo) {
+                user.Disable = status;
+            }
+            if (await _repo.SaveAll ()) {
+                return NoContent ();
+            }
+            return BadRequest ($"Updating users Status Failed");
         }
 
     }

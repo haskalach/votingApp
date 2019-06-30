@@ -227,5 +227,9 @@ namespace Application.API.Data {
             return CondifgList;
         }
 
+        public async Task<IEnumerable<User>> GetAllUsers () {
+            var users = await _context.Users.ToListAsync ();
+            return users;
+        }
     }
 }

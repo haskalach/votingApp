@@ -17,5 +17,6 @@ namespace Application.API.Dtos {
         public string PhotoUrl { get; set; }
         public int OrganizationId { get; set; }
         public ICollection<UserRoleForReturnDto> UserRoles { get; set; }
+        public bool Disable { get; set; }
     }
 }

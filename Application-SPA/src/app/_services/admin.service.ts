@@ -21,4 +21,16 @@ export class AdminService {
       roles
     );
   }
+  updateUserStatus(userId: number, status: boolean) {
+    return this.http.post(this.baseUrl + 'admin/changeUserStatus', {
+      userId: userId,
+      disable: status
+    });
+  }
+  updateAllUsersStatus(status: boolean) {
+    return this.http.post(
+      this.baseUrl + 'admin/changeAllUserStatus/' + status,
+      {}
+    );
+  }
 }

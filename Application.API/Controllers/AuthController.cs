@@ -82,8 +82,8 @@ namespace Application.API.Controllers {
             if (result.Succeeded) {
                 var appUser = await _userManager.Users.Include (p => p.Photos).FirstOrDefaultAsync (u => u.NormalizedUserName == userForLoginDto.UserName.ToUpper ());
                 var roles = await _userManager.GetRolesAsync (appUser);
-                if ((roles.IndexOf ("Admin") == -1) && (user.OrganizationId == null)) {
-                    return BadRequest ("Could Not sign in Untill User is linked to organization");
+                if ((roles.IndexOf ("Admin") == -1) && (user.OrganizationId == null || user.Disable == true)) {
+                    return BadRequest ("Could Not sign in Untill User is linked to organization and enabled");
                 }
 
                 var userToreturn = _mapper.Map<UserForListDto> (appUser);

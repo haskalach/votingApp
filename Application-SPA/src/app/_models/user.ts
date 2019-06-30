@@ -21,4 +21,5 @@ export interface User {
   userRoles?: any[];
   organizationId?: number;
   organization: Organization;
+  disable: boolean;
 }

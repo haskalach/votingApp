@@ -1,33 +1,80 @@
 <div class="row">
-  <div class="col-12">
-      <button class="btn btn-success add-btn" *appHasRole="['Admin']" [routerLink]="['/admin/register']">Add User</button>
+  <div class="col-12 top-section">
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      (click)="updateAllUserStatus(false)"
+    >
+      Enable Users
+    </button>
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      (click)="updateAllUserStatus(true)"
+    >
+      Disable Users
+    </button>
+    <button
+      class="btn btn-success add-btn"
+      *appHasRole="['Admin']"
+      [routerLink]="['/admin/register']"
+    >
+      Add User
+    </button>
   </div>
   <table class="table">
     <tr>
       <th style="width:10%">User Id</th>
-      <th style="width:30%">UserName</th>
-      <th style="width:20%">Active Roles</th>
-      <th style="width:20%">Organization</th>
-      <th style="width:20%">Roles Edit</th>
+      <th>UserName</th>
+      <th>Active Roles</th>
+      <th>Organization</th>
+      <th>Disabled</th>
+      <th>Roles Edit</th>
     </tr>
     <tr *ngFor="let user of users">
       <td>
-        {{user.id}}
+        {{ user.id }}
       </td>
       <td>
-        {{user.userName}}
+        {{ user.userName }}
       </td>
       <td>
-        {{user.roles}}
+        {{ user.roles }}
       </td>
       <td>
-        <select class="form-controll" [(ngModel)]="user.organizationId" *ngIf="user.userName!=='Admin'" (change)="updateUserOrganization(user)">
+        <select
+          class="form-controll"
+          [(ngModel)]="user.organizationId"
+          *ngIf="user.userName !== 'Admin'"
+          (change)="updateUserOrganization(user)"
+        >
           <option [ngValue]="null">No Selected Organization</option>
-          <option *ngFor="let org of organizations" [ngValue]="org.id">{{org.name}}</option>
+          <option *ngFor="let org of organizations" [ngValue]="org.id">{{
+            org.name
+          }}</option>
         </select>
       </td>
       <td>
-        <button class="btn btn-info" (click)="editRolesModal(user)">Edit Roles</button>
+        <ng-container *ngIf="user.roles[0] !== 'Admin'">
+          {{ user.disable }}
+          <button
+            (click)="updateUserStatus(user.id, true)"
+            *ngIf="user.disable == false"
+          >
+            Disable User
+          </button>
+          <button
+            (click)="updateUserStatus(user.id, false)"
+            *ngIf="user.disable == true"
+          >
+            Enable User
+          </button>
+        </ng-container>
+      </td>
+      <td>
+        <button class="btn btn-info" (click)="editRolesModal(user)">
+          Edit Roles
+        </button>
       </td>
     </tr>
   </table>
