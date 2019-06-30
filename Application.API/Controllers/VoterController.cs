@@ -12,6 +12,7 @@ using Application.API.Models;
 using AutoMapper;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 
@@ -22,8 +23,10 @@ namespace Application.API.Controllers {
         private readonly IGeneralRepository _repo;
         private readonly IMapper _mapper;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly UserManager<User> _userManager;
 
-        public VoterController (IGeneralRepository repo, IMapper mapper, IHostingEnvironment hostingEnvironment) {
+        public VoterController (IGeneralRepository repo, IMapper mapper, IHostingEnvironment hostingEnvironment, UserManager<User> userManager) {
+            _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
             _repo = repo;
             _mapper = mapper;
@@ -143,107 +146,139 @@ namespace Application.API.Controllers {
         }
 
         [HttpPost ("upload/{Id}"), DisableRequestSizeLimit]
-        public ActionResult UploadFile (int Id) {
-            try {
-                var file = Request.Form.Files[0];
-                var list = new List<Voter> ();
-                string folderName = "Upload";
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                string newPath = Path.Combine (Directory.GetCurrentDirectory (), folderName);
-                if (!Directory.Exists (newPath)) {
-                    Directory.CreateDirectory (newPath);
-                }
-                if (file.Length > 0) {
-                    string fileName = ContentDispositionHeaderValue.Parse (file.ContentDisposition).FileName.Trim ('"');
-                    string fullPath = Path.Combine (newPath, fileName);
-                    using (var stream = new FileStream (fullPath, FileMode.Create)) {
-                        file.CopyTo (stream);
+        public async Task<IActionResult> UploadFile (int Id) {
+            var voters = await _repo.GetAllVotersByType (Id);
+            foreach (var voter in voters) {
+                _repo.Delete (voter);
+            }
+            var Organization = await _repo.GetOrganizationByType (Id);
+            var referenceUsers = await _repo.GetOrganizationReferences (Organization.Id, 0);
+            foreach (var user in referenceUsers) {
+                _repo.Delete (user);
+            }
+            if (await _repo.SaveAll ()) {
+
+                try {
+                    var file = Request.Form.Files[0];
+                    var list = new List<Voter> ();
+                    string folderName = "Upload";
+                    string webRootPath = _hostingEnvironment.WebRootPath;
+                    string newPath = Path.Combine (Directory.GetCurrentDirectory (), folderName);
+                    if (!Directory.Exists (newPath)) {
+                        Directory.CreateDirectory (newPath);
                     }
-
-                    using (Stream inputStream = file.OpenReadStream ()) {
-                        IExcelDataReader reader;
-
-                        reader = ExcelReaderFactory.CreateOpenXmlReader (inputStream);
-
-                        List<string> header = new List<string> ();
-                        if (reader.Read ()) {
-                            for (int cell = 0; cell < reader.FieldCount; cell++) {
-                                header.Add (reader[cell]?.ToString ().Trim ().ToUpper ());
-                            }
+                    if (file.Length > 0) {
+                        string fileName = ContentDispositionHeaderValue.Parse (file.ContentDisposition).FileName.Trim ('"');
+                        string fullPath = Path.Combine (newPath, fileName);
+                        using (var stream = new FileStream (fullPath, FileMode.Create)) {
+                            file.CopyTo (stream);
                         }
-                        DataTableCollection sheets = reader.AsDataSet (GetDataSetConfig ()).Tables;
-                        DataTable sheet = sheets["Sheet1"];
 
-                        foreach (DataRow row in sheet.Rows) {
-                            Voter dataItem = new Voter ();
-                            int code;
+                        using (Stream inputStream = file.OpenReadStream ()) {
+                            IExcelDataReader reader;
 
-                            DateTime birthDate;
-                            DateTime registration;
-                            DateTime graduation;
-                            DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
-                            DateTime.TryParse (row["Registration"].ToString (), out registration);
-                            DateTime.TryParse (row["Graduation"].ToString (), out graduation);
-                            dataItem.FirstNameArabic = NullToString (row["FirstNameArabic"]);
-                            dataItem.FatherNameArabic = NullToString (row["FatherNameArabic"]);
-                            dataItem.FamilyArabic = NullToString (row["FamilyArabic"]);
-                            dataItem.FirstName = NullToString (row["FirstName"]);
-                            dataItem.FatherName = NullToString (row["FatherName"]);
-                            dataItem.Family = NullToString (row["Family"]);
-                            dataItem.Nationality = NullToString (row["Nationality"]);
-                            dataItem.Speciality = NullToString (row["Speciality"]);
-                            dataItem.SubChapter = NullToString (row["SubChapter"]);
-                            dataItem.BirthDate = birthDate;
-                            dataItem.BirthCountry = NullToString (row["BirthCountry"]);
-                            dataItem.BirthPlace = NullToString (row["BirthPlace"]);
-                            dataItem.CivilIdMouhavaza = NullToString (row["CivilIdMouhavaza"]);
-                            dataItem.CivilIdKadaa = NullToString (row["CivilIdKadaa"]);
-                            dataItem.CivilIdRegion = NullToString (row["CivilIdRegion"]);
-                            dataItem.RegisteryNumber = NullToString (row["RegisteryNumber"]);
-                            dataItem.CivilIdPlace = NullToString (row["CivilIdPlace"]);
-                            dataItem.Registration = registration;
-                            dataItem.LastCoveredYear = NullToString (row["LastCoveredYear"]);
-                            dataItem.Graduation = graduation;
-                            dataItem.School = NullToString (row["School"]);
-                            dataItem.GraduationCountry = NullToString (row["GraduationCountry"]);
-                            dataItem.AddressWork = NullToString (row["AddressWork"]);
-                            dataItem.MobileWork = NullToString (row["MobileWork"]);
-                            dataItem.PhoneWork = NullToString (row["PhoneWork"]);
-                            dataItem.AddressHome = NullToString (row["AddressHome"]);
-                            dataItem.MobileHome = NullToString (row["MobileHome"]);
-                            dataItem.PhoneHome = NullToString (row["PhoneHome"]);
-                            dataItem.Email = NullToString (row["Email"]);
-                            dataItem.Religion = NullToString (row["Religion"]);
-                            dataItem.Politic = NullToString (row["Politic"]);
-                            dataItem.VoterTypeId = Id;
-                            bool exists = false;
+                            reader = ExcelReaderFactory.CreateOpenXmlReader (inputStream);
 
-                            Int32.TryParse (row["Code"].ToString (), out code);
-                            dataItem.Code = code;
-                            list.ForEach (item => {
-                                if (item.Code == dataItem.Code) {
-                                    exists = true;
+                            List<string> header = new List<string> ();
+                            if (reader.Read ()) {
+                                for (int cell = 0; cell < reader.FieldCount; cell++) {
+                                    header.Add (reader[cell]?.ToString ().Trim ().ToUpper ());
                                 }
-                            });
-                            if (_repo.GetVoter (dataItem.Code, Id, 0).Result == null && exists == false) {
-                                list.Add (dataItem);
-                                _repo.Add (dataItem);
                             }
+                            DataTableCollection sheets = reader.AsDataSet (GetDataSetConfig ()).Tables;
+                            DataTable sheet = sheets["Sheet1"];
 
+                            foreach (DataRow row in sheet.Rows) {
+                                Voter dataItem = new Voter ();
+                                User RefUser = new User ();
+                                int code;
+
+                                DateTime birthDate;
+                                DateTime registration;
+                                DateTime graduation;
+                                DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
+                                DateTime.TryParse (row["Registration"].ToString (), out registration);
+                                DateTime.TryParse (row["Graduation"].ToString (), out graduation);
+                                dataItem.FirstNameArabic = NullToString (row["FirstNameArabic"]);
+                                dataItem.FatherNameArabic = NullToString (row["FatherNameArabic"]);
+                                dataItem.FamilyArabic = NullToString (row["FamilyArabic"]);
+                                dataItem.FirstName = NullToString (row["FirstName"]);
+                                dataItem.FatherName = NullToString (row["FatherName"]);
+                                dataItem.Family = NullToString (row["Family"]);
+                                dataItem.Nationality = NullToString (row["Nationality"]);
+                                dataItem.Speciality = NullToString (row["Speciality"]);
+                                dataItem.SubChapter = NullToString (row["SubChapter"]);
+                                dataItem.BirthDate = birthDate;
+                                dataItem.BirthCountry = NullToString (row["BirthCountry"]);
+                                dataItem.BirthPlace = NullToString (row["BirthPlace"]);
+                                dataItem.CivilIdMouhavaza = NullToString (row["CivilIdMouhavaza"]);
+                                dataItem.CivilIdKadaa = NullToString (row["CivilIdKadaa"]);
+                                dataItem.CivilIdRegion = NullToString (row["CivilIdRegion"]);
+                                dataItem.RegisteryNumber = NullToString (row["RegisteryNumber"]);
+                                dataItem.CivilIdPlace = NullToString (row["CivilIdPlace"]);
+                                dataItem.Registration = registration;
+                                dataItem.LastCoveredYear = NullToString (row["LastCoveredYear"]);
+                                dataItem.Graduation = graduation;
+                                dataItem.School = NullToString (row["School"]);
+                                dataItem.GraduationCountry = NullToString (row["GraduationCountry"]);
+                                dataItem.AddressWork = NullToString (row["AddressWork"]);
+                                dataItem.MobileWork = NullToString (row["MobileWork"]);
+                                dataItem.PhoneWork = NullToString (row["PhoneWork"]);
+                                dataItem.AddressHome = NullToString (row["AddressHome"]);
+                                dataItem.MobileHome = NullToString (row["MobileHome"]);
+                                dataItem.PhoneHome = NullToString (row["PhoneHome"]);
+                                dataItem.Email = NullToString (row["Email"]);
+                                dataItem.Religion = NullToString (row["Religion"]);
+                                dataItem.Politic = NullToString (row["Politic"]);
+                                dataItem.VoterTypeId = Id;
+                                if (NullToString (row["Reference"]) != String.Empty) {
+                                    RefUser.Name = NullToString (row["Reference"]);
+                                    RefUser.UserName = CamelCase (Organization.Name) + "-" + NullToString (row["Reference"]);
+                                    RefUser.OrganizationId = Organization.Id;
+                                    var user = await _userManager.FindByNameAsync (RefUser.UserName);
+                                    if (user == null) {
+                                        List<string> selectedRoles = new List<string> ();
+                                        selectedRoles.Add ("Reference");
+                                        var result = await _userManager.CreateAsync (RefUser, "password");
+                                        user = await _userManager.FindByNameAsync (RefUser.UserName);
+                                        var Rolesresult = await _userManager.AddToRolesAsync (user, selectedRoles);
+
+                                    }
+                                    dataItem.ReferenceId = user.Id;
+                                }
+
+                                bool exists = false;
+
+                                Int32.TryParse (row["Code"].ToString (), out code);
+                                dataItem.Code = code;
+                                list.ForEach (item => {
+                                    if (item.Code == dataItem.Code) {
+                                        exists = true;
+                                    }
+                                });
+                                if (_repo.GetVoter (dataItem.Code, Id, 0).Result == null && exists == false) {
+                                    list.Add (dataItem);
+                                    _repo.Add (dataItem);
+                                }
+
+                            }
+                            System.IO.File.Delete (fullPath);
                         }
-                        System.IO.File.Delete (fullPath);
                     }
+                    if (list.Count == 0) {
+                        return Ok (list);
+                    }
+                    if (await _repo.SaveAll ()) {
+                        return Ok (list);
+                    } else {
+                        return BadRequest ("something wrong happend while saving");
+                    }
+                } catch (System.Exception ex) {
+                    return BadRequest ("Upload Failed: " + ex.Message);
                 }
-                if (list.Count == 0) {
-                    return Ok (list);
-                }
-                if (_repo.SaveAll ().Result) {
-                    return Ok (list);
-                } else {
-                    return BadRequest ("something wrong happend while saving");
-                }
-            } catch (System.Exception ex) {
-                return BadRequest ("Upload Failed: " + ex.Message);
+
+            } else {
+                return BadRequest ("failed to delete old data");
             }
         }
 
@@ -318,6 +353,25 @@ namespace Application.API.Controllers {
             // which will throw if Value isn't actually a string object.
             //return Value == null || Value == DBNull.Value ? "" : (string)Value;
 
+        }
+        static string CamelCase (string s) {
+            if (s == null || s.Length < 2)
+                return s;
+
+            // Split the string into words.
+            string[] words = s.Split (
+                new char[] { },
+                StringSplitOptions.RemoveEmptyEntries);
+
+            // Combine the words.
+            string result = words[0].ToLower ();
+            for (int i = 1; i < words.Length; i++) {
+                result +=
+                    words[i].Substring (0, 1).ToUpper () +
+                    words[i].Substring (1);
+            }
+
+            return result;
         }
     }
 }

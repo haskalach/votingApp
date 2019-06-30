@@ -119,6 +119,11 @@ namespace Application.API.Data {
 
             return await voters;
         }
+        public async Task<IEnumerable<Voter>> GetAllVotersByType (int voterTypeId) {
+            var voters = _context.Voters.Where (v => v.VoterTypeId == voterTypeId).ToListAsync ();
+
+            return await voters;
+        }
         public async Task<bool> SaveAll () {
             return await _context.SaveChangesAsync () > 0;
         }
@@ -230,6 +235,11 @@ namespace Application.API.Data {
         public async Task<IEnumerable<User>> GetAllUsers () {
             var users = await _context.Users.ToListAsync ();
             return users;
+        }
+
+        public async Task<Organization> GetOrganizationByType (int voterTypeId) {
+            var organization = await _context.Organizations.Where (o => o.VoterTypeId == voterTypeId).FirstOrDefaultAsync ();
+            return organization;
         }
     }
 }
