@@ -61,6 +61,17 @@ export class VoterViewComponent implements OnInit {
       }
     );
   }
+  contact() {
+    this.voterSrvice.contact(this.id).subscribe(
+      next => {
+        this.alertifyService.success('contacted Succesfully');
+        this.voter.contacted = true;
+      },
+      error => {
+        this.alertifyService.error('could not contact this voter');
+      }
+    );
+  }
 
   // findIndexInData(data, property, value) {
   //   for (let i = 0, l = data.length; i < l; i++) {

@@ -39,6 +39,7 @@ export interface Voter {
   voterTypeId: number;
   voterType: VoterType;
   votingYears: VotingYear[];
+  contacted:boolean;
 }
 
 export interface VoterType {

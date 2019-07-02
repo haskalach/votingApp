@@ -146,6 +146,11 @@ export class VoterService {
       voterId: id
     });
   }
+  contact(id): Observable<Voter> {
+    return this.http.get<Voter>(
+      this.baseUrl + this.voterRepo + '/contact/' + id
+    );
+  }
   getReferenceVoters(
     page?,
     itemsPerPage?,

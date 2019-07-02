@@ -222,5 +222,14 @@
         {{ voter.reference?.userName }}</a
       >
     </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>
+        Contacted:
+      </label>
+      {{ voter.contacted }}
+      <ng-container *ngIf="!voter.contacted">
+        <fa-icon [icon]="['fas', 'vote-yea']" (click)="contact()"></fa-icon>
+      </ng-container>
+    </div>
   </div>
 </div>

@@ -130,6 +130,21 @@ namespace Application.API.Controllers {
 
         }
 
+        [HttpGet ("contact/{Id}")]
+        public async Task<IActionResult> Contact (int Id) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var voterFromRepo = await _repo.GetVoterById (Id, OrganizationId ?? default (int));
+            voterFromRepo.Contacted = true;
+            if (await _repo.SaveAll ()) {
+                return Ok (voterFromRepo);
+            } else {
+                return BadRequest ("Could not Set Contacted For This Voter");
+            }
+
+        }
+
         [HttpPut ("updateReference")]
 
         public async Task<IActionResult> updateReference (ReferenceUpdateDto referenceUpdateDto) {
@@ -314,7 +329,7 @@ namespace Application.API.Controllers {
                 // add a new worksheet to the empty workbook
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add ("Voters");
                 var voters = await _repo.GetAllVotersByType (Id);
-                var votersForExport =  _mapper.Map<IEnumerable<VotersExportDto>> (voters);
+                var votersForExport = _mapper.Map<IEnumerable<VotersExportDto>> (voters);
                 worksheet.Cells.LoadFromCollection (votersForExport, true);
 
                 package.Save (); //Save the workbook.
