@@ -145,6 +145,21 @@ namespace Application.API.Controllers {
 
         }
 
+        [HttpGet ("attend/{Id}")]
+        public async Task<IActionResult> Attend (int Id) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var voterFromRepo = await _repo.GetVoterById (Id, OrganizationId ?? default (int));
+            voterFromRepo.Attend = true;
+            if (await _repo.SaveAll ()) {
+                return Ok (voterFromRepo);
+            } else {
+                return BadRequest ("Could not Set Attend For This Voter");
+            }
+
+        }
+
         [HttpPut ("updateReference")]
 
         public async Task<IActionResult> updateReference (ReferenceUpdateDto referenceUpdateDto) {

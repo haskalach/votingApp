@@ -130,6 +130,12 @@
       </span>
     </div>
     <div class="col-12 col-sm-6 field-container">
+      <label>Abroad:</label>
+      <span>
+        {{ voter.abroad }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
       <label>Graduation Country:</label>
       <span>
         {{ voter.graduationCountry }}
@@ -229,6 +235,15 @@
       {{ voter.contacted }}
       <ng-container *ngIf="!voter.contacted">
         <fa-icon [icon]="['fas', 'vote-yea']" (click)="contact()"></fa-icon>
+      </ng-container>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>
+        Attend:
+      </label>
+      {{ voter.attend }}
+      <ng-container *ngIf="!voter.attend">
+        <fa-icon [icon]="['fas', 'vote-yea']" (click)="attend()"></fa-icon>
       </ng-container>
     </div>
   </div>

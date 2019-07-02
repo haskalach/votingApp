@@ -72,6 +72,17 @@ export class VoterViewComponent implements OnInit {
       }
     );
   }
+  attend() {
+    this.voterSrvice.attend(this.id).subscribe(
+      next => {
+        this.alertifyService.success('set as attend succesfully');
+        this.voter.attend = true;
+      },
+      error => {
+        this.alertifyService.error('could not set as attend');
+      }
+    );
+  }
 
   // findIndexInData(data, property, value) {
   //   for (let i = 0, l = data.length; i < l; i++) {
