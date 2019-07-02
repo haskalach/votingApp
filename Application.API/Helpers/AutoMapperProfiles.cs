@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.API.Dtos;
@@ -36,6 +37,11 @@ namespace Application.API.Helpers {
             CreateMap<VotingYearForCreationDto, VotingYears> ();
             CreateMap<VoterForEditDto, Voter> ();
             CreateMap<ReferenceUpdateDto, Voter> ();
+            CreateMap<Voter, VotersExportDto> ()
+                .ForMember (dest => dest.Voted, opt => {
+                    opt.MapFrom (src => src.VotingYears.Any (year => year.Year == DateTime.Today.Year.ToString ()));
+                });
+
         }
     }
 }

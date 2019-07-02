@@ -79,14 +79,14 @@ export class EngenereManagementComponent implements OnInit {
   }
   exportData() {
     // window.location.href = 'http://localhost:5000/demo.xlsx';
-    this.voterService.exportData().subscribe(
-      next => {
-        console.log({ next });
-        window.location.href = next['url'];
-      },
-      error => {
-        console.log({ error });
-      }
-    );
+  //   this.voterService.exportData().subscribe(
+  //     next => {
+  //       console.log({ next });
+  //       window.location.href = next['url'];
+  //     },
+  //     error => {
+  //       console.log({ error });
+  //     }
+  //   );
   }
 }

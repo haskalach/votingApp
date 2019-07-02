@@ -55,6 +55,17 @@ export class UploadEngeneresComponent implements OnInit {
         }
       });
   }
+  exportdata() {
+    this.voterService.exportData(this.VoterTypeId).subscribe(
+      next => {
+        console.log({ next });
+        window.location.href = next['url'];
+      },
+      error => {
+        console.log({ error });
+      }
+    );
+  }
 
   getOrganizationTypesList() {
     this.organizationService.getOrganizationTypes().subscribe(

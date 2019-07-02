@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Application.API.Models;
 
-namespace Application.API.Models {
-    public class Voter {
+namespace Application.API.Dtos {
+    public class VotersExportDto {
         public int Id { get; set; }
         public int Code { get; set; }
         public string FirstNameArabic { get; set; }
@@ -39,10 +40,6 @@ namespace Application.API.Models {
         public bool Attend { get; set; }
         public bool Contacted { get; set; }
         public bool Abroad { get; set; }
-        public int? ReferenceId { get; set; }
-        public User Reference { get; set; }
-        public int VoterTypeId { get; set; }
-        public VoterType VoterType { get; set; }
-        public ICollection<VotingYears> VotingYears { get; set; }
+        public bool Voted { get; set; }
     }
 }

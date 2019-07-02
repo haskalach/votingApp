@@ -203,8 +203,10 @@ export class VoterService {
         })
       );
   }
-  exportData() {
-    return this.http.get<string>(this.baseUrl + this.voterRepo + '/export');
+  exportData(id) {
+    return this.http.get<string>(
+      this.baseUrl + this.voterRepo + '/export/' + id
+    );
   }
   getConfig() {
     return this.http.get<ConfigList>(

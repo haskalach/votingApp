@@ -120,7 +120,7 @@ namespace Application.API.Data {
             return await voters;
         }
         public async Task<IEnumerable<Voter>> GetAllVotersByType (int voterTypeId) {
-            var voters = _context.Voters.Where (v => v.VoterTypeId == voterTypeId).ToListAsync ();
+            var voters = _context.Voters.Where (v => v.VoterTypeId == voterTypeId).Include (v => v.VotingYears).ToListAsync ();
 
             return await voters;
         }

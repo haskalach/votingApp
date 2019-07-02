@@ -1,6 +1,12 @@
 <h1>File Upload</h1>
 <div class="form-group">
-  <input #file type="file" multiple (change)="upload(file.files)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+  <input
+    #file
+    type="file"
+    multiple
+    (change)="upload(file.files)"
+    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+  />
 </div>
 <div class="form-group">
   <select [(ngModel)]="VoterTypeId">
@@ -18,4 +24,8 @@
 </span> -->
 <button type="button" class="btn btn-success" (click)="uploadFiles()">
   Upload Selected Files
+</button>
+
+<button type="button" class="btn btn-success" (click)="exportdata()">
+  Export data
 </button>
