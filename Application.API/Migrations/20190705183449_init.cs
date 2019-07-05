@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application.API.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,7 +107,8 @@ namespace Application.API.Migrations
                     Interests = table.Column<string>(nullable: true),
                     city = table.Column<string>(nullable: true),
                     country = table.Column<string>(nullable: true),
-                    OrganizationId = table.Column<int>(nullable: true)
+                    OrganizationId = table.Column<int>(nullable: true),
+                    Disable = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -271,7 +272,6 @@ namespace Application.API.Migrations
                     Contacted = table.Column<bool>(nullable: false),
                     Abroad = table.Column<bool>(nullable: false),
                     ReferenceId = table.Column<int>(nullable: true),
-                    Enabled = table.Column<bool>(nullable: false),
                     VoterTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

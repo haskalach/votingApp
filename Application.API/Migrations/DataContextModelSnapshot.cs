@@ -211,8 +211,6 @@ namespace Application.API.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<bool>("Enabled");
-
                     b.Property<string>("Family");
 
                     b.Property<string>("FamilyArabic");

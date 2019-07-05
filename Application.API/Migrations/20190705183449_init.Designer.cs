@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190630071754_AddingDisablePropertyForUsers")]
-    partial class AddingDisablePropertyForUsers
+    [Migration("20190705183449_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,8 +212,6 @@ namespace Application.API.Migrations
                     b.Property<bool>("Contacted");
 
                     b.Property<string>("Email");
-
-                    b.Property<bool>("Enabled");
 
                     b.Property<string>("Family");
 

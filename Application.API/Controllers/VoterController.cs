@@ -178,8 +178,10 @@ namespace Application.API.Controllers {
         [HttpPost ("upload/{Id}"), DisableRequestSizeLimit]
         public async Task<IActionResult> UploadFile (int Id) {
             var voters = await _repo.GetAllVotersByType (Id);
+            var changes = false;
             foreach (var voter in voters) {
                 if (voter != null) {
+                    changes = true;
                     _repo.Delete (voter);
                 }
 
@@ -187,11 +189,11 @@ namespace Application.API.Controllers {
             var Organization = await _repo.GetOrganizationByType (Id);
             var referenceUsers = await _repo.GetOrganizationReferences (Organization.Id, 0);
             foreach (var user in referenceUsers) {
-
+                changes = true;
                 _repo.Delete (user);
 
             }
-            if (await _repo.SaveAll ()) {
+            if (changes && await _repo.SaveAll () || !changes) {
 
                 try {
                     var file = Request.Form.Files[0];
