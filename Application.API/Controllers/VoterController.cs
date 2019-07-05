@@ -269,6 +269,7 @@ namespace Application.API.Controllers {
                                 dataItem.Email = NullToString (row["Email"]);
                                 dataItem.Religion = NullToString (row["Religion"]);
                                 dataItem.Politic = NullToString (row["Politic"]);
+                                dataItem.Abroad = NullToString (row["Abroad"]).ToLower () != "true" ? false : true;
                                 dataItem.VoterTypeId = Id;
                                 if (NullToString (row["Reference"]) != String.Empty) {
                                     RefUser.Name = NullToString (row["Reference"]);

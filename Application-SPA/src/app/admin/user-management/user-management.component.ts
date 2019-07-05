@@ -155,10 +155,10 @@ export class UserManagementComponent implements OnInit {
     );
   }
   rolesWithoutRef(roles) {
-    console.log({ roles });
+    // console.log({ roles });
     let found = true;
     roles.forEach(elem => {
-      if (elem === 'Reference' || elem ===  'Admin') {
+      if (elem === 'Reference' || elem === 'Admin') {
         found = false;
       }
     });

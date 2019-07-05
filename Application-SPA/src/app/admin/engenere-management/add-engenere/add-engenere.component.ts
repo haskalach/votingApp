@@ -78,7 +78,7 @@ export class AddEngenereComponent implements OnInit {
           this.voterForm.reset();
         },
         error => {
-          console.log(error);
+          //console.log(error);
           this.alertify.error(error);
         },
         () => {}
