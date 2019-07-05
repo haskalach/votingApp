@@ -17,7 +17,7 @@ export class OrgUsersComponent implements OnInit {
   getOrgUSers() {
     this.userService.getOrgUsers().subscribe(next => {
       this.users = next;
-      console.log({next});
+      // console.log({next});
     });
   }
 }

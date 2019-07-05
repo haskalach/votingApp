@@ -43,26 +43,28 @@ export class UploadEngeneresComponent implements OnInit {
   }
 
   uploadFiles() {
-    this.voterService
-      .uploadData(this.formData, 'Voter/Upload/' + this.VoterTypeId)
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.progress = Math.round((100 * event.loaded) / event.total);
-        } else if (event.type === HttpEventType.Response) {
-          console.log({ event });
-          this.alertify.success(event.body['length'] + ' added');
-          this.fileInput.nativeElement.value = '';
-        }
-      });
+    if (this.formData) {
+      this.voterService
+        .uploadData(this.formData, 'Voter/Upload/' + this.VoterTypeId)
+        .subscribe(event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round((100 * event.loaded) / event.total);
+          } else if (event.type === HttpEventType.Response) {
+            // console.log({ event });
+            this.alertify.success(event.body['length'] + ' added');
+            this.fileInput.nativeElement.value = '';
+          }
+        });
+    }
   }
   exportdata() {
     this.voterService.exportData(this.VoterTypeId).subscribe(
       next => {
-        console.log({ next });
+        // console.log({ next });
         window.location.href = next['url'];
       },
       error => {
-        console.log({ error });
+        // console.log({ error });
       }
     );
   }
@@ -73,7 +75,7 @@ export class UploadEngeneresComponent implements OnInit {
         this.voterTypes = types;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

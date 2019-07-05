@@ -20,7 +20,7 @@ export class OrganizationTypeManagementComponent implements OnInit {
         this.organizationTypes = types;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

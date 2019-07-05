@@ -30,7 +30,7 @@ export class MobileVoterSearchComponent implements OnInit {
     if (this.code) {
       this.voterSrvice.getVoterByCode(this.code).subscribe(
         (next: Voter) => {
-          console.log(next);
+          // console.log(next);
           this.voter = next;
           if (next) {
             this.code = '';
@@ -61,7 +61,7 @@ export class MobileVoterSearchComponent implements OnInit {
       this.voterSrvice.vote(this.voter.id).subscribe(
         next => {
           this.VotingYears.push(this.currentYear.toString());
-          console.log(this.VotingYears);
+          // console.log(this.VotingYears);
         },
         error => {
           this.alertifyService.error('could not vote for this user');

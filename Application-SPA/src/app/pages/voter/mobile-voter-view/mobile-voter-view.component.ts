@@ -34,7 +34,7 @@ export class MobileVoterViewComponent implements OnInit {
 
   getVoter(id) {
     this.voterSrvice.getVoter(id).subscribe((next: Voter) => {
-      console.log(next);
+      // console.log(next);
       this.voter = next;
       this.VotingYears = [];
       this.voter.votingYears.forEach(year => {
@@ -54,7 +54,7 @@ export class MobileVoterViewComponent implements OnInit {
     this.voterSrvice.vote(this.id).subscribe(
       next => {
         this.VotingYears.push(this.currentYear.toString());
-        console.log(this.VotingYears);
+        // console.log(this.VotingYears);
       },
       error => {
         this.alertifyService.error('could not vote for this user');

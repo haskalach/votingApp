@@ -20,6 +20,13 @@ export class UserManagementComponent implements OnInit {
   users: User[];
   bsModalRef: BsModalRef;
   organizations: Organization[];
+  availableRoles: any[] = [
+    { name: 'Admin', value: 'Admin' },
+    { name: 'OrganizationAdmin', value: 'OrganizationAdmin' },
+    { name: 'LaptopUser', value: 'LaptopUser' },
+    { name: 'MobileUser', value: 'MobileUser' },
+    { name: 'Reference', value: 'Reference' }
+  ];
   constructor(
     private adminService: AdminService,
     private modalService: BsModalService,
@@ -39,7 +46,7 @@ export class UserManagementComponent implements OnInit {
         this.users = users;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -49,7 +56,7 @@ export class UserManagementComponent implements OnInit {
         this.organizations = organizations;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -67,14 +74,14 @@ export class UserManagementComponent implements OnInit {
           ...values.filter(el => el.checked === true).map(el => el.name)
         ]
       };
-      console.log({ rolesToUpdate });
+      // console.log({ rolesToUpdate });
       if (rolesToUpdate) {
         this.adminService.updateUserRoles(user, rolesToUpdate).subscribe(
           () => {
             user.roles = [...rolesToUpdate.roleNames];
           },
           error => {
-            console.log(error);
+            // console.log(error);
           }
         );
       }
@@ -83,26 +90,19 @@ export class UserManagementComponent implements OnInit {
   private getRolesArray(user) {
     const roles = [];
     const userRoles = user.roles;
-    const availableRoles: any[] = [
-      { name: 'Admin', value: 'Admin' },
-      { name: 'OrganizationAdmin', value: 'OrganizationAdmin' },
-      { name: 'LaptopUser', value: 'LaptopUser' },
-      { name: 'MobileUser', value: 'MobileUser' },
-      { name: 'Reference', value: 'Reference' }
-    ];
-    for (let i = 0; i < availableRoles.length; i++) {
+    for (let i = 0; i < this.availableRoles.length; i++) {
       let isMatch = false;
       for (let j = 0; j < userRoles.length; j++) {
-        if (availableRoles[i].name === userRoles[j]) {
+        if (this.availableRoles[i].name === userRoles[j]) {
           isMatch = true;
-          availableRoles[i].checked = true;
-          roles.push(availableRoles[i]);
+          this.availableRoles[i].checked = true;
+          roles.push(this.availableRoles[i]);
           break;
         }
       }
       if (!isMatch) {
-        availableRoles[i].checked = false;
-        roles.push(availableRoles[i]);
+        this.availableRoles[i].checked = false;
+        roles.push(this.availableRoles[i]);
       }
     }
     return roles;
@@ -112,7 +112,7 @@ export class UserManagementComponent implements OnInit {
       userName: user.userName,
       organizationId: user.organizationId == null ? 0 : user.organizationId
     };
-    console.log({ assignObject });
+    // console.log({ assignObject });
     this.userService.assignOrganization(assignObject).subscribe(
       next => {
         this.alertityService.success('User Organization Update Succesfully');
@@ -153,5 +153,15 @@ export class UserManagementComponent implements OnInit {
         this.alertityService.error('User Failed To Delete');
       }
     );
+  }
+  rolesWithoutRef(roles) {
+    console.log({ roles });
+    let found = true;
+    roles.forEach(elem => {
+      if (elem === 'Reference' || elem ===  'Admin') {
+        found = false;
+      }
+    });
+    return found;
   }
 }

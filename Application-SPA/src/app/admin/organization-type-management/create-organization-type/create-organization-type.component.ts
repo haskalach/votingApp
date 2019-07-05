@@ -41,7 +41,7 @@ export class CreateOrganizationTypeComponent implements OnInit {
             // this.router.navigate(['/admin/users']);
           },
           error => {
-            console.log(error);
+            // console.log(error);
             this.alertify.error(error);
           },
           () => {

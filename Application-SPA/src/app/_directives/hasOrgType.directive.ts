@@ -21,7 +21,7 @@ export class HasOrgTypeDirective implements OnInit {
 
   ngOnInit() {
     const userType = this.authService.decodedToken.organizationType as string;
-    console.log({ userType });
+    // console.log({ userType });
     // if no roles clear the containerRef
     if (!userType) {
       this.viewContainerRef.clear();

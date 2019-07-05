@@ -129,12 +129,7 @@
         {{ voter.school }}
       </span>
     </div>
-    <div class="col-12 col-sm-6 field-container">
-      <label>Abroad:</label>
-      <span>
-        {{ voter.abroad }}
-      </span>
-    </div>
+
     <div class="col-12 col-sm-6 field-container">
       <label>Graduation Country:</label>
       <span>
@@ -183,18 +178,9 @@
         {{ voter.email }}
       </span>
     </div>
-    <div class="col-12 col-sm-6 field-container">
-      <label>Religion:</label>
-      <span>
-        {{ voter.religion }}
-      </span>
-    </div>
-    <div class="col-12 col-sm-6 field-container">
-      <label>Politic:</label>
-      <span>
-        {{ voter.politic }}
-      </span>
-    </div>
+
+
+
     <div class="col-12 col-sm-6 field-container">
       <label>Voting Years:</label>
       <ng-container *ngFor="let year of VotingYears; let i = index">
@@ -222,11 +208,11 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-12 col-sm-6 field-container" *ngIf="voter.referenceId">
-      <label>Reference:</label>
-      <a [routerLink]="['/members/' + voter.referenceId]">
-        {{ voter.reference?.userName }}</a
-      >
+    <div class="col-12 col-sm-6 field-container">
+      <label>Abroad:</label>
+      <span>
+        {{ voter.abroad }}
+      </span>
     </div>
     <div class="col-12 col-sm-6 field-container">
       <label>
@@ -239,12 +225,32 @@
     </div>
     <div class="col-12 col-sm-6 field-container">
       <label>
-        Attend:
+        Attending:
       </label>
       {{ voter.attend }}
       <ng-container *ngIf="!voter.attend">
         <fa-icon [icon]="['fas', 'vote-yea']" (click)="attend()"></fa-icon>
       </ng-container>
     </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Religion:</label>
+      <span>
+        {{ voter.religion }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container">
+      <label>Politic:</label>
+      <span>
+        {{ voter.politic }}
+      </span>
+    </div>
+    <div class="col-12 col-sm-6 field-container" *ngIf="voter.referenceId">
+      <label>Reference:</label>
+      <a [routerLink]="['/members/' + voter.referenceId]">
+        {{ voter.reference?.userName }}</a
+      >
+    </div>
+
+
   </div>
 </div>

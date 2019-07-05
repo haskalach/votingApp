@@ -55,7 +55,11 @@
         </select>
       </td>
       <td>
-        <button class="btn btn-info" (click)="editRolesModal(user)">
+        <button
+          class="btn btn-info"
+          (click)="editRolesModal(user)"
+          *ngIf="rolesWithoutRef(user.roles)"
+        >
           Edit Roles
         </button>
       </td>

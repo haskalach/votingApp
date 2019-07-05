@@ -53,7 +53,7 @@ export class VoterEditComponent implements OnInit {
 
   getVoter(id) {
     this.voterSrvice.getVoter(id).subscribe((next: Voter) => {
-      console.log(next);
+      // console.log(next);
       this.voter = next;
       this.VoterForm.patchValue(this.voter);
       this.VotingYears = [];

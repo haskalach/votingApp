@@ -21,4 +21,13 @@ export class RolesModalComponent implements OnInit {
     this.updateSelectedRoles.emit(this.roles);
     this.bsModalRef.hide();
   }
+  changeRoles(role) {
+    this.roles.forEach(elem => {
+      if (elem.value !== role.value) {
+        elem.checked = false;
+      } else {
+        elem.checked = true;
+      }
+    });
+  }
 }

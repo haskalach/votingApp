@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     private alertiry: AlertifyService
   ) {}
   canActivate(next: ActivatedRouteSnapshot): boolean {
-    console.log(next.firstChild);
+    // console.log(next.firstChild);
     const roles = next.firstChild.data['roles'] as Array<string>;
     if (roles) {
       const match = this.authService.roleMatch(roles);

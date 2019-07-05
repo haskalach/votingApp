@@ -65,7 +65,7 @@ export class EngenereManagementComponent implements OnInit {
         this.voterTypes = types;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

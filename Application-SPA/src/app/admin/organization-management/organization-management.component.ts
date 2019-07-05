@@ -42,7 +42,7 @@ export class OrganizationManagementComponent implements OnInit {
         this.organizations = organizations;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -52,7 +52,7 @@ export class OrganizationManagementComponent implements OnInit {
         this.organizationTypes = types;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
