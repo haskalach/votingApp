@@ -4,7 +4,7 @@
 
   <div class="form-group">
     <input
-      type="text"
+      type="number"
       class="form-control"
       formControlName="code"
       [ngClass]="{
@@ -25,10 +25,20 @@
   </div>
   <div class="form-group">
     <select class="form-control" formControlName="VoterTypeId">
+      <option [ngValue]="null">Select Voter Type</option>
       <option *ngFor="let voterType of voterTypes" [ngValue]="voterType.id">
         {{ voterType.name }}</option
       >
     </select>
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        voterForm.get('VoterTypeId').touched &&
+        voterForm.get('VoterTypeId').hasError('required')
+      "
+    >
+      Type Is Required
+    </div>
   </div>
 
   <div class="form-group">
@@ -311,19 +321,19 @@
     <input
       type="text"
       class="form-control"
-      formControlName="civilIdMouhafava"
+      formControlName="civilIdMouhavaza"
       [ngClass]="{
         'is-invalid':
-          voterForm.get('civilIdMouhafava').errors &&
-          voterForm.get('civilIdMouhafava').touched
+          voterForm.get('civilIdMouhavaza').errors &&
+          voterForm.get('civilIdMouhavaza').touched
       }"
       placeholder="Civil Id Mouhafava"
     />
     <div
       class="invalid-feedback"
       *ngIf="
-        voterForm.get('civilIdMouhafava').touched &&
-        voterForm.get('civilIdMouhafava').hasError('required')
+        voterForm.get('civilIdMouhavaza').touched &&
+        voterForm.get('civilIdMouhavaza').hasError('required')
       "
     >
       Civil Id Mouhafava Is Required

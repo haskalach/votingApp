@@ -211,25 +211,25 @@ namespace Application.API.Data {
             };
 
             foreach (var item in voters) {
-                if (!CondifgList.religion.Contains (item.Religion) && item.Religion.Trim () != "") {
+                if (item.Religion != null && item.Religion.Trim () != "" && !CondifgList.religion.Contains (item.Religion)) {
                     CondifgList.religion.Add (item.Religion);
                 }
-                if (!CondifgList.politics.Contains (item.Politic) && item.Politic.Trim () != "") {
+                if (item.Politic != null && item.Politic.Trim () != "" && !CondifgList.politics.Contains (item.Politic)) {
                     CondifgList.politics.Add (item.Politic);
                 }
-                if (!CondifgList.subChapter.Contains (item.SubChapter) && item.SubChapter.Trim () != "") {
+                if (item.SubChapter != null && item.SubChapter.Trim () != "" && !CondifgList.subChapter.Contains (item.SubChapter)) {
                     CondifgList.subChapter.Add (item.SubChapter);
                 }
-                if (!CondifgList.civilIdMouhavaza.Contains (item.CivilIdMouhavaza) && item.CivilIdMouhavaza.Trim () != "") {
+                if (item.CivilIdMouhavaza != null && item.CivilIdMouhavaza.Trim () != "" && !CondifgList.civilIdMouhavaza.Contains (item.CivilIdMouhavaza)) {
                     CondifgList.civilIdMouhavaza.Add (item.CivilIdMouhavaza);
                 }
-                if (!CondifgList.civilIdKadaa.Contains (item.CivilIdKadaa) && item.CivilIdKadaa.Trim () != "") {
+                if (item.CivilIdKadaa != null && item.CivilIdKadaa.Trim () != "" && !CondifgList.civilIdKadaa.Contains (item.CivilIdKadaa)) {
                     CondifgList.civilIdKadaa.Add (item.CivilIdKadaa);
                 }
-                if (!CondifgList.civilIdRegion.Contains (item.CivilIdRegion) && item.CivilIdRegion.Trim () != "") {
+                if (item.CivilIdRegion != null && item.CivilIdRegion.Trim () != "" && !CondifgList.civilIdRegion.Contains (item.CivilIdRegion)) {
                     CondifgList.civilIdRegion.Add (item.CivilIdRegion);
                 }
-                if (!CondifgList.civilIdPlace.Contains (item.CivilIdPlace) && item.CivilIdPlace.Trim () != "") {
+                if (item.CivilIdPlace != null && item.CivilIdPlace.Trim () != "" && !CondifgList.civilIdPlace.Contains (item.CivilIdPlace)) {
                     CondifgList.civilIdPlace.Add (item.CivilIdPlace);
                 }
             }

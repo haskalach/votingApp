@@ -41,7 +41,7 @@ export class VoterService {
       }
       if (voterParams.firstNameArabic) {
         params = params.append(
-          'cofirstNameArabicde',
+          'firstNameArabic',
           voterParams.firstNameArabic
         );
       }

@@ -14,6 +14,9 @@ body {
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 
 .text-error {
   color: red;

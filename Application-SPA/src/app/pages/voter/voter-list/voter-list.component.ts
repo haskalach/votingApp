@@ -26,7 +26,7 @@ export class VoterListComponent implements OnInit {
     code: null,
     firstNameArabic: null,
     fatherNameArabic: null,
-    lastNameArabic: null,
+    familyArabic: null,
     subChapter: null,
     civilIdMouhavaza: null,
     civilIdKadaa: null,

@@ -26,7 +26,7 @@ export class MobileVoterListComponent implements OnInit {
     code: null,
     firstNameArabic: null,
     fatherNameArabic: null,
-    lastNameArabic: null,
+    familyArabic: null,
     attend: null,
     abroad: null,
     contacted: null

@@ -1,3 +1,4 @@
+import { UtilitiesService } from './../../../_services/utilities/utilities.service';
 import { OrganizationService } from './../../../_services/organization/organization.service';
 
 import { VoterType } from './../../../_models/VoterType';
@@ -23,7 +24,8 @@ export class AddEngenereComponent implements OnInit {
     private alertify: AlertifyService,
     private voterService: VoterService,
     private router: Router,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private utilities: UtilitiesService
   ) {}
 
   ngOnInit() {
@@ -36,35 +38,35 @@ export class AddEngenereComponent implements OnInit {
       firstNameArabic: ['', Validators.required],
       fatherNameArabic: ['', Validators.required],
       familyArabic: ['', Validators.required],
-      firstName: ['', Validators.required],
-      fatherName: ['', Validators.required],
-      family: ['', Validators.required],
-      nationality: ['', Validators.required],
-      speciality: ['', Validators.required],
-      subChapter: ['', Validators.required],
+      firstName: [''],
+      fatherName: [''],
+      family: [''],
+      nationality: [''],
+      speciality: [''],
+      subChapter: [''],
       birthDate: ['', Validators.required],
-      birthCountry: ['', Validators.required],
-      birthPlace: ['', Validators.required],
-      civilIdMouhafava: ['', Validators.required],
-      civilIdKadaa: ['', Validators.required],
-      civilIdRegion: ['', Validators.required],
-      RegisteryNumber: ['', Validators.required],
-      civilIdPlace: ['', Validators.required],
+      birthCountry: [''],
+      birthPlace: [''],
+      civilIdMouhavaza: [''],
+      civilIdKadaa: [''],
+      civilIdRegion: [''],
+      RegisteryNumber: [''],
+      civilIdPlace: [''],
       registration: ['', Validators.required],
-      lastCoveredYear: ['', Validators.required],
+      lastCoveredYear: [''],
       graduation: ['', Validators.required],
-      school: ['', Validators.required],
-      graduationCountry: ['', Validators.required],
-      addressWork: ['', Validators.required],
-      mobileWork: ['', Validators.required],
-      phoneWork: ['', Validators.required],
-      addressHome: ['', Validators.required],
-      mobileHome: ['', Validators.required],
-      phoneHome: ['', Validators.required],
-      email: ['', Validators.required],
+      school: [''],
+      graduationCountry: [''],
+      addressWork: [''],
+      mobileWork: [''],
+      phoneWork: [''],
+      addressHome: [''],
+      mobileHome: [''],
+      phoneHome: [''],
+      email: [''],
       religion: ['', Validators.required],
-      politic: ['', Validators.required],
-      VoterTypeId: [1, Validators.required]
+      politic: [''],
+      VoterTypeId: [null, Validators.required]
     });
   }
   addVoter() {
@@ -76,11 +78,13 @@ export class AddEngenereComponent implements OnInit {
           this.voterForm.reset();
         },
         error => {
-          // console.log(error);
+          console.log(error);
           this.alertify.error(error);
         },
         () => {}
       );
+    } else {
+      this.utilities.validateAllFormFields(this.voterForm);
     }
   }
   getOrganizationTypesList() {
