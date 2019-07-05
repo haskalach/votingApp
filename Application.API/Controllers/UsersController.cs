@@ -32,6 +32,7 @@ namespace Application.API.Controllers {
             return Ok (userToReturn);
         }
 
+        [Authorize (Policy = "ModeratorRole")]
         [HttpGet ("organizationUser")]
         public async Task<IActionResult> GetOrganizationUsers () {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);

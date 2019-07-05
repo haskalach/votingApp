@@ -49,6 +49,7 @@ namespace Application.API.Controllers {
             return BadRequest (result.Errors);
         }
 
+        [Authorize (Policy = "ModeratorRole")]
         [HttpPost ("createReference")]
         public async Task<IActionResult> CreateReferenceUser (UserForReferenceRegisterDto userForReferenceRegisterDto) {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);

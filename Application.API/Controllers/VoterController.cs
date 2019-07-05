@@ -11,6 +11,7 @@ using Application.API.Helpers;
 using Application.API.Models;
 using AutoMapper;
 using ExcelDataReader;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -175,6 +176,7 @@ namespace Application.API.Controllers {
             throw new Exception ($"Could Not Set Reference Use For {referenceUpdateDto.Id}");
         }
 
+        [Authorize (Policy = "RequireAdminRole")]
         [HttpPost ("upload/{Id}"), DisableRequestSizeLimit]
         public async Task<IActionResult> UploadFile (int Id) {
             var voters = await _repo.GetAllVotersByType (Id);
@@ -330,6 +332,7 @@ namespace Application.API.Controllers {
             return Ok (configList);
         }
 
+        [Authorize (Policy = "RequireAdminRole")]
         [HttpGet ("Export/{Id}")]
         public async Task<IActionResult> Excel (int Id) {
 
