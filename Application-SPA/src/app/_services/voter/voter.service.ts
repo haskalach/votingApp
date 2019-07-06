@@ -40,10 +40,7 @@ export class VoterService {
         params = params.append('code', voterParams.code);
       }
       if (voterParams.firstNameArabic) {
-        params = params.append(
-          'firstNameArabic',
-          voterParams.firstNameArabic
-        );
+        params = params.append('firstNameArabic', voterParams.firstNameArabic);
       }
       if (voterParams.familyArabic) {
         params = params.append('familyArabic', voterParams.familyArabic);
@@ -120,6 +117,11 @@ export class VoterService {
       }
     );
     return this.http.request(uploadReq);
+  }
+  deleteOldData(id: number) {
+    return this.http.delete(
+      this.baseUrl + this.voterRepo + '/oldData' + '/' + id
+    );
   }
   getVoter(id: number): Observable<Voter> {
     return this.http.get<Voter>(this.baseUrl + this.voterRepo + '/' + id);
