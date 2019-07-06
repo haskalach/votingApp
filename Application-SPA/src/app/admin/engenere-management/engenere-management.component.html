@@ -104,6 +104,7 @@
     [(ngModel)]="pagination.currentPage"
     [itemsPerPage]="pagination.itemsPerPage"
     (pageChanged)="pageChanged($event)"
+    [maxSize] = "10"
     previousText="&lsaquo;"
     nextText="&rsaquo;"
     firstText="&laquo;"
