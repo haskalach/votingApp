@@ -270,19 +270,20 @@ namespace Application.API.Controllers {
                                 dataItem.ReferenceId = user.Id;
                             }
 
-                            bool exists = false;
+                            // bool exists = false;
 
-                            Int32.TryParse (row["Code"].ToString (), out code);
-                            dataItem.Code = code;
-                            list.ForEach (item => {
-                                if (item.Code == dataItem.Code) {
-                                    exists = true;
-                                }
-                            });
-                            if (await _repo.GetVoter (dataItem.Code, Id, 0) == null && exists == false) {
-                                list.Add (dataItem);
-                                _repo.Add (dataItem);
-                            }
+                            // Int32.TryParse (row["Code"].ToString (), out code);
+                            // dataItem.Code = code;
+                            // list.ForEach (item => {
+                            //     if (item.Code == dataItem.Code) {
+                            //         exists = true;
+                            //     }
+                            // });
+                            // if (await _repo.GetVoter (dataItem.Code, Id, 0) == null && exists == false) {
+                            //     list.Add (dataItem);
+                            // }
+                            list.Add (dataItem);
+                            _repo.Add(dataItem);
 
                         }
                         System.IO.File.Delete (fullPath);
@@ -290,7 +291,7 @@ namespace Application.API.Controllers {
                 }
                 if (list.Count == 0) {
                     return Ok ();
-                }
+                } 
                 if (await _repo.SaveAll ()) {
                     return Ok ();
                 } else {

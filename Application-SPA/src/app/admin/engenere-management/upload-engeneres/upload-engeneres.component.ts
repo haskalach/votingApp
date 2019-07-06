@@ -13,6 +13,7 @@ import { OrganizationService } from 'src/app/_services/organization/organization
   styleUrls: ['./upload-engeneres.component.scss']
 })
 export class UploadEngeneresComponent implements OnInit {
+  loading = false;
   public progress: number;
   public message: string;
   baseUrl = environment.apiUrl;
@@ -44,17 +45,25 @@ export class UploadEngeneresComponent implements OnInit {
 
   uploadFiles() {
     if (this.formData) {
+      this.loading = true;
       this.voterService
         .uploadData(this.formData, 'Voter/Upload/' + this.VoterTypeId)
-        .subscribe(event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.progress = Math.round((100 * event.loaded) / event.total);
-          } else if (event.type === HttpEventType.Response) {
-            // console.log({ event });
-            this.alertify.success(event.body['length'] + ' added');
-            this.fileInput.nativeElement.value = '';
+        .subscribe(
+          event => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round((100 * event.loaded) / event.total);
+            } else if (event.type === HttpEventType.Response) {
+              // console.log({ event });
+              this.alertify.success(' records added');
+              this.fileInput.nativeElement.value = '';
+              this.loading = false;
+            }
+          },
+          error => {
+            this.alertify.error('error uploading data' + error);
+            this.loading = false;
           }
-        });
+        );
     }
   }
   exportdata() {

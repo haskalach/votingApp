@@ -19,6 +19,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -110,6 +111,7 @@ export function tokenGetter() {
     ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ProgressbarModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

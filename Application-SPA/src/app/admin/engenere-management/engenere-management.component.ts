@@ -11,6 +11,7 @@ import { VoterType } from 'src/app/_models/VoterType';
   styleUrls: ['./engenere-management.component.scss']
 })
 export class EngenereManagementComponent implements OnInit {
+
   voters: Voter[];
   pageNumber = 1;
   pageSize = 10;
