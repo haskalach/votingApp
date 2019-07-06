@@ -133,11 +133,13 @@
         <span>
           No
         </span>
-        <span class="vote-icon" (click)="vote()">
-          Vote Now
-          <fa-icon [icon]="['fas', 'vote-yea']"></fa-icon>
-        </span>
       </ng-container>
+    </div>
+    <div class="col-12 field-container" style="text-align: center;">
+      <button class="vote-icon" (click)="vote()" *ngIf="!Voted()">
+        Vote Now
+        <!-- <fa-icon [icon]="['fas', 'vote-yea']"></fa-icon> -->
+      </button>
     </div>
   </div>
 </div>
