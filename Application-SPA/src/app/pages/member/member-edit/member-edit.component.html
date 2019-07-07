@@ -90,7 +90,7 @@
               (updateMainPhotoUrl)="updateMainPhoto($event)"
             ></app-photo-editor>
           </tab>
-          <tab heading="Password">
+          <tab heading="Password" *appHasRole="['Admin']">
             <form [formGroup]="changepasswordForm" (ngSubmit)="onSubmit()">
               <input
                 class="form-control mr-sm-2"

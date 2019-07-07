@@ -75,7 +75,7 @@ export class MemberEditComponent implements OnInit {
           this.changepasswordForm.reset();
         },
         error => {
-          this.alertify.error(error);
+          this.alertify.error('your current Password is incorrect');
         },
         () => {
           // this.router.navigate(['/members']);

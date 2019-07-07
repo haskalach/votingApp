@@ -98,6 +98,7 @@ namespace Application.API.Controllers {
 
         }
 
+        [Authorize (Policy = "RequireAdminRole")]
         [HttpPost ("changePassword")]
         public async Task<IActionResult> changePassword (ChangePasswordDto changePasswordDto) {
             var userId = User.FindFirst (ClaimTypes.NameIdentifier).Value;
