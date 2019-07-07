@@ -28,10 +28,28 @@
         />
         <select
           class="form-control"
-          [(ngModel)]="voterParams.voted"
+          [(ngModel)]="voterParams.attend"
           placeholder="Attend"
         >
-          <option [ngValue]="null">Voted</option>
+          <option [ngValue]="null">Attend</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.contacted"
+          placeholder="Contacted"
+        >
+          <option [ngValue]="null">Contacted</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+        <select
+          class="form-control"
+          [(ngModel)]="voterParams.abroad"
+          placeholder="abroad"
+        >
+          <option [ngValue]="null">Abroad</option>
           <option [ngValue]="true">Yes</option>
           <option [ngValue]="false">No</option>
         </select>

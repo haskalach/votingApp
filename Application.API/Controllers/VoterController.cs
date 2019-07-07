@@ -146,13 +146,13 @@ namespace Application.API.Controllers {
 
         }
 
-        [HttpGet ("attend/{Id}")]
-        public async Task<IActionResult> Attend (int Id) {
+        [HttpPost ("attend")]
+        public async Task<IActionResult> Attend (AttendDto attendDto) {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _repo.GetUser (userId);
             var OrganizationId = userFromRepo.OrganizationId;
-            var voterFromRepo = await _repo.GetVoterById (Id, OrganizationId ?? default (int));
-            voterFromRepo.Attend = true;
+            var voterFromRepo = await _repo.GetVoterById (attendDto.Id, OrganizationId ?? default (int));
+            voterFromRepo.Attend = attendDto.Attend;
             if (await _repo.SaveAll ()) {
                 return Ok (voterFromRepo);
             } else {
@@ -209,89 +209,93 @@ namespace Application.API.Controllers {
                         }
                         DataTableCollection sheets = reader.AsDataSet (GetDataSetConfig ()).Tables;
                         DataTable sheet = sheets["Sheet1"];
+                        if (sheet == null) {
+                            return BadRequest (" wrong excel sheet name");
+                        } else {
+                            foreach (DataRow row in sheet.Rows) {
+                                Voter dataItem = new Voter ();
+                                User RefUser = new User ();
+                                int code;
 
-                        foreach (DataRow row in sheet.Rows) {
-                            Voter dataItem = new Voter ();
-                            User RefUser = new User ();
-                            int code;
+                                DateTime birthDate;
+                                DateTime registration;
+                                DateTime graduation;
+                                DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
+                                DateTime.TryParse (row["Registration"].ToString (), out registration);
+                                DateTime.TryParse (row["Graduation"].ToString (), out graduation);
+                                dataItem.FirstNameArabic = NullToString (row["FirstNameArabic"]);
+                                dataItem.FatherNameArabic = NullToString (row["FatherNameArabic"]);
+                                dataItem.FamilyArabic = NullToString (row["FamilyArabic"]);
+                                dataItem.FirstName = NullToString (row["FirstName"]);
+                                dataItem.FatherName = NullToString (row["FatherName"]);
+                                dataItem.Family = NullToString (row["Family"]);
+                                dataItem.Nationality = NullToString (row["Nationality"]);
+                                dataItem.Speciality = NullToString (row["Speciality"]);
+                                dataItem.SubChapter = NullToString (row["SubChapter"]);
+                                dataItem.BirthDate = birthDate;
+                                dataItem.BirthCountry = NullToString (row["BirthCountry"]);
+                                dataItem.BirthPlace = NullToString (row["BirthPlace"]);
+                                dataItem.CivilIdMouhavaza = NullToString (row["CivilIdMouhavaza"]);
+                                dataItem.CivilIdKadaa = NullToString (row["CivilIdKadaa"]);
+                                dataItem.CivilIdRegion = NullToString (row["CivilIdRegion"]);
+                                dataItem.RegisteryNumber = NullToString (row["RegisteryNumber"]);
+                                dataItem.CivilIdPlace = NullToString (row["CivilIdPlace"]);
+                                dataItem.Registration = registration;
+                                dataItem.LastCoveredYear = NullToString (row["LastCoveredYear"]);
+                                dataItem.Graduation = graduation;
+                                dataItem.School = NullToString (row["School"]);
+                                dataItem.GraduationCountry = NullToString (row["GraduationCountry"]);
+                                dataItem.AddressWork = NullToString (row["AddressWork"]);
+                                dataItem.MobileWork = NullToString (row["MobileWork"]);
+                                dataItem.PhoneWork = NullToString (row["PhoneWork"]);
+                                dataItem.AddressHome = NullToString (row["AddressHome"]);
+                                dataItem.MobileHome = NullToString (row["MobileHome"]);
+                                dataItem.PhoneHome = NullToString (row["PhoneHome"]);
+                                dataItem.Email = NullToString (row["Email"]);
+                                dataItem.Religion = NullToString (row["Religion"]);
+                                dataItem.Politic = NullToString (row["Politic"]);
+                                dataItem.Abroad = NullToString (row["Abroad"]).ToLower () != "true" ? false : true;
+                                dataItem.VoterTypeId = Id;
+                                if (NullToString (row["Reference"]) != String.Empty) {
+                                    RefUser.Name = NullToString (row["Reference"]);
+                                    RefUser.UserName = CamelCase (Organization.Name) + "-" + NullToString (row["Reference"]);
+                                    RefUser.OrganizationId = Organization.Id;
+                                    var user = await _userManager.FindByNameAsync (RefUser.UserName);
+                                    if (user == null) {
+                                        List<string> selectedRoles = new List<string> ();
+                                        selectedRoles.Add ("Reference");
+                                        var result = await _userManager.CreateAsync (RefUser, "password");
+                                        user = await _userManager.FindByNameAsync (RefUser.UserName);
+                                        var Rolesresult = await _userManager.AddToRolesAsync (user, selectedRoles);
 
-                            DateTime birthDate;
-                            DateTime registration;
-                            DateTime graduation;
-                            DateTime.TryParse (row["BirthDate"].ToString (), out birthDate);
-                            DateTime.TryParse (row["Registration"].ToString (), out registration);
-                            DateTime.TryParse (row["Graduation"].ToString (), out graduation);
-                            dataItem.FirstNameArabic = NullToString (row["FirstNameArabic"]);
-                            dataItem.FatherNameArabic = NullToString (row["FatherNameArabic"]);
-                            dataItem.FamilyArabic = NullToString (row["FamilyArabic"]);
-                            dataItem.FirstName = NullToString (row["FirstName"]);
-                            dataItem.FatherName = NullToString (row["FatherName"]);
-                            dataItem.Family = NullToString (row["Family"]);
-                            dataItem.Nationality = NullToString (row["Nationality"]);
-                            dataItem.Speciality = NullToString (row["Speciality"]);
-                            dataItem.SubChapter = NullToString (row["SubChapter"]);
-                            dataItem.BirthDate = birthDate;
-                            dataItem.BirthCountry = NullToString (row["BirthCountry"]);
-                            dataItem.BirthPlace = NullToString (row["BirthPlace"]);
-                            dataItem.CivilIdMouhavaza = NullToString (row["CivilIdMouhavaza"]);
-                            dataItem.CivilIdKadaa = NullToString (row["CivilIdKadaa"]);
-                            dataItem.CivilIdRegion = NullToString (row["CivilIdRegion"]);
-                            dataItem.RegisteryNumber = NullToString (row["RegisteryNumber"]);
-                            dataItem.CivilIdPlace = NullToString (row["CivilIdPlace"]);
-                            dataItem.Registration = registration;
-                            dataItem.LastCoveredYear = NullToString (row["LastCoveredYear"]);
-                            dataItem.Graduation = graduation;
-                            dataItem.School = NullToString (row["School"]);
-                            dataItem.GraduationCountry = NullToString (row["GraduationCountry"]);
-                            dataItem.AddressWork = NullToString (row["AddressWork"]);
-                            dataItem.MobileWork = NullToString (row["MobileWork"]);
-                            dataItem.PhoneWork = NullToString (row["PhoneWork"]);
-                            dataItem.AddressHome = NullToString (row["AddressHome"]);
-                            dataItem.MobileHome = NullToString (row["MobileHome"]);
-                            dataItem.PhoneHome = NullToString (row["PhoneHome"]);
-                            dataItem.Email = NullToString (row["Email"]);
-                            dataItem.Religion = NullToString (row["Religion"]);
-                            dataItem.Politic = NullToString (row["Politic"]);
-                            dataItem.Abroad = NullToString (row["Abroad"]).ToLower () != "true" ? false : true;
-                            dataItem.VoterTypeId = Id;
-                            if (NullToString (row["Reference"]) != String.Empty) {
-                                RefUser.Name = NullToString (row["Reference"]);
-                                RefUser.UserName = CamelCase (Organization.Name) + "-" + NullToString (row["Reference"]);
-                                RefUser.OrganizationId = Organization.Id;
-                                var user = await _userManager.FindByNameAsync (RefUser.UserName);
-                                if (user == null) {
-                                    List<string> selectedRoles = new List<string> ();
-                                    selectedRoles.Add ("Reference");
-                                    var result = await _userManager.CreateAsync (RefUser, "password");
-                                    user = await _userManager.FindByNameAsync (RefUser.UserName);
-                                    var Rolesresult = await _userManager.AddToRolesAsync (user, selectedRoles);
-
+                                    }
+                                    dataItem.ReferenceId = user.Id;
                                 }
-                                dataItem.ReferenceId = user.Id;
+
+                                // bool exists = false;
+
+                                Int32.TryParse (row["Code"].ToString (), out code);
+                                dataItem.Code = code;
+                                // list.ForEach (item => {
+                                //     if (item.Code == dataItem.Code) {
+                                //         exists = true;
+                                //     }
+                                // });
+                                // if (await _repo.GetVoter (dataItem.Code, Id, 0) == null && exists == false) {
+                                //     list.Add (dataItem);
+                                // }
+                                list.Add (dataItem);
+                                _repo.Add (dataItem);
+
                             }
-
-                            // bool exists = false;
-
-                            // Int32.TryParse (row["Code"].ToString (), out code);
-                            // dataItem.Code = code;
-                            // list.ForEach (item => {
-                            //     if (item.Code == dataItem.Code) {
-                            //         exists = true;
-                            //     }
-                            // });
-                            // if (await _repo.GetVoter (dataItem.Code, Id, 0) == null && exists == false) {
-                            //     list.Add (dataItem);
-                            // }
-                            list.Add (dataItem);
-                            _repo.Add(dataItem);
-
+                            System.IO.File.Delete (fullPath);
                         }
-                        System.IO.File.Delete (fullPath);
+
                     }
                 }
                 if (list.Count == 0) {
                     return Ok ();
-                } 
+                }
                 if (await _repo.SaveAll ()) {
                     return Ok ();
                 } else {
@@ -336,7 +340,7 @@ namespace Application.API.Controllers {
             var OrganizationId = userFromRepo.OrganizationId;
             var Organization = await _repo.GetOrganization (OrganizationId?? default (int));
             var VoterTypeId = Organization.VoterTypeId;
-            var configList = await _repo.GetConfigList (VoterTypeId);
+            var configList = await _repo.GetConfigList (VoterTypeId, OrganizationId?? default (int));
             return Ok (configList);
         }
 

@@ -201,7 +201,7 @@
         <span
           class="vote-icon"
           (click)="vote()"
-          *appHasRole="['OrganizationAdmin']"
+          *appHasRole="['OrganizationAdmin','LaptopUser']"
         >
           Vote Now
           <fa-icon [icon]="['fas', 'vote-yea']"></fa-icon>
@@ -228,8 +228,9 @@
         Attending:
       </label>
       {{ voter.attend }}
-      <ng-container *ngIf="!voter.attend">
-        <fa-icon [icon]="['fas', 'vote-yea']" (click)="attend()"></fa-icon>
+      <ng-container >
+        <fa-icon [icon]="['fas', 'vote-yea']" (click)="attend(!voter.attend)" *ngIf="!voter.attend"></fa-icon>
+        <fa-icon [icon]="['fas', 'ban']" (click)="attend(!voter.attend)" *ngIf="voter.attend"></fa-icon>
       </ng-container>
     </div>
     <div class="col-12 col-sm-6 field-container">

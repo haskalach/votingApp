@@ -72,11 +72,15 @@ export class VoterViewComponent implements OnInit {
       }
     );
   }
-  attend() {
-    this.voterSrvice.attend(this.id).subscribe(
+  attend(status) {
+    const attendObj = {
+      id: this.id,
+      attend: status
+    };
+    this.voterSrvice.attend(attendObj).subscribe(
       next => {
         this.alertifyService.success('set as attend succesfully');
-        this.voter.attend = true;
+        this.voter.attend = attendObj.attend;
       },
       error => {
         this.alertifyService.error('could not set as attend');

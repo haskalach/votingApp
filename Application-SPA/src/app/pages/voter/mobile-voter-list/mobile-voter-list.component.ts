@@ -39,7 +39,7 @@ export class MobileVoterListComponent implements OnInit {
     civilIdMouhavaza: [],
     civilIdKadaa: [],
     civilIdRegion: [],
-    civilIdPlace: []
+    referenceUsers: []
   };
   constructor(
     private voterService: VoterService,

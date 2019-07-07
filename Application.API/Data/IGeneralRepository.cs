@@ -26,7 +26,7 @@ namespace Application.API.Data {
         Task<Voter> GetVoter (int code, int VoterTypeId, int? OrganzationId);
         Task<Voter> GetVoterById (int voterId, int OrganzationId);
         Task<VotingYears> GetVotingYear (int VoterId, int OrganizationId, string Year);
-        Task<ConfigList> GetConfigList (int VoterTypeId);
+        Task<ConfigList> GetConfigList (int VoterTypeId,int OrganizationId);
 
     }
 }

@@ -39,6 +39,9 @@ export class VoterService {
       if (voterParams.code) {
         params = params.append('code', voterParams.code);
       }
+      if (voterParams.referenceId) {
+        params = params.append('referenceId', voterParams.referenceId);
+      }
       if (voterParams.firstNameArabic) {
         params = params.append('firstNameArabic', voterParams.firstNameArabic);
       }
@@ -153,9 +156,10 @@ export class VoterService {
       this.baseUrl + this.voterRepo + '/contact/' + id
     );
   }
-  attend(id): Observable<Voter> {
-    return this.http.get<Voter>(
-      this.baseUrl + this.voterRepo + '/attend/' + id
+  attend(obj): Observable<Voter> {
+    return this.http.post<Voter>(
+      this.baseUrl + this.voterRepo + '/attend',
+      obj
     );
   }
   getReferenceVoters(

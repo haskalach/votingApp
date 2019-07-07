@@ -8,6 +8,6 @@ namespace Application.API.Models {
         public ICollection<string> civilIdMouhavaza { get; set; }
         public ICollection<string> civilIdKadaa { get; set; }
         public ICollection<string> civilIdRegion { get; set; }
-        public ICollection<string> civilIdPlace { get; set; }
+        public ICollection<SelectObject> referenceUsers { get; set; }
     }
 }

@@ -35,7 +35,7 @@ export class ReferenceVoterListComponent implements OnInit {
     civilIdMouhavaza: [],
     civilIdKadaa: [],
     civilIdRegion: [],
-    civilIdPlace: []
+    referenceUsers: []
   };
   constructor(private voterService: VoterService) {}
 

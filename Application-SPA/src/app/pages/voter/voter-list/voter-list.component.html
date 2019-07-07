@@ -76,18 +76,6 @@
         </select>
         <select
           class="form-control"
-          [(ngModel)]="voterParams.civilIdPlace"
-          placeholder="civilIdRegion"
-        >
-          <option [ngValue]="null">Select Place</option>
-          <option
-            *ngFor="let option of ConfigList.civilIdPlace"
-            [ngValue]="option"
-            >{{ option }}
-          </option>
-        </select>
-        <select
-          class="form-control"
           [(ngModel)]="voterParams.attend"
           placeholder="Attend"
         >
@@ -107,7 +95,7 @@
         <select
           class="form-control"
           [(ngModel)]="voterParams.abroad"
-          placeholder="Contacted"
+          placeholder="abroad"
         >
           <option [ngValue]="null">Abroad</option>
           <option [ngValue]="true">Yes</option>
@@ -133,6 +121,18 @@
             >{{ option }}
           </option>
         </select>
+        <select
+        class="form-control"
+        [(ngModel)]="voterParams.referenceId"
+        placeholder="civilIdRegion"
+      >
+        <option [ngValue]="null">Select Reference</option>
+        <option
+          *ngFor="let option of ConfigList.referenceUsers"
+          [ngValue]="option.value"
+          >{{ option.name }}
+        </option>
+      </select>
       </div>
       <div class="btn-section">
         <button class="btn btn-success add-btn" (click)="refreshData()">

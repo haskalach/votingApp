@@ -5,5 +5,9 @@ export interface ConfigList {
   civilIdMouhavaza: string[];
   civilIdKadaa: string[];
   civilIdRegion: string[];
-  civilIdPlace: string[];
+  referenceUsers: SelectOnject[];
+}
+export interface SelectOnject {
+  value: number;
+  name: string;
 }

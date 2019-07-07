@@ -110,6 +110,10 @@ namespace Application.API.Data {
             if (voterParamas.abroad != null) {
                 voters = voters.Where (x => x.Abroad == voterParamas.abroad);
             }
+            if (voterParamas.referenceId > 0) {
+
+                voters = voters.Where (x => x.ReferenceId == voterParamas.referenceId);
+            }
 
             return await PagedList<Voter>.CreatAsync (voters, voterParamas.PageNumber, voterParamas.PageSize);
         }
@@ -186,6 +190,15 @@ namespace Application.API.Data {
 
                 voters = voters.Where (x => x.FatherNameArabic == (voterParamas.fatherNameArabic).Trim ());
             }
+            if (voterParamas.contacted != null) {
+                voters = voters.Where (x => x.Contacted == voterParamas.contacted);
+            }
+            if (voterParamas.attend != null) {
+                voters = voters.Where (x => x.Attend == voterParamas.attend);
+            }
+            if (voterParamas.abroad != null) {
+                voters = voters.Where (x => x.Abroad == voterParamas.abroad);
+            }
             if (voterParamas.voted != null) {
                 if (voterParamas.voted == true) {
                     voters = voters.Where (x => (x.VotingYears.Any (year => year.Year == DateTime.Today.Year.ToString ())));
@@ -197,9 +210,9 @@ namespace Application.API.Data {
             return await PagedList<Voter>.CreatAsync (voters, voterParamas.PageNumber, voterParamas.PageSize);
         }
 
-        public async Task<ConfigList> GetConfigList (int VoterTypeId) {
+        public async Task<ConfigList> GetConfigList (int VoterTypeId, int OrganizationId) {
             var voters = await _context.Voters.Where (v => v.VoterTypeId == VoterTypeId).ToListAsync ();
-
+            var organizationUsers = await GetOrganizationReferences (OrganizationId, 0);
             var CondifgList = new ConfigList () {
                 religion = new List<string> (),
                 politics = new List<string> (),
@@ -207,7 +220,8 @@ namespace Application.API.Data {
                 civilIdMouhavaza = new List<string> (),
                 civilIdKadaa = new List<string> (),
                 civilIdRegion = new List<string> (),
-                civilIdPlace = new List<string> ()
+                referenceUsers = new List<SelectObject> ()
+
             };
 
             foreach (var item in voters) {
@@ -229,9 +243,13 @@ namespace Application.API.Data {
                 if (item.CivilIdRegion != null && item.CivilIdRegion.Trim () != "" && !CondifgList.civilIdRegion.Contains (item.CivilIdRegion)) {
                     CondifgList.civilIdRegion.Add (item.CivilIdRegion);
                 }
-                if (item.CivilIdPlace != null && item.CivilIdPlace.Trim () != "" && !CondifgList.civilIdPlace.Contains (item.CivilIdPlace)) {
-                    CondifgList.civilIdPlace.Add (item.CivilIdPlace);
-                }
+            }
+            foreach (var user in organizationUsers) {
+                var selectObject = new SelectObject () {
+                    Value = user.Id,
+                    Name = user.UserName
+                };
+                CondifgList.referenceUsers.Add (selectObject);
             }
             return CondifgList;
         }

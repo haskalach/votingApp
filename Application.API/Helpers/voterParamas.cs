@@ -21,6 +21,8 @@ namespace Application.API.Helpers {
         public string civilIdKadaa { get; set; }
         public string civilIdRegion { get; set; }
         public string civilIdPlace { get; set; }
+        public string registeryNumber { get; set; }
+        public int referenceId { get; set; }
         public int PageSize {
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value; }

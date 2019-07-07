@@ -37,7 +37,8 @@ export class VoterListComponent implements OnInit {
     politic: null,
     attend: null,
     abroad: null,
-    contacted: null
+    contacted: null,
+    referenceId: null
   };
   ReferenceUsers: User[];
   ConfigList: ConfigList = {
@@ -47,7 +48,7 @@ export class VoterListComponent implements OnInit {
     civilIdMouhavaza: [],
     civilIdKadaa: [],
     civilIdRegion: [],
-    civilIdPlace: []
+    referenceUsers: []
   };
   constructor(
     private voterService: VoterService,
