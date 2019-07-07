@@ -98,6 +98,22 @@ namespace Application.API.Controllers {
 
         }
 
+        [HttpPost ("changePassword")]
+        public async Task<IActionResult> changePassword (ChangePasswordDto changePasswordDto) {
+            var userId = User.FindFirst (ClaimTypes.NameIdentifier).Value;
+            var user = await _userManager.FindByIdAsync (userId);
+            if (user == null) {
+                return BadRequest ("wrong user Name");
+            }
+            var result = await _userManager.ChangePasswordAsync (user, changePasswordDto.CurrentPassword, changePasswordDto.Password);
+            if (result.Succeeded) {
+                return Ok ();
+            } else {
+                return BadRequest ();
+            }
+
+        }
+
         private async Task<string> GenerateJwtToken (User user) {
 
             var claims = new List<Claim> {

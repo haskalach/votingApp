@@ -1,5 +1,5 @@
 import { AuthService } from './../../../_services/auth.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { User } from 'src/app/_models/user';
@@ -12,6 +12,7 @@ import { UserService } from 'src/app/_services/user/user.service';
   styleUrls: ['./member-edit.component.scss']
 })
 export class MemberEditComponent implements OnInit {
+  changepasswordForm: FormGroup;
   user: User;
   userForm: FormGroup;
   photoUrl: string;
@@ -29,6 +30,10 @@ export class MemberEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.changepasswordForm = new FormGroup({
+      currentPassword: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
     this.authService.currentPhotoUrl.subscribe(p => {
       this.photoUrl = p;
     });
@@ -60,5 +65,22 @@ export class MemberEditComponent implements OnInit {
   }
   updateMainPhoto(event: string) {
     this.user.photoUrl = event;
+  }
+  onSubmit() {
+    if (this.changepasswordForm.valid) {
+      this.authService.changePassword(this.changepasswordForm.value).subscribe(
+        next => {
+          // console.log('logged in succesfully');
+          this.alertify.success('password changed succesfully');
+          this.changepasswordForm.reset();
+        },
+        error => {
+          this.alertify.error(error);
+        },
+        () => {
+          // this.router.navigate(['/members']);
+        }
+      );
+    }
   }
 }

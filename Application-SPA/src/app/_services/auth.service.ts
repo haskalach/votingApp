@@ -36,6 +36,9 @@ export class AuthService {
       })
     );
   }
+  changePassword(model: any) {
+    return this.http.post(this.baseUrl + this.repo + 'changePassword', model);
+  }
 
   resgiter(user: User) {
     return this.http.post(this.baseUrl + this.repo + 'register', user);
