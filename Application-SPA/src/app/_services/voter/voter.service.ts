@@ -202,6 +202,15 @@ export class VoterService {
       if (voterParams.voted !== null) {
         params = params.append('voted', voterParams.voted);
       }
+      if (voterParams.contacted !== null) {
+        params = params.append('contacted', voterParams.contacted);
+      }
+      if (voterParams.attend !== null) {
+        params = params.append('attend', voterParams.attend);
+      }
+      if (voterParams.abroad !== null) {
+        params = params.append('abroad', voterParams.abroad);
+      }
     }
 
     if (page != null && itemsPerPage != null) {
