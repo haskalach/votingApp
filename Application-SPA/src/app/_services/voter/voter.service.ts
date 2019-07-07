@@ -162,6 +162,12 @@ export class VoterService {
       obj
     );
   }
+  abroad(obj): Observable<Voter> {
+    return this.http.post<Voter>(
+      this.baseUrl + this.voterRepo + '/abroad',
+      obj
+    );
+  }
   getReferenceVoters(
     page?,
     itemsPerPage?,

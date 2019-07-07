@@ -213,6 +213,10 @@
       <span>
         {{ voter.abroad }}
       </span>
+      <ng-container >
+          <fa-icon [icon]="['fas', 'vote-yea']" (click)="abroad(!voter.abroad)" *ngIf="!voter.abroad"></fa-icon>
+          <fa-icon [icon]="['fas', 'ban']" (click)="abroad(!voter.abroad)" *ngIf="voter.abroad"></fa-icon>
+        </ng-container>
     </div>
     <div class="col-12 col-sm-6 field-container">
       <label>

@@ -147,16 +147,31 @@ namespace Application.API.Controllers {
         }
 
         [HttpPost ("attend")]
-        public async Task<IActionResult> Attend (AttendDto attendDto) {
+        public async Task<IActionResult> Attend (BoolChangeDto attendDto) {
             var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _repo.GetUser (userId);
             var OrganizationId = userFromRepo.OrganizationId;
             var voterFromRepo = await _repo.GetVoterById (attendDto.Id, OrganizationId ?? default (int));
-            voterFromRepo.Attend = attendDto.Attend;
+            voterFromRepo.Attend = attendDto.Status;
             if (await _repo.SaveAll ()) {
                 return Ok (voterFromRepo);
             } else {
                 return BadRequest ("Could not Set Attend For This Voter");
+            }
+
+        }
+
+        [HttpPost ("abroad")]
+        public async Task<IActionResult> Abroad (BoolChangeDto abroadDto) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var voterFromRepo = await _repo.GetVoterById (abroadDto.Id, OrganizationId ?? default (int));
+            voterFromRepo.Abroad = abroadDto.Status;
+            if (await _repo.SaveAll ()) {
+                return Ok (voterFromRepo);
+            } else {
+                return BadRequest ("Could not Set Abroad For This Voter");
             }
 
         }

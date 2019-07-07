@@ -75,15 +75,30 @@ export class VoterViewComponent implements OnInit {
   attend(status) {
     const attendObj = {
       id: this.id,
-      attend: status
+      status: status
     };
     this.voterSrvice.attend(attendObj).subscribe(
       next => {
         this.alertifyService.success('set as attend succesfully');
-        this.voter.attend = attendObj.attend;
+        this.voter.attend = attendObj.status;
       },
       error => {
         this.alertifyService.error('could not set as attend');
+      }
+    );
+  }
+  abroad(status) {
+    const attendObj = {
+      id: this.id,
+      status: status
+    };
+    this.voterSrvice.abroad(attendObj).subscribe(
+      next => {
+        this.alertifyService.success('set as Abroad succesfully');
+        this.voter.abroad = attendObj.status;
+      },
+      error => {
+        this.alertifyService.error('could not set as Abroad');
       }
     );
   }

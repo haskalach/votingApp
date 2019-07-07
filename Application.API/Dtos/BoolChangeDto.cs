@@ -1,8 +1,8 @@
 namespace Application.API.Dtos
 {
-    public class AttendDto
+    public class BoolChangeDto
     {
         public int Id { get; set; }
-        public bool Attend { get; set; }
+        public bool Status { get; set; }
     }
 }
