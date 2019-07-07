@@ -95,7 +95,7 @@ select.ng-invalid.ng-touched {
 .overflow-auto {
   overflow: auto;
 }
-.table-container{
+.table-container {
   overflow: auto;
 }
 @media only screen and (max-width: 400px) {
@@ -110,5 +110,18 @@ select.ng-invalid.ng-touched {
         margin-right: 0px;
       }
     }
+  }
+  .form-inline {
+    justify-content: center;
+  }
+  .form-inline > .form-control {
+    margin-bottom: 5px;
+  }
+  .filter-section {
+    flex-flow: wrap;
+  }
+  .filter-section > .form-control {
+    width: calc(50% - 5px);
+    margin-bottom: 5px;
   }
 }
