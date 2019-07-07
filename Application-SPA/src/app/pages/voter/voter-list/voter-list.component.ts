@@ -110,4 +110,16 @@ export class VoterListComponent implements OnInit {
       this.ConfigList = next;
     });
   }
+  exportVotersFiltered() {
+    this.voterService.exportVotersFiltered(this.voterParams).subscribe(
+      next => {
+        // console.log({ next });
+        window.location.href = next['url'];
+      },
+      error => {
+        this.alertifyService.error('could not fetch data');
+        // console.log({ error });
+      }
+    );
+  }
 }

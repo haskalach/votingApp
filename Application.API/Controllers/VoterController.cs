@@ -370,6 +370,36 @@ namespace Application.API.Controllers {
             EportObj.URL = URL;
             return Ok (EportObj);
         }
+
+        [HttpGet ("ExportFiltered")]
+        public async Task<IActionResult> ExcelFiltered ([FromQuery] VoterParams voterParams) {
+            var userId = int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser (userId);
+            var OrganizationId = userFromRepo.OrganizationId;
+            var Organization = await _repo.GetOrganization (OrganizationId?? default (int));
+            var VoterTypeId = Organization.VoterTypeId;
+            // await Task.Yield ();
+            string sWebRootFolder = _hostingEnvironment.WebRootPath;
+            string sFileName = @"demo.xlsx";
+            string URL = string.Format ("{0}://{1}/{2}", Request.Scheme, Request.Host, sFileName);
+            FileInfo file = new FileInfo (Path.Combine (sWebRootFolder, sFileName));
+            if (file.Exists) {
+                file.Delete ();
+                file = new FileInfo (Path.Combine (sWebRootFolder, sFileName));
+            }
+            using (ExcelPackage package = new ExcelPackage (file)) {
+                // add a new worksheet to the empty workbook
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add ("Voters");
+                var voters = await _repo.GetAllVotersByTypeFiltered (VoterTypeId, voterParams);
+                var votersForExport = _mapper.Map<IEnumerable<VotersExportDto>> (voters);
+                worksheet.Cells.LoadFromCollection (votersForExport, true);
+
+                package.Save (); //Save the workbook.
+            }
+            Export EportObj = new Export ();
+            EportObj.URL = URL;
+            return Ok (EportObj);
+        }
         private static ExcelDataSetConfiguration GetDataSetConfig () {
             return new ExcelDataSetConfiguration {
                 ConfigureDataTable = _ => new ExcelDataTableConfiguration () {

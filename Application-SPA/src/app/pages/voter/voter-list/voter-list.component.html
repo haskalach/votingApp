@@ -122,19 +122,25 @@
           </option>
         </select>
         <select
-        class="form-control"
-        [(ngModel)]="voterParams.referenceId"
-        placeholder="civilIdRegion"
-      >
-        <option [ngValue]="null">Select Reference</option>
-        <option
-          *ngFor="let option of ConfigList.referenceUsers"
-          [ngValue]="option.value"
-          >{{ option.name }}
-        </option>
-      </select>
+          class="form-control"
+          [(ngModel)]="voterParams.referenceId"
+          placeholder="civilIdRegion"
+        >
+          <option [ngValue]="null">Select Reference</option>
+          <option
+            *ngFor="let option of ConfigList.referenceUsers"
+            [ngValue]="option.value"
+            >{{ option.name }}
+          </option>
+        </select>
       </div>
       <div class="btn-section">
+        <button
+          class="btn btn-success add-btn"
+          (click)="exportVotersFiltered()"
+        >
+          Export All Filtered Data
+        </button>
         <button class="btn btn-success add-btn" (click)="refreshData()">
           Filter
         </button>
@@ -212,7 +218,7 @@
     nextText="&rsaquo;"
     firstText="&laquo;"
     lastText="&raquo;"
-    [maxSize] = "10"
+    [maxSize]="10"
   >
   </pagination>
 </div>

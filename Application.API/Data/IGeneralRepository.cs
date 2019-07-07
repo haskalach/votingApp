@@ -17,6 +17,7 @@ namespace Application.API.Data {
         Task<PagedList<Voter>> GetVoters (VoterParams voterParam);
         Task<IEnumerable<Voter>> GetAllVoters ();
         Task<IEnumerable<Voter>> GetAllVotersByType (int VoterTypeId);
+        Task<IEnumerable<Voter>> GetAllVotersByTypeFiltered (int VoterTypeId, VoterParams engenereParams);
         Task<PagedList<Voter>> GetReferenceVoters (int referenceId, VoterParams engenereParams);
         Task<Photo> GetMainPhoto (int userId);
         Task<IEnumerable<Organization>> GetOrganizations ();

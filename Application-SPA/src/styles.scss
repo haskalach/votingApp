@@ -28,6 +28,9 @@ select.ng-invalid.ng-touched {
   border-radius: 4px;
 }
 
+.btn-section > button {
+  margin-left: 5px;
+}
 .nav-tabs > li.open,
 .member-tabset > .nav-tabs > li:hover {
   border-bottom: 4px solid #fbcdcf;

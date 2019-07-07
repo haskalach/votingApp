@@ -263,5 +263,73 @@ namespace Application.API.Data {
             var organization = await _context.Organizations.Where (o => o.VoterTypeId == voterTypeId).FirstOrDefaultAsync ();
             return organization;
         }
+
+        public async Task<IEnumerable<Voter>> GetAllVotersByTypeFiltered (int VoterTypeId, VoterParams voterParamas) {
+            var voters = _context.Voters.Where (v => v.VoterTypeId == VoterTypeId).Include (v => v.VotingYears).AsQueryable ();;
+            if (voterParamas.voterTypeId > 0) {
+                voters = voters.Where (x => x.VoterTypeId == voterParamas.voterTypeId);
+            }
+            if (!string.IsNullOrEmpty (voterParamas.religion)) {
+                voters = voters.Where (x => x.Religion == (voterParamas.religion).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.politic)) {
+
+                voters = voters.Where (x => x.Politic == (voterParamas.politic).Trim ());
+            }
+            if (voterParamas.code > 0) {
+
+                voters = voters.Where (x => x.Code == voterParamas.code);
+            }
+            if (!string.IsNullOrEmpty (voterParamas.firstNameArabic)) {
+
+                voters = voters.Where (x => x.FirstNameArabic == (voterParamas.firstNameArabic).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.familyArabic)) {
+
+                voters = voters.Where (x => x.FamilyArabic == (voterParamas.familyArabic).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.fatherNameArabic)) {
+
+                voters = voters.Where (x => x.FatherNameArabic == (voterParamas.fatherNameArabic).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.subChapter)) {
+
+                voters = voters.Where (x => x.SubChapter == (voterParamas.subChapter).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.school)) {
+
+                voters = voters.Where (x => x.School.Contains ((voterParamas.school).Trim ()));
+            }
+            if (!string.IsNullOrEmpty (voterParamas.civilIdKadaa)) {
+
+                voters = voters.Where (x => x.CivilIdKadaa == (voterParamas.civilIdKadaa).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.civilIdMouhavaza)) {
+
+                voters = voters.Where (x => x.CivilIdMouhavaza == (voterParamas.civilIdMouhavaza).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.civilIdPlace)) {
+
+                voters = voters.Where (x => x.CivilIdPlace == (voterParamas.civilIdPlace).Trim ());
+            }
+            if (!string.IsNullOrEmpty (voterParamas.civilIdRegion)) {
+
+                voters = voters.Where (x => x.CivilIdRegion == (voterParamas.civilIdRegion).Trim ());
+            }
+            if (voterParamas.contacted != null) {
+                voters = voters.Where (x => x.Contacted == voterParamas.contacted);
+            }
+            if (voterParamas.attend != null) {
+                voters = voters.Where (x => x.Attend == voterParamas.attend);
+            }
+            if (voterParamas.abroad != null) {
+                voters = voters.Where (x => x.Abroad == voterParamas.abroad);
+            }
+            if (voterParamas.referenceId > 0) {
+
+                voters = voters.Where (x => x.ReferenceId == voterParamas.referenceId);
+            }
+            return await voters.ToListAsync ();
+        }
     }
 }

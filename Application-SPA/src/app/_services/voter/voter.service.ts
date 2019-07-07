@@ -224,6 +224,74 @@ export class VoterService {
       this.baseUrl + this.voterRepo + '/export/' + id
     );
   }
+  exportVotersFiltered(voterParams?) {
+    let params = new HttpParams();
+    if (voterParams) {
+      if (voterParams.voterTypeId) {
+        params = params.append('voterTypeId', voterParams.voterTypeId);
+      }
+      if (voterParams.religion) {
+        params = params.append('religion', voterParams.religion);
+      }
+      if (voterParams.politic) {
+        params = params.append('politic', voterParams.politic);
+      }
+      if (voterParams.code) {
+        params = params.append('code', voterParams.code);
+      }
+      if (voterParams.referenceId) {
+        params = params.append('referenceId', voterParams.referenceId);
+      }
+      if (voterParams.firstNameArabic) {
+        params = params.append('firstNameArabic', voterParams.firstNameArabic);
+      }
+      if (voterParams.familyArabic) {
+        params = params.append('familyArabic', voterParams.familyArabic);
+      }
+      if (voterParams.fatherNameArabic) {
+        params = params.append(
+          'fatherNameArabic',
+          voterParams.fatherNameArabic
+        );
+      }
+      if (voterParams.subChapter) {
+        params = params.append('subChapter', voterParams.subChapter);
+      }
+      if (voterParams.contacted !== null) {
+        params = params.append('contacted', voterParams.contacted);
+      }
+      if (voterParams.attend !== null) {
+        params = params.append('attend', voterParams.attend);
+      }
+      if (voterParams.abroad !== null) {
+        params = params.append('abroad', voterParams.abroad);
+      }
+      if (voterParams.reiligion) {
+        params = params.append('reiligion', voterParams.reiligion);
+      }
+      if (voterParams.school) {
+        params = params.append('school', voterParams.school);
+      }
+      if (voterParams.civilIdMouhavaza) {
+        params = params.append(
+          'civilIdMouhavaza',
+          voterParams.civilIdMouhavaza
+        );
+      }
+      if (voterParams.civilIdKadaa) {
+        params = params.append('civilIdKadaa', voterParams.civilIdKadaa);
+      }
+      if (voterParams.civilIdRegion) {
+        params = params.append('civilIdRegion', voterParams.civilIdRegion);
+      }
+      if (voterParams.civilIdPlace) {
+        params = params.append('civilIdPlace', voterParams.civilIdPlace);
+      }
+    }
+    return this.http.get(this.baseUrl + this.voterRepo + '/exportFiltered', {
+      params
+    });
+  }
   getConfig() {
     return this.http.get<ConfigList>(
       this.baseUrl + this.voterRepo + '/configuration'
