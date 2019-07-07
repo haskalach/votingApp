@@ -8,32 +8,34 @@
       Add Organization
     </button>
   </div>
-  <table class="table">
-    <tr>
-      <th style="width:20%">Id</th>
-      <th style="width:40%">Name</th>
-      <th style="width:40%">Type</th>
-    </tr>
-    <tr *ngFor="let org of organizations">
-      <td>
-        {{ org.id }}
-      </td>
-      <td>
-        {{ org.name }}
-      </td>
-      <td>
-        <select
-          class="form-control"
-          [(ngModel)]="org.voterTypeId"
-          (change)="updateOrganizationType(org)"
-        >
-          <option
-            *ngFor="let orgType of organizationTypes"
-            [ngValue]="orgType.id"
-            >{{ orgType.name }}</option
+  <div class="col-12 table-container">
+    <table class="table">
+      <tr>
+        <th style="width:20%">Id</th>
+        <th style="width:40%">Name</th>
+        <th style="width:40%">Type</th>
+      </tr>
+      <tr *ngFor="let org of organizations">
+        <td>
+          {{ org.id }}
+        </td>
+        <td>
+          {{ org.name }}
+        </td>
+        <td>
+          <select
+            class="form-control"
+            [(ngModel)]="org.voterTypeId"
+            (change)="updateOrganizationType(org)"
           >
-        </select>
-      </td>
-    </tr>
-  </table>
+            <option
+              *ngFor="let orgType of organizationTypes"
+              [ngValue]="orgType.id"
+              >{{ orgType.name }}</option
+            >
+          </select>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

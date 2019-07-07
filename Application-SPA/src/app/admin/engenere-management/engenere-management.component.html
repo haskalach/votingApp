@@ -43,51 +43,49 @@
       </div>
     </div>
   </div>
-  <table class="table">
-    <tr>
-      <th>Type</th>
-      <th>Code</th>
-      <th>First Name Arabic</th>
-      <th>First Name</th>
-      <th>Family</th>
-      <th>Birth Date</th>
-      <th>Religion</th>
-      <th>Politic</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let voter of voters">
-      <td>{{ voter.voterType.name }}</td>
-      <td>
-        {{ voter.code }}
-      </td>
-      <td>
-        {{ voter.firstNameArabic }}
-      </td>
-      <td>
-        {{ voter.firstName }}
-      </td>
-      <td>
-        {{ voter.family }}
-      </td>
-      <td>
-        {{ voter.birthDate | date }}
-      </td>
-      <td>
-        {{ voter.religion }}
-      </td>
-      <td>
-        {{ voter.politic }}
-      </td>
-      <td class="action-tab">
-        <a [routerLink]="['/admin/voter-view/' + voter.id]">
-          <fa-icon [icon]="['fas', 'eye']"></fa-icon>
-        </a>
-        <a [routerLink]="['/admin/voter-edit/' + voter.id]">
-          <fa-icon [icon]="['fas', 'user-edit']"></fa-icon>
-        </a>
-      </td>
-    </tr>
-  </table>
+  <div class="col-12 table-container">
+    <table class="table">
+      <tr>
+        <th>Type</th>
+        <th>Code</th>
+        <th>First Name</th>
+        <th>Family</th>
+        <th>Birth Date</th>
+        <th>Religion</th>
+        <th>Politic</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let voter of voters">
+        <td>{{ voter.voterType.name }}</td>
+        <td>
+          {{ voter.code }}
+        </td>
+        <td>
+          {{ voter.firstNameArabic }}
+        </td>
+        <td>
+          {{ voter.familyArabic }}
+        </td>
+        <td>
+          {{ voter.birthDate | date }}
+        </td>
+        <td>
+          {{ voter.religion }}
+        </td>
+        <td>
+          {{ voter.politic }}
+        </td>
+        <td class="action-tab">
+          <a [routerLink]="['/admin/voter-view/' + voter.id]">
+            <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+          </a>
+          <a [routerLink]="['/admin/voter-edit/' + voter.id]">
+            <fa-icon [icon]="['fas', 'user-edit']"></fa-icon>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 <div class="pagination-container d-flex justify-content-center">
   <pagination
@@ -97,7 +95,7 @@
     [(ngModel)]="pagination.currentPage"
     [itemsPerPage]="pagination.itemsPerPage"
     (pageChanged)="pageChanged($event)"
-    [maxSize] = "10"
+    [maxSize]="10"
     previousText="&lsaquo;"
     nextText="&rsaquo;"
     firstText="&laquo;"

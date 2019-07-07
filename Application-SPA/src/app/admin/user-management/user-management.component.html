@@ -22,70 +22,72 @@
       Add User
     </button>
   </div>
-  <table class="table">
-    <tr>
-      <th style="width:10%">User Id</th>
-      <th>UserName</th>
-      <th>Active Roles</th>
-      <th>Organization</th>
-      <th>Roles Edit</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let user of users">
-      <td>
-        {{ user.id }}
-      </td>
-      <td>
-        {{ user.userName }}
-      </td>
-      <td>
-        {{ user.roles }}
-      </td>
-      <td>
-        <select
-          class="form-controll"
-          [(ngModel)]="user.organizationId"
-          *ngIf="user.userName !== 'Admin'"
-          (change)="updateUserOrganization(user)"
-        >
-          <option [ngValue]="null">No Selected Organization</option>
-          <option *ngFor="let org of organizations" [ngValue]="org.id">{{
-            org.name
-          }}</option>
-        </select>
-      </td>
-      <td>
-        <button
-          class="btn btn-info"
-          (click)="editRolesModal(user)"
-          *ngIf="rolesWithoutRef(user.roles)"
-        >
-          Edit Roles
-        </button>
-      </td>
-      <td>
-        <ng-container *ngIf="user.roles[0] !== 'Admin'">
-          {{ user.disable }}
-          <button
-            (click)="updateUserStatus(user.id, true)"
-            *ngIf="user.disable == false"
-            class="statusbtn"
+  <div class="col-12 table-container">
+    <table class="table">
+      <tr>
+        <th style="width:10%">User Id</th>
+        <th>UserName</th>
+        <th>Active Roles</th>
+        <th>Organization</th>
+        <th>Roles Edit</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let user of users">
+        <td>
+          {{ user.id }}
+        </td>
+        <td>
+          {{ user.userName }}
+        </td>
+        <td>
+          {{ user.roles }}
+        </td>
+        <td>
+          <select
+            class="form-controll"
+            [(ngModel)]="user.organizationId"
+            *ngIf="user.userName !== 'Admin'"
+            (change)="updateUserOrganization(user)"
           >
-            Disable User
-          </button>
+            <option [ngValue]="null">No Selected Organization</option>
+            <option *ngFor="let org of organizations" [ngValue]="org.id">{{
+              org.name
+            }}</option>
+          </select>
+        </td>
+        <td>
           <button
-            (click)="updateUserStatus(user.id, false)"
-            *ngIf="user.disable == true"
-            class="statusbtn"
+            class="btn btn-info"
+            (click)="editRolesModal(user)"
+            *ngIf="rolesWithoutRef(user.roles)"
           >
-            Enable User
+            Edit Roles
           </button>
-          <fa-icon
-            [icon]="['fas', 'trash']"
-            (click)="delteUser(user.id)"
-          ></fa-icon>
-        </ng-container>
-      </td>
-    </tr>
-  </table>
+        </td>
+        <td>
+          <ng-container *ngIf="user.roles[0] !== 'Admin'">
+            {{ user.disable }}
+            <button
+              (click)="updateUserStatus(user.id, true)"
+              *ngIf="user.disable == false"
+              class="statusbtn"
+            >
+              Disable User
+            </button>
+            <button
+              (click)="updateUserStatus(user.id, false)"
+              *ngIf="user.disable == true"
+              class="statusbtn"
+            >
+              Enable User
+            </button>
+            <fa-icon
+              [icon]="['fas', 'trash']"
+              (click)="delteUser(user.id)"
+            ></fa-icon>
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
