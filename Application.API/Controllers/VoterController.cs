@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 
 namespace Application.API.Controllers {
@@ -315,7 +317,7 @@ namespace Application.API.Controllers {
                     return Ok ();
                 } else {
                     await _context.BulkInsertAsync (list);
-                    return Ok();
+                    return Ok ();
                 }
                 // if () {
                 //     return Ok ();
@@ -331,27 +333,13 @@ namespace Application.API.Controllers {
         [Authorize (Policy = "RequireAdminRole")]
         [HttpDelete ("oldData/{Id}")]
         public async Task<IActionResult> deleteOldData (int Id) {
-            var voters = await _repo.GetAllVotersByType (Id);
-            var changes = false;
-            foreach (var voter in voters) {
-                if (voter != null) {
-                    changes = true;
-                    _repo.Delete (voter);
-                }
+            var voters = new List<Voter> ();
+            voters = _context.Voters.Where (v => v.VoterTypeId == Id).Include (v => v.VotingYears).ToList ();
+            _context.BulkDelete (voters);
+            // var Organization = await _repo.GetOrganizationByType (Id);
+            // var referenceUsers = await _repo.GetOrganizationReferences (Organization.Id, 0);
 
-            }
-            var Organization = await _repo.GetOrganizationByType (Id);
-            var referenceUsers = await _repo.GetOrganizationReferences (Organization.Id, 0);
-            foreach (var user in referenceUsers) {
-                changes = true;
-                _repo.Delete (user);
-
-            }
-            if (await _repo.SaveAll ()) {
-                return Ok ();
-            } else {
-                return BadRequest ("could not delete old data");
-            }
+            return Ok ();
         }
 
         [HttpGet ("configuration")]

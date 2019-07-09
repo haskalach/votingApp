@@ -78,14 +78,17 @@ export class UploadEngeneresComponent implements OnInit {
     );
   }
   deleteData() {
+    this.loading = true;
     this.voterService.deleteOldData(this.VoterTypeId).subscribe(
       next => {
         // console.log({ next });
         // window.location.href = next['url'];
         this.alertify.success('old data deleted Succesfully');
+        this.loading = false;
       },
       error => {
         this.alertify.error('old faild to delete');
+        this.loading = false;
         // console.log({ error });
       }
     );
