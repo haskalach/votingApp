@@ -10,6 +10,7 @@ using Application.API.Dtos;
 using Application.API.Helpers;
 using Application.API.Models;
 using AutoMapper;
+using EFCore.BulkExtensions;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -25,8 +26,10 @@ namespace Application.API.Controllers {
         private readonly IMapper _mapper;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly UserManager<User> _userManager;
+        private readonly DataContext _context;
 
-        public VoterController (IGeneralRepository repo, IMapper mapper, IHostingEnvironment hostingEnvironment, UserManager<User> userManager) {
+        public VoterController (IGeneralRepository repo, IMapper mapper, IHostingEnvironment hostingEnvironment, UserManager<User> userManager, DataContext context) {
+            _context = context;
             _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
             _repo = repo;
@@ -300,7 +303,7 @@ namespace Application.API.Controllers {
                                 //     list.Add (dataItem);
                                 // }
                                 list.Add (dataItem);
-                                _repo.Add (dataItem);
+                                // _repo.Add (dataItem);
 
                             }
                             System.IO.File.Delete (fullPath);
@@ -310,12 +313,15 @@ namespace Application.API.Controllers {
                 }
                 if (list.Count == 0) {
                     return Ok ();
-                }
-                if (await _repo.SaveAll ()) {
-                    return Ok ();
                 } else {
-                    return BadRequest ("something wrong happend while saving");
+                    await _context.BulkInsertAsync (list);
+                    return Ok();
                 }
+                // if () {
+                //     return Ok ();
+                // } else {
+                //     return BadRequest ("something wrong happend while saving");
+                // }
             } catch (System.Exception ex) {
                 return BadRequest ("Upload Failed: " + ex.Message);
             }
