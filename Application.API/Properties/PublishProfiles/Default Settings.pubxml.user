@@ -8,4 +8,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8/RRf4XoPUCE9LyukkkhGQAAAAACAAAAAAAQZgAAAAEAACAAAABRPYXYA6m7pBAv9VVkVhuAhQaTxIlPcd43nc9l1s/AtAAAAAAOgAAAAAIAACAAAACNBEQly7edkuQtMN/+MWjOLXrGfSJg7SJPjq4CTLZweSAAAACvf1pxWCzplXfkEaULZg75cS58XDvFNsqNwhHAQftsBkAAAABILmPTNitllFfTmNMyaOrYzosIxDaR26Ey9ppeNiiYnSwcu89Msr70nZg8Bpo5UaV1TUx60xkKrERwJESBsnHL</EncryptedPassword>
   </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL5040.site4now.net%3bInitial Catalog=DB_A4AC8B_pierrerebeiz%3bUser Id=DB_A4AC8B_pierrerebeiz_admin%3bPassword=P%40ssw0rd!%40#%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Application.API.Data.DataContext">
+      <Value>Data Source=SQL5040.site4now.net%3bInitial Catalog=DB_A4AC8B_pierrerebeiz%3bUser Id=DB_A4AC8B_pierrerebeiz_admin%3bPassword=P%40ssw0rd!%40#%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
 </Project>
