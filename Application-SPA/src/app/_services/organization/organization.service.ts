@@ -27,4 +27,10 @@ export class OrganizationService {
   updateOrganizationType(obj) {
     return this.http.put(this.baseUrl + this.repo + '/updateType', obj);
   }
+  deleteOrganization(id) {
+    return this.http.delete(this.baseUrl + this.repo + '/' + id);
+  }
+  deleteOrganizationType(id) {
+    return this.http.delete(this.baseUrl + this.repo + '/type/' + id);
+  }
 }

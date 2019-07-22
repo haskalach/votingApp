@@ -56,4 +56,15 @@ export class OrganizationManagementComponent implements OnInit {
       }
     );
   }
+  deleteOrganization(id) {
+    this.organizationService.deleteOrganization(id).subscribe(
+      next => {
+        this.alertifyService.success('organization Deleted Succesfully');
+        this.getOrganizationList();
+      },
+      error => {
+        this.alertifyService.error('organizationcant cant be deleted');
+      }
+    );
+  }
 }

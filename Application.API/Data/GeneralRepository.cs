@@ -331,5 +331,10 @@ namespace Application.API.Data {
             }
             return await voters.ToListAsync ();
         }
+
+        public async Task<VoterType> GetOrganizationTypeById (int id) {
+            var organizationType = await _context.VoterTypes.Where (ot => ot.Id == id).Include (v => v.Voters).FirstOrDefaultAsync ();
+            return organizationType;
+        }
     }
 }

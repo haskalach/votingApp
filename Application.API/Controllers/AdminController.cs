@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.API.Data;
 using Application.API.Dtos;
+using Application.API.Helpers;
 using Application.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -90,6 +91,11 @@ namespace Application.API.Controllers {
         [HttpDelete ("deleteUser/{userId}")]
         public async Task<IActionResult> deleteUser (int userId) {
             var usersFromRepo = await _repo.GetUser (userId);
+            var voterParams = new VoterParams();
+            var Voters = await _repo.GetReferenceVoters (userId, voterParams);
+            foreach (Voter element in Voters) {
+                element.ReferenceId = null;
+            }
             _repo.Delete (usersFromRepo);
             if (await _repo.SaveAll ()) {
                 return NoContent ();

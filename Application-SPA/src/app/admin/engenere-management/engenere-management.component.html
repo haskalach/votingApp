@@ -17,6 +17,9 @@
           Data Management
         </button>
       </div>
+      <div class="total-voters">
+        {{ pagination.totalItems }} Voters
+      </div>
     </div>
     <div class="row table-header-row">
       <div class="filter-section">
@@ -46,17 +49,17 @@
   <div class="col-12 table-container">
     <table class="table">
       <tr>
-        <th>Type</th>
         <th>Code</th>
         <th>First Name</th>
         <th>Family</th>
-        <th>Birth Date</th>
+        <th>Abroad</th>
+        <th>Contacted</th>
+        <th>Attend</th>
         <th>Religion</th>
         <th>Politic</th>
         <th>Actions</th>
       </tr>
       <tr *ngFor="let voter of voters">
-        <td>{{ voter.voterType.name }}</td>
         <td>
           {{ voter.code }}
         </td>
@@ -66,9 +69,9 @@
         <td>
           {{ voter.familyArabic }}
         </td>
-        <td>
-          {{ voter.birthDate | date }}
-        </td>
+        <td>{{ voter.abroad }}</td>
+        <td>{{ voter.contacted }}</td>
+        <td>{{ voter.attend }}</td>
         <td>
           {{ voter.religion }}
         </td>
@@ -79,9 +82,9 @@
           <a [routerLink]="['/admin/voter-view/' + voter.id]">
             <fa-icon [icon]="['fas', 'eye']"></fa-icon>
           </a>
-          <a [routerLink]="['/admin/voter-edit/' + voter.id]">
+          <!-- <a [routerLink]="['/admin/voter-edit/' + voter.id]">
             <fa-icon [icon]="['fas', 'user-edit']"></fa-icon>
-          </a>
+          </a> -->
         </td>
       </tr>
     </table>

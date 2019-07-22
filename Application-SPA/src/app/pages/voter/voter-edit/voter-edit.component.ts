@@ -38,6 +38,7 @@ export class VoterEditComponent implements OnInit {
       addressHome: new FormControl(),
       mobileHome: new FormControl(),
       phoneHome: new FormControl(),
+      email: new FormControl(),
       religion: new FormControl(),
       politic: new FormControl(),
       referenceId: new FormControl(null)

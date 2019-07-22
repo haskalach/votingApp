@@ -13,7 +13,8 @@
       <tr>
         <th style="width:20%">Id</th>
         <th style="width:40%">Name</th>
-        <th style="width:40%">Type</th>
+        <th style="width:30%">Type</th>
+        <th style="width:10%">Actions</th>
       </tr>
       <tr *ngFor="let org of organizations">
         <td>
@@ -34,6 +35,12 @@
               >{{ orgType.name }}</option
             >
           </select>
+        </td>
+        <td>
+          <fa-icon
+            [icon]="['fas', 'trash']"
+            (click)="deleteOrganization(org.id)"
+          ></fa-icon>
         </td>
       </tr>
     </table>

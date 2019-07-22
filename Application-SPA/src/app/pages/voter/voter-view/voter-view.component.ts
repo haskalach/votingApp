@@ -4,6 +4,8 @@ import { VoterService } from 'src/app/_services/voter/voter.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-voter-view',
@@ -16,10 +18,12 @@ export class VoterViewComponent implements OnInit {
   VotingYears: string[] = null;
   currentYear: number;
   VoterTypeEnum = VoterTypeEnum;
+  VoterForm: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private voterSrvice: VoterService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -30,12 +34,25 @@ export class VoterViewComponent implements OnInit {
       }
     });
     this.currentYear = new Date().getFullYear();
+    this.VoterForm = new FormGroup({
+      addressWork: new FormControl(),
+      mobileWork: new FormControl(),
+      phoneWork: new FormControl(),
+      addressHome: new FormControl(),
+      mobileHome: new FormControl(),
+      phoneHome: new FormControl(),
+      email: new FormControl(),
+      religion: new FormControl(),
+      politic: new FormControl(),
+      referenceId: new FormControl(null)
+    });
   }
 
   getVoter(id) {
     this.voterSrvice.getVoter(id).subscribe((next: Voter) => {
       // console.log(next);
       this.voter = next;
+      this.VoterForm.patchValue(this.voter);
       this.VotingYears = [];
       this.voter.votingYears.forEach(year => {
         this.VotingYears.push(year.year.toString());
@@ -102,7 +119,17 @@ export class VoterViewComponent implements OnInit {
       }
     );
   }
-
+  updateVoter() {
+    this.voterSrvice.updateVoter(this.id, this.VoterForm.value).subscribe(
+      next => {
+        this.alertifyService.success('updated succesfully');
+        this.location.back();
+      },
+      error => {
+        this.alertifyService.error(error);
+      }
+    );
+  }
   // findIndexInData(data, property, value) {
   //   for (let i = 0, l = data.length; i < l; i++) {
   //     if (data[i][property] === value) {

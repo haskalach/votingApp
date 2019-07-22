@@ -66,7 +66,6 @@
         </td>
         <td>
           <ng-container *ngIf="user.roles[0] !== 'Admin'">
-            {{ user.disable }}
             <button
               (click)="updateUserStatus(user.id, true)"
               *ngIf="user.disable == false"

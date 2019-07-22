@@ -2,7 +2,7 @@
   <form [formGroup]="VoterForm" (ngSubmit)="updateVoter()">
     <div class="row">
       <div class="col-12 heading-section">
-        <h1>{{ voter.code }} </h1>
+        <h1>{{ voter.code }}</h1>
       </div>
       <div class="col-12 col-sm-6 field-container">
         <label>First Name Arabic:</label>
@@ -163,7 +163,7 @@
       <div class="col-12 col-sm-6 field-container">
         <label>Email:</label>
         <span>
-          {{ voter.email }}
+          <input formControlName="email" />
         </span>
       </div>
       <div class="col-12 col-sm-6 field-container">
@@ -184,7 +184,7 @@
       </div>
       <div class="col-12 col-sm-6 field-container">
         <label>Reference:</label>
-        <select  formControlName="referenceId">
+        <select formControlName="referenceId">
           <option [ngValue]="null">Select Reference</option>
           <option *ngFor="let ref of ReferenceUsers" [ngValue]="ref.id">
             {{ ref.userName }}

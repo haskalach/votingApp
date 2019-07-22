@@ -22,11 +22,12 @@ namespace Application.API.Data {
         Task<IEnumerable<Organization>> GetOrganizations ();
         Task<Organization> GetOrganizationByType (int voterTypeId);
         Task<IEnumerable<VoterType>> GetOrganizationTypes ();
+        Task<VoterType> GetOrganizationTypeById (int id);
         Task<Organization> GetOrganization (int orgId);
         Task<Voter> GetVoter (int code, int VoterTypeId, int? OrganzationId);
         Task<Voter> GetVoterById (int voterId, int OrganzationId);
         Task<VotingYears> GetVotingYear (int VoterId, int OrganizationId, string Year);
-        Task<ConfigList> GetConfigList (int VoterTypeId,int OrganizationId);
+        Task<ConfigList> GetConfigList (int VoterTypeId, int OrganizationId);
 
     }
 }

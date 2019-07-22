@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.API.Data;
 using Application.API.Dtos;
@@ -46,7 +47,7 @@ namespace Application.API.Controllers {
         }
 
         [Authorize (Policy = "RequireAdminRole")]
-        [HttpPut("UpdateType")]
+        [HttpPut ("UpdateType")]
         public async Task<IActionResult> SetOrganizationType (OrganizationTypeUpdateDto organizationTypeUpdateDto) {
             var OrganizationFromRepo = await _repo.GetOrganization (organizationTypeUpdateDto.Id);
             _mapper.Map (organizationTypeUpdateDto, OrganizationFromRepo);
@@ -71,11 +72,34 @@ namespace Application.API.Controllers {
         }
 
         [Authorize (Policy = "RequireAdminRole")]
+        [HttpDelete ("type/{id}")]
+        public async Task<IActionResult> DeleteOrganizationType (int id) {
+            var organizationType = await _repo.GetOrganizationTypeById (id);
+            _repo.Delete (organizationType);
+            if (await _repo.SaveAll ()) {
+                return Ok ();
+            }
+            return BadRequest ("Could not delete Organzation type");
+        }
+
+        [Authorize (Policy = "RequireAdminRole")]
         [HttpGet ("type")]
         public async Task<IActionResult> GetOrganizationTypes () {
 
             var organizationTypes = await _repo.GetOrganizationTypes ();
             return Ok (organizationTypes);
+        }
+
+        [Authorize (Policy = "RequireAdminRole")]
+        [HttpDelete ("{id}")]
+        public async Task<IActionResult> DeleteOrganization (int id) {
+
+            var organization = await _repo.GetOrganization (id);
+            _repo.Delete (organization);
+            if (await _repo.SaveAll ()) {
+                return Ok ();
+            }
+            return BadRequest ("Could not delete Organzation");
         }
     }
 }
