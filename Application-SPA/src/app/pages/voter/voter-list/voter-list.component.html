@@ -145,6 +145,7 @@
           Filter
         </button>
       </div>
+      <div class="total-voters">{{ pagination?.totalItems }} Voters</div>
     </div>
   </div>
   <div class="col-12 table-container">
@@ -154,7 +155,9 @@
         <th>First Name Ar</th>
         <th>Father Name Ar</th>
         <th>Family Ar</th>
-        <th>Birth Date</th>
+        <th>Abroad</th>
+        <th>Contacted</th>
+        <th>Attend</th>
         <th>Religion</th>
         <th>Politic</th>
         <th>Reference</th>
@@ -173,9 +176,9 @@
         <td>
           {{ voter.familyArabic }}
         </td>
-        <td>
-          {{ voter.birthDate | date }}
-        </td>
+        <td>{{ voter.abroad }}</td>
+        <td>{{ voter.contacted }}</td>
+        <td>{{ voter.attend }}</td>
         <td>
           {{ voter.religion }}
         </td>

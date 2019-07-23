@@ -266,11 +266,23 @@
           ></fa-icon>
         </ng-container>
       </div>
-      <div class="col-12 col-sm-6 field-container" *ngIf="voter.referenceId">
+      <!-- <div class="col-12 col-sm-6 field-container" *ngIf="voter.referenceId">
         <label>Reference:</label>
         <a [routerLink]="['/members/' + voter.referenceId]">
           {{ voter.reference?.userName }}</a
         >
+      </div> -->
+      <div
+        class="col-12 col-sm-6 field-container"
+        *appHasRole="['OrganizationAdmin', 'LaptopUser']"
+      >
+        <label>Reference:</label>
+        <select formControlName="referenceId">
+          <option [ngValue]="null">Select Reference</option>
+          <option *ngFor="let ref of ReferenceUsers" [ngValue]="ref.id">
+            {{ ref.userName }}
+          </option>
+        </select>
       </div>
     </div>
     <button

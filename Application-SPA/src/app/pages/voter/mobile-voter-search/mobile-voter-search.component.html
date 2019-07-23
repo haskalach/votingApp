@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 top-section">
+    <div class="col top-section">
       <input
         class="form-control"
         [(ngModel)]="code"
@@ -8,6 +8,11 @@
         type="number"
         disabled
       />
+    </div>
+    <div class="top-section" style="padding-right:15px">
+      <button class="btn btn-secondary" (click)="code = ''">
+        Clear
+      </button>
     </div>
     <div class="col-12 number-panel">
       <div class="row no-margin">
@@ -51,7 +56,7 @@
           style="margin-top:5px;"
           (click)="delete()"
         >
-          Delete
+          Erase
         </button>
         <button class="col btn btn-default" (click)="appendNumber('0')">
           0
@@ -141,5 +146,8 @@
         <!-- <fa-icon [icon]="['fas', 'vote-yea']"></fa-icon> -->
       </button>
     </div>
+  </div>
+  <div class="row" *ngIf="!voter">
+    No Data Found
   </div>
 </div>

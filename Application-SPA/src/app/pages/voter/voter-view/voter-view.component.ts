@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/_services/user/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Voter } from './../../../_models/Voter';
 import { VoterService } from 'src/app/_services/voter/voter.service';
@@ -6,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VoterTypeEnum } from 'src/app/_enum/VoterType.enum';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-voter-view',
@@ -19,14 +21,17 @@ export class VoterViewComponent implements OnInit {
   currentYear: number;
   VoterTypeEnum = VoterTypeEnum;
   VoterForm: FormGroup;
+  ReferenceUsers: User[];
   constructor(
     private route: ActivatedRoute,
     private voterSrvice: VoterService,
     private alertifyService: AlertifyService,
-    private location: Location
+    private location: Location,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
+    this.getReferenceUsers();
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.id = +params['id'];
@@ -129,6 +134,11 @@ export class VoterViewComponent implements OnInit {
         this.alertifyService.error(error);
       }
     );
+  }
+  getReferenceUsers() {
+    this.userService.getOrgReference().subscribe((next: User[]) => {
+      this.ReferenceUsers = next;
+    });
   }
   // findIndexInData(data, property, value) {
   //   for (let i = 0, l = data.length; i < l; i++) {
