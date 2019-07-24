@@ -41,6 +41,7 @@ export class MobileVoterListComponent implements OnInit {
     civilIdRegion: [],
     referenceUsers: []
   };
+  currentYear;
   constructor(
     private voterService: VoterService,
     private organizationService: OrganizationService,
@@ -52,6 +53,7 @@ export class MobileVoterListComponent implements OnInit {
     this.loadItems(null, null, this.voterParams);
     this.getReferenceUsers();
     this.getConfiguration();
+    this.currentYear = new Date().getFullYear();
   }
 
   loadItems(pageNumber?, pageSize?, voterParams?) {
@@ -64,7 +66,11 @@ export class MobileVoterListComponent implements OnInit {
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadItems(this.pagination.currentPage, this.pagination.itemsPerPage);
+    this.loadItems(
+      this.pagination.currentPage,
+      this.pagination.itemsPerPage,
+      this.voterParams
+    );
   }
 
   getReferenceUsers() {
@@ -100,5 +106,21 @@ export class MobileVoterListComponent implements OnInit {
     this.voterService.getConfig().subscribe(next => {
       this.ConfigList = next;
     });
+  }
+  vote(id) {
+    this.voterService.vote(id).subscribe(
+      next => {
+        this.alertifyService.success('voted succesfully');
+        this.loadItems(
+          this.pagination.currentPage,
+          this.pagination.itemsPerPage,
+          this.voterParams
+        );
+        // console.log(this.VotingYears);
+      },
+      error => {
+        this.alertifyService.error('could not vote for this user');
+      }
+    );
   }
 }

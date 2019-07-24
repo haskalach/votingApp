@@ -18,6 +18,7 @@ namespace Application.API.Data {
             builder.Entity<VotingYears> ().HasOne (v => v.Voter).WithMany (v => v.VotingYears).HasForeignKey (v => v.VoterId).OnDelete (DeleteBehavior.Restrict);
             builder.Entity<Organization> ().HasMany (v => v.VotingYears).WithOne (v => v.Organization).HasForeignKey (v => v.OrganizationId).OnDelete (DeleteBehavior.Cascade);
             builder.Entity<User> ().HasOne (u => u.Organization).WithMany (o => o.Users).OnDelete (DeleteBehavior.Cascade);
+            builder.Entity<Voter> ().HasOne (v => v.Reference).WithMany (v => v.Voters).OnDelete (DeleteBehavior.SetNull);
             builder.Entity<Voter> ().HasOne (v => v.VoterType).WithMany (v => v.Voters).OnDelete (DeleteBehavior.Cascade);
             builder.Entity<UserRole> (userRole => {
 

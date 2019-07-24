@@ -16,6 +16,7 @@ namespace Application.API.Models {
         public string city { get; set; }
         public string country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Voter> Voters { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public int? OrganizationId { get; set; }
         public Organization Organization { get; set; }

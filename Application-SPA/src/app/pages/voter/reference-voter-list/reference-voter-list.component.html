@@ -58,6 +58,7 @@
         <button class="btn btn-success add-btn" (click)="refreshData()">
           Filter
         </button>
+        <div class="total-voters">{{ pagination?.totalItems }} Voters</div>
       </div>
     </div>
   </div>
@@ -101,7 +102,9 @@
           {{ voter.phoneHome }}
         </td>
         <td>
-          {{ voter.mobileHome }}
+          <a [href]="'tel:' + voter.mobileHome">
+            <span> {{ voter.mobileHome }} </span>
+          </a>
         </td>
         <td class="action-tab">
           <a [routerLink]="['/voter-view/' + voter.id]">
@@ -124,7 +127,7 @@
     nextText="&rsaquo;"
     firstText="&laquo;"
     lastText="&raquo;"
-    [maxSize] = "10"
+    [maxSize]="10"
   >
   </pagination>
 </div>

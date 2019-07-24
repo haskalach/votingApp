@@ -31,6 +31,7 @@
         <button class="btn btn-success add-btn" (click)="refreshData()">
           Filter
         </button>
+        <div class="total-voters">{{ pagination?.totalItems }} Voters</div>
       </div>
     </div>
   </div>
@@ -64,6 +65,12 @@
           <a [routerLink]="['/mobile-voter-view/' + voter.id]">
             <fa-icon [icon]="['fas', 'eye']"></fa-icon>
           </a>
+          <fa-icon
+            [icon]="['fas', 'vote-yea']"
+            (click)="vote(voter.id)"
+            style="margin-left:3px;"
+            *ngIf="voter.votingYears.length === 0"
+          ></fa-icon>
         </td>
       </tr>
     </table>
@@ -81,7 +88,7 @@
     nextText="&rsaquo;"
     firstText="&laquo;"
     lastText="&raquo;"
-    [maxSize] = "10"
+    [maxSize]="10"
   >
   </pagination>
 </div>

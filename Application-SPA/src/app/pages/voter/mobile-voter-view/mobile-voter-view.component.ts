@@ -55,6 +55,7 @@ export class MobileVoterViewComponent implements OnInit {
       next => {
         this.VotingYears.push(this.currentYear.toString());
         // console.log(this.VotingYears);
+        this.alertifyService.success('voted succesfully');
       },
       error => {
         this.alertifyService.error('could not vote for this user');

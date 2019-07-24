@@ -50,7 +50,7 @@ namespace Application.API.Data {
         }
 
         public async Task<PagedList<Voter>> GetVoters (VoterParams voterParamas) {
-            var voters = _context.Voters.Include (v => v.VoterType).AsQueryable ();
+            var voters = _context.Voters.Include (v => v.VoterType).Include (v => v.VotingYears).Include (v => v.VoterType).AsQueryable ();
             if (voterParamas.voterTypeId > 0) {
                 voters = voters.Where (x => x.VoterTypeId == voterParamas.voterTypeId);
             }

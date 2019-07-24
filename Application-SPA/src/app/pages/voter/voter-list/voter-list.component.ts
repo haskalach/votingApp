@@ -73,7 +73,11 @@ export class VoterListComponent implements OnInit {
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadItems(this.pagination.currentPage, this.pagination.itemsPerPage);
+    this.loadItems(
+      this.pagination.currentPage,
+      this.pagination.itemsPerPage,
+      this.voterParams
+    );
   }
 
   getReferenceUsers() {
