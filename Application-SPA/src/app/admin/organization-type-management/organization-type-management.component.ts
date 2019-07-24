@@ -10,6 +10,7 @@ import { VoterType } from 'src/app/_models/VoterType';
 })
 export class OrganizationTypeManagementComponent implements OnInit {
   organizationTypes: VoterType[];
+  loading = false;
   constructor(
     private organizationService: OrganizationService,
     private alertifyService: AlertifyService
@@ -29,12 +30,15 @@ export class OrganizationTypeManagementComponent implements OnInit {
     );
   }
   deleteOrganizationType(id) {
+    this.loading = true;
     this.organizationService.deleteOrganizationType(id).subscribe(
       next => {
+        this.loading = false;
         this.alertifyService.success('organization type Deleted Succesfully');
         this.getOrganizationTypesList();
       },
       error => {
+        this.loading = false;
         this.alertifyService.error('organizationcant type cant be deleted');
       }
     );

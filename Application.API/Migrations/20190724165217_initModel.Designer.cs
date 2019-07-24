@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190722164825_updateDeleteCascade")]
-    partial class updateDeleteCascade
+    [Migration("20190724165217_initModel")]
+    partial class initModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -373,7 +373,7 @@ namespace Application.API.Migrations
                     b.HasOne("Application.API.Models.VoterType", "VoterType")
                         .WithMany("Organizations")
                         .HasForeignKey("VoterTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Application.API.Models.Photo", b =>
@@ -408,8 +408,9 @@ namespace Application.API.Migrations
             modelBuilder.Entity("Application.API.Models.Voter", b =>
                 {
                     b.HasOne("Application.API.Models.User", "Reference")
-                        .WithMany()
-                        .HasForeignKey("ReferenceId");
+                        .WithMany("Voters")
+                        .HasForeignKey("ReferenceId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Application.API.Models.VoterType", "VoterType")
                         .WithMany("Voters")
@@ -422,7 +423,7 @@ namespace Application.API.Migrations
                     b.HasOne("Application.API.Models.Organization", "Organization")
                         .WithMany("VotingYears")
                         .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Application.API.Models.Voter", "Voter")
                         .WithMany("VotingYears")

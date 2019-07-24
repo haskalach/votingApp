@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application.API.Migrations
 {
-    public partial class init : Migration
+    public partial class initModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,7 +74,7 @@ namespace Application.API.Migrations
                         column: x => x.VoterTypeId,
                         principalTable: "VoterTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,7 +118,7 @@ namespace Application.API.Migrations
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -282,7 +282,7 @@ namespace Application.API.Migrations
                         column: x => x.ReferenceId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Voters_VoterTypes_VoterTypeId",
                         column: x => x.VoterTypeId,
@@ -308,7 +308,7 @@ namespace Application.API.Migrations
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VotingYears_Voters_VoterId",
                         column: x => x.VoterId,

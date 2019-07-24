@@ -371,7 +371,7 @@ namespace Application.API.Migrations
                     b.HasOne("Application.API.Models.VoterType", "VoterType")
                         .WithMany("Organizations")
                         .HasForeignKey("VoterTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Application.API.Models.Photo", b =>
