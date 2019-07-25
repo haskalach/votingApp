@@ -29,6 +29,7 @@ import { AddEngenereComponent } from './admin/engenere-management/add-engenere/a
 import { MobileVoterListComponent } from './pages/voter/mobile-voter-list/mobile-voter-list.component';
 import { MobileVoterViewComponent } from './pages/voter/mobile-voter-view/mobile-voter-view.component';
 import { MobileVoterSearchComponent } from './pages/voter/mobile-voter-search/mobile-voter-search.component';
+import { ReferenceVoterViewComponent } from './pages/voter/reference-voter-view/reference-voter-view.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
           {
             path: 'mobile-voter-search',
             component: MobileVoterSearchComponent
+          },
+          {
+            path:'reference-voter-view/:id',
+            component:ReferenceVoterViewComponent
           }
         ]
       },

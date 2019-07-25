@@ -77,4 +77,8 @@ export class MobileVoterSearchComponent implements OnInit {
       this.code = this.code.substring(0, this.code.length - 1);
     }
   }
+  clearmethod(){
+    this.code = '';
+    this.voter = null;
+  }
 }
