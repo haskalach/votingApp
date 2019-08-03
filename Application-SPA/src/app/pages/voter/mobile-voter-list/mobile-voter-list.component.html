@@ -92,3 +92,14 @@
   >
   </pagination>
 </div>
+<div class="overlay" *ngIf="loading">
+  <progressbar
+    max="200"
+    [value]="200"
+    type="danger"
+    [striped]="true"
+    [animate]="true"
+    style="width:300px"
+    ><i>Data processing please wait</i></progressbar
+  >
+</div>

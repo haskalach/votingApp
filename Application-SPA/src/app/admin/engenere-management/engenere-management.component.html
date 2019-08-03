@@ -17,9 +17,7 @@
           Data Management
         </button>
       </div>
-      <div class="total-voters">
-        {{ pagination?.totalItems }} Voters
-      </div>
+      <div class="total-voters">{{ pagination?.totalItems }} Voters</div>
     </div>
     <div class="row table-header-row">
       <div class="filter-section">
@@ -105,4 +103,15 @@
     lastText="&raquo;"
   >
   </pagination>
+</div>
+<div class="overlay" *ngIf="loading">
+  <progressbar
+    max="200"
+    [value]="200"
+    type="danger"
+    [striped]="true"
+    [animate]="true"
+    style="width:300px"
+    ><i>Data processing please wait</i></progressbar
+  >
 </div>
