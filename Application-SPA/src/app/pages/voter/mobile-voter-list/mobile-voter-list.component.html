@@ -43,7 +43,8 @@
         <th>Father Name</th>
         <th>Family</th>
         <th>Birth</th>
-        <th>Actions</th>
+        <th>View</th>
+        <th>Vote</th>
       </tr>
       <tr *ngFor="let voter of voters">
         <td>
@@ -65,12 +66,14 @@
           <a [routerLink]="['/mobile-voter-view/' + voter.id]">
             <fa-icon [icon]="['fas', 'eye']"></fa-icon>
           </a>
+        </td>
+        <td>
           <fa-icon
-            [icon]="['fas', 'vote-yea']"
-            (click)="vote(voter.id)"
-            style="margin-left:3px;"
-            *ngIf="voter.votingYears.length === 0"
-          ></fa-icon>
+          [icon]="['fas', 'vote-yea']"
+          (click)="vote(voter.id)"
+          style="margin-left:3px;"
+          *ngIf="voter.votingYears.length === 0"
+        ></fa-icon>
         </td>
       </tr>
     </table>
@@ -91,4 +94,15 @@
     [maxSize]="10"
   >
   </pagination>
+</div>
+<div class="overlay" *ngIf="loading">
+  <progressbar
+    max="200"
+    [value]="200"
+    type="danger"
+    [striped]="true"
+    [animate]="true"
+    style="width:300px"
+    ><i>Data processing please wait</i></progressbar
+  >
 </div>

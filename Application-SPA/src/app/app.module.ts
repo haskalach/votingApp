@@ -66,6 +66,7 @@ import { ReferenceVoterListComponent } from './pages/voter/reference-voter-list/
 import { MobileVoterListComponent } from './pages/voter/mobile-voter-list/mobile-voter-list.component';
 import { MobileVoterViewComponent } from './pages/voter/mobile-voter-view/mobile-voter-view.component';
 import { MobileVoterSearchComponent } from './pages/voter/mobile-voter-search/mobile-voter-search.component';
+import { ReferenceVoterViewComponent } from './pages/voter/reference-voter-view/reference-voter-view.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -103,7 +104,8 @@ export function tokenGetter() {
     ReferenceVoterListComponent,
     MobileVoterListComponent,
     MobileVoterViewComponent,
-    MobileVoterSearchComponent
+    MobileVoterSearchComponent,
+    ReferenceVoterViewComponent
   ],
   imports: [
     ButtonsModule.forRoot(),

@@ -37,6 +37,7 @@ export class ReferenceVoterListComponent implements OnInit {
     civilIdRegion: [],
     referenceUsers: []
   };
+  loading = false;
   constructor(private voterService: VoterService) {}
 
   ngOnInit() {
@@ -44,16 +45,27 @@ export class ReferenceVoterListComponent implements OnInit {
   }
 
   loadItems(pageNumber?, pageSize?, voterParams?) {
+    this.loading = true;
     this.voterService
       .getReferenceVoters(pageNumber, pageSize, voterParams)
-      .subscribe((res: PaginatedResult<Voter[]>) => {
-        this.voters = res.result;
-        this.pagination = res.pagination;
-      });
+      .subscribe(
+        (res: PaginatedResult<Voter[]>) => {
+          this.voters = res.result;
+          this.pagination = res.pagination;
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        }
+      );
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadItems(this.pagination.currentPage, this.pagination.itemsPerPage,this.voterParams);
+    this.loadItems(
+      this.pagination.currentPage,
+      this.pagination.itemsPerPage,
+      this.voterParams
+    );
   }
 
   refreshData() {

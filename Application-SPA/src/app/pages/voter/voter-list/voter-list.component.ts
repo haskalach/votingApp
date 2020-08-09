@@ -50,6 +50,7 @@ export class VoterListComponent implements OnInit {
     civilIdRegion: [],
     referenceUsers: []
   };
+  loading = false;
   constructor(
     private voterService: VoterService,
     private organizationService: OrganizationService,
@@ -64,12 +65,17 @@ export class VoterListComponent implements OnInit {
   }
 
   loadItems(pageNumber?, pageSize?, voterParams?) {
-    this.voterService
-      .getVoters(pageNumber, pageSize, voterParams)
-      .subscribe((res: PaginatedResult<Voter[]>) => {
+    this.loading = true;
+    this.voterService.getVoters(pageNumber, pageSize, voterParams).subscribe(
+      (res: PaginatedResult<Voter[]>) => {
         this.voters = res.result;
         this.pagination = res.pagination;
-      });
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+      }
+    );
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;

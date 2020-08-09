@@ -1,0 +1,245 @@
+<div class="container" *ngIf="voter">
+  <form [formGroup]="VoterForm" (ngSubmit)="updateVoter()">
+    <div class="row">
+      <div class="col-12 heading-section">
+        <h1>{{ voter.code }}</h1>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>First Name Arabic:</label>
+        <span>
+          {{ voter.firstNameArabic }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Father Name Arabic:</label>
+        <span>
+          {{ voter.fatherNameArabic }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Family Arabic:</label>
+        <span>
+          {{ voter.familyArabic }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>First Name:</label>
+        <span>
+          {{ voter.firstName }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Father Name:</label>
+        <span>
+          {{ voter.fatherName }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Family Name:</label>
+        <span>
+          {{ voter.family }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Nationality:</label>
+        <span>
+          {{ voter.nationality }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Speciality:</label>
+        <span>
+          {{ voter.speciality }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Sub Chapter:</label>
+        <span>
+          {{ voter.subChapter }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Birth Date:</label>
+        <span>
+          {{ voter.birthDate | date }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Birth Country:</label>
+        <span>
+          {{ voter.birthCountry }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Birth Place:</label>
+        <span>
+          {{ voter.birthPlace }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Civil Id Mouhavaza:</label>
+        <span>
+          {{ voter.civilIdMouhavaza }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Civil Id Kadaa:</label>
+        <span>
+          {{ voter.civilIdKadaa }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Civil Id Region:</label>
+        <span>
+          {{ voter.civilIdRegion }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Registery Number:</label>
+        <span>
+          {{ voter.registeryNumber }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Civil Id place:</label>
+        <span>
+          {{ voter.civilIdPlace }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Registration:</label>
+        <span>
+          {{ voter.registration | date }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Last Covered Year:</label>
+        <span>
+          {{ voter.lastCoveredYear }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Graduation:</label>
+        <span>
+          {{ voter.graduation | date }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>School:</label>
+        <span>
+          {{ voter.school }}
+        </span>
+      </div>
+
+      <div class="col-12 col-sm-6 field-container">
+        <label>Graduation Country:</label>
+        <span>
+          {{ voter.graduationCountry }}
+        </span>
+      </div>
+      <!-- <div class="col-12 col-sm-6 field-container">
+        <label>Address Work:</label>
+        <span>
+          {{ voter.addressWork }}
+        </span>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Mobile Work:</label>
+        <a [href]="'tel:' + '+961' + voter.mobileWork">
+          <span> +961/{{ voter.mobileWork }} </span>
+        </a>
+      </div> -->
+      <div class="col-12 col-sm-6 field-container">
+        <label>Address Work:</label>
+        <span>
+          {{voter.addressWork}}
+        </span>
+        
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Mobile Work:</label>
+         {{voter.mobileWork}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Phone Work:</label>
+         {{voter.phoneWork}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Address Home:</label>
+        {{voter.addressHome}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Mobile Home:</label>
+        {{voter.mobileHome}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Phone Home:</label>
+        {{voter.phoneHome}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Email:</label>
+        {{voter.email}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Religion:</label>
+        {{voter.religion}}
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>Politic:</label>
+        {{voter.politic}}
+      </div>
+
+      <div class="col-12 col-sm-6 field-container">
+        <label>Abroad:</label>
+        <span>
+          {{ voter.abroad }}
+        </span>
+        <ng-container>
+          <fa-icon
+            [icon]="['fas', 'vote-yea']"
+            (click)="abroad(!voter.abroad)"
+            *ngIf="!voter.abroad"
+          ></fa-icon>
+          <fa-icon
+            [icon]="['fas', 'ban']"
+            (click)="abroad(!voter.abroad)"
+            *ngIf="voter.abroad"
+          ></fa-icon>
+        </ng-container>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>
+          Contacted:
+        </label>
+        {{ voter.contacted }}
+        <ng-container *ngIf="!voter.contacted">
+          <fa-icon [icon]="['fas', 'vote-yea']" (click)="contact()"></fa-icon>
+        </ng-container>
+      </div>
+      <div class="col-12 col-sm-6 field-container">
+        <label>
+          Attending:
+        </label>
+        {{ voter.attend }}
+        <ng-container>
+          <fa-icon
+            [icon]="['fas', 'vote-yea']"
+            (click)="attend(!voter.attend)"
+            *ngIf="!voter.attend"
+          ></fa-icon>
+          <fa-icon
+            [icon]="['fas', 'ban']"
+            (click)="attend(!voter.attend)"
+            *ngIf="voter.attend"
+          ></fa-icon>
+        </ng-container>
+      </div>
+      <!-- <div class="col-12 col-sm-6 field-container" *ngIf="voter.referenceId">
+        <label>Reference:</label>
+        <a [routerLink]="['/members/' + voter.referenceId]">
+          {{ voter.reference?.userName }}</a
+        >
+      </div> -->
+    </div>
+  </form>
+</div>
