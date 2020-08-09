@@ -21,7 +21,7 @@ export class UploadEngeneresComponent implements OnInit {
   formData;
   VoterTypeId = VoterTypeEnum.engenere;
   voterTypes: VoterType[];
-  @ViewChild('file') fileInput: ElementRef;
+  @ViewChild('file', { static: true }) fileInput: ElementRef;
   constructor(
     private voterService: VoterService,
     private alertify: AlertifyService,

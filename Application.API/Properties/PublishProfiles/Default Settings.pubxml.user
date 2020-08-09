@@ -6,11 +6,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8/RRf4XoPUCE9LyukkkhGQAAAAACAAAAAAAQZgAAAAEAACAAAABG4clHVqx15JBuQ/zhtEVg6vqWeUdGCzBnjxxmUDQM7AAAAAAOgAAAAAIAACAAAADwnvlY0X7aRlqNeYNhurlyLs8zY407W3eiCJPoNfyF3CAAAADo1HcD/YriIpfvndkW3dH4+wcp706754VNswuzn0/dr0AAAABlhB0fTsr43HlyaMnluxaHQXT2m8zhI5zsvaJC7FHVWYnrJlhr7e3ryvItNXrYgSpCoQgB51vl7VJaQVRPTLYd</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOiwbuWzIqEixMeiXJ1/wrQAAAAACAAAAAAAQZgAAAAEAACAAAAANE7atJ0xpoLTarZ+EcA7nld3iwnFmt7eVF4VCTA4MrQAAAAAOgAAAAAIAACAAAABHqcLywYVsB3DT8IwPo1J1R3LHJERptnJzzpk0w5dlkyAAAAAZTBnaZABan37nEx6+kCBBiHH3JazF+HWsqHi1/y+kakAAAAAuUBR4D4cEl+qvyPOjV3ooWuS0HTI5MAh2ZkuRwATM/kSRgKvYbgJmwj25f/KZpeGgC6Gqq/iqlPPpBYhx7wTh</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
       <Value>Data Source=SQL5043.site4now.net%3bInitial Catalog=DB_A4AC8B_kalach%3bUser Id=DB_A4AC8B_kalach_admin%3bPassword=P%40ssw0rd!%40#%3b</Value>
     </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Application.API.Data.DataContext">
+      <Value>Data Source=SQL5043.site4now.net%3bInitial Catalog=DB_A4AC8B_kalach%3bUser Id=DB_A4AC8B_kalach_admin%3bPassword=P%40ssw0rd!%40#%3b</Value>
+    </EFMigrations>
   </ItemGroup>
 </Project>
